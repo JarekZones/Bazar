@@ -6,6 +6,7 @@
   - Přidáno tlačítko "Reset to defaults" v adminu.
   - Aktualizace placeholderů cenového rozsahu (min/max) po inicializaci a po změnách dat.
   - Drobný fallback pro obrázek (pokud se externí obrázek nenačte, prázdné pole zůstane).
+  - Přidán vlastní confirm modal a nahrazeny nativní confirm() volání.
 -->
 <html lang="cs">
 <head>
@@ -81,6 +82,18 @@
   .mutedSmall{font-size:12px;color:var(--muted)}
   .flex{display:flex;gap:8px;align-items:center}
 
+  /* confirm modal styles */
+  .confirmBack{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:none;align-items:center;justify-content:center;padding:20px;z-index:220}
+  .confirmBox{background:var(--card);padding:16px;border-radius:10px;max-width:520px;width:100%;box-shadow:0 8px 32px rgba(0,0,0,0.12)}
+  .confirmHeader{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+  .confirmIcon{width:36px;height:36px;border-radius:8px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+  .confirmTitle{font-weight:700;font-size:16px}
+  .confirmMsg{margin-bottom:12px;font-size:15px;color:#111}
+  .confirmActions{display:flex;gap:8px;justify-content:flex-end}
+  .confirmActions .btn{padding:8px 12px;border-radius:8px;border:0;cursor:pointer}
+  .confirmActions .btn.cancel{background:#fff;border:1px solid #e2e8f0;color:var(--muted)}
+  .confirmActions .btn.ok{background:var(--accent);color:#fff}
+
   @media (max-width:900px){
     .layout{grid-template-columns:1fr;gap:12px}
     .grid{grid-template-columns:repeat(2,1fr)}
@@ -137,8 +150,8 @@
   </div>
 
   <!-- Product detail modal -->
-  <div class="modalBack" id="modalBack" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true">
+  <div class="modalBack" id="modalBack" role="dialog" aria-hidden="true">
+    <div class="modal" role="document" aria-modal="true">
       <div id="modalGalleryWrapper">
         <button class="modalClose" id="closeModal">✕</button>
         <div class="galleryMain" id="modalMain" aria-live="polite"></div>
@@ -311,6 +324,23 @@
     </div>
   </div>
 
+  <!-- Custom confirm dialog -->
+  <div id="confirmBack" class="confirmBack" aria-hidden="true">
+    <div class="confirmBox" role="dialog" aria-modal="true">
+      <div class="confirmHeader">
+        <div class="confirmIcon">!</div>
+        <div>
+          <div class="confirmTitle">Potvrď akci</div>
+        </div>
+      </div>
+      <div id="confirmMsg" class="confirmMsg">Potvrď akci</div>
+      <div class="confirmActions">
+        <button id="confirmCancel" class="btn cancel">Zrušit</button>
+        <button id="confirmOk" class="btn ok">OK</button>
+      </div>
+    </div>
+  </div>
+
 <script>
 /* -------- Konfigurace -------- */
 const STORAGE_KEY = 'usedPhonesProducts_v1';
@@ -320,37 +350,79 @@ const sellerEmail = "seller@example.com";
 
 /* --- Kompletní výchozí data (24 produktů) --- */
 const defaultProducts = [
-  {id:1,title:"Motorola Moto G04",brand:"Motorola",color:"Oranžová",memory:"4GB / 64GB",demo:true,
-   description:`Motorola Moto G04 je cenově dostupný chytrý telefon, který vyniká svým stylovým designem a solidní výbavou pro každodenní použití. K jeho hlavním přednostem patří velký 6,56" IPS HD+ displej s rozlišením 1612 x 720 pixelů a obnovovací frekvencí 90 Hz. Displej zajišťuje plynulý pohyb veškerého zobrazovaného obsahu i dobrou čitelnost na denním světle. Jeho kompaktní tělo je tenké, lehké a vyrobené z kvalitních materiálů, přičemž speciální matná povrchová úprava telefonu nejen dobře vypadá, ale i příjemně sedí v ruce. K výbavě patří také děrovaný design displeje pro decentně umístěnou přední kameru a podpora Dolby Atmos pro lepší zážitek ze sledování videí i poslechu hudby.
-
-Výkon telefonu zajišťuje osmijádrový procesor Unisoc T606 s taktem až 1,6 GHz ve spojení se 4 GB RAM. Díky tomu i v této cenové kategorii nabídne plynulý chod systému Android 14 i náročnějších běžných aplikací. Interní úložiště má kapacitu 64 GB a lze jej rozšířit paměťovou kartou microSD až o 1 TB, což potěší uživatele s větším množstvím fotografií, videí či aplikací. Telefon je vybaven moderními technologiemi jako je čtečka otisků prstů na boku, odemykání obličejem, USB-C konektor a stále oblíbený 3,5mm jack na sluchátka. Samozřejmostí je podpora Dual SIM, LTE a bezkontaktní komunikace Bluetooth a Wi‑Fi.
-
-Fotovýbava jednoznačně předčí většinu konkurentů v této třídě – hlavní fotoaparát s rozlišením 16 Mpx je vybaven PDAF ostřením a podporou nočního režimu, umělou inteligencí a dalšími funkcemi. Selfie kamera nabídne snímač s 5 Mpx a taktéž podporuje řadu režimů pro vylepšení, například retuše obličeje a HDR. Výdrž telefonu má na starosti velká baterie s kapacitou 5000 mAh, která běžně zvládne i více než den provozu na jedno nabití, a podporuje 10–15W rychlonabíjení.`,
-   note:"Ochranná folie na LCD",charger:true,cable:true,earphones:false,case:true,box:false,price:1990,
-   img:"https://www.huramobil.cz/fotocache/bigorig/IRMOTOG04ORN.jpg"},
-  {id:2,title:"Motorola Moto G54",brand:"Motorola",color:"Zelená",memory:"12GB / 256GB",demo:true,description:"Motorola Moto G54, výkon 12/256, bez vad, prodávaná jako předváděcí kus.",note:"Ochranná folie na LCD",charger:true,cable:false,earphones:true,case:true,box:true,price:2490,img:"https://placehold.co/400x300?text=G54"},
-  {id:3,title:"Motorola Moto G84",brand:"Motorola",color:"Červená",memory:"12GB / 256GB",demo:true,description:"G84 s drobným problémem OLED (vypálení části). V ostatních funkcích OK.",note:"Vypálený OLED, Ochranná folie",charger:true,cable:true,earphones:false,case:true,box:true,price:2900,img:"https://placehold.co/400x300?text=G84"},
-  {id:4,title:"Samsung Galaxy A7 (2018)",brand:"Samsung",color:"Modrá",memory:"4GB / 64GB",demo:false,description:"Samsung A7 2018, nově vyměněné LCD, estetické drobnosti.",note:"Nový LCD",charger:true,cable:true,earphones:true,case:true,box:true,price:2500,img:"https://placehold.co/400x300?text=A7"},
-  {id:5,title:"Samsung Galaxy J4+",brand:"Samsung",color:"Černá",memory:"2GB / 32GB",demo:false,description:"Základní model J4+, vhodný jako záložní telefon.",note:"Nový LCD / ošoupaný zadní kryt",charger:true,cable:true,earphones:true,case:true,box:true,price:1200,img:"https://placehold.co/400x300?text=J4+"},
-  {id:6,title:"Samsung GT-S5610",brand:"Samsung",color:"Šedá",memory:"-",demo:false,description:"Starší tlačítkový telefon, funguje.",note:"",charger:true,cable:true,earphones:true,case:true,box:true,price:500,img:"https://placehold.co/400x300?text=S5610"},
-  {id:7,title:"Samsung Galaxy S9",brand:"Samsung",color:"Černá",memory:"4GB / 64GB",demo:false,description:"Galaxy S9 s drobnými škrábanci na zádech, plně funkční.",note:"Lehce poškrábaná záda",charger:true,cable:true,earphones:true,case:true,box:true,price:3100,img:"https://placehold.co/400x300?text=S9"},
-  {id:8,title:"Vivo Y21s",brand:"Vivo",color:"Modrá",memory:"4GB / 128GB",demo:false,description:"Vivo Y21s v dobrém stavu.",note:"",charger:true,cable:true,earphones:true,case:false,box:true,price:1490,img:"https://placehold.co/400x300?text=Y21s-A"},
-  {id:9,title:"Vivo Y21s",brand:"Vivo",color:"Modrá",memory:"4GB / 128GB",demo:false,description:"Další kus Vivo Y21s.",note:"",charger:false,cable:true,earphones:true,case:true,box:false,price:1390,img:"https://placehold.co/400x300?text=Y21s-B"},
-  {id:10,title:"Vivo Y21s",brand:"Vivo",color:"Modrá",memory:"4GB / 128GB",demo:false,description:"Vivo Y21s, standardní stav.",note:"",charger:false,cable:true,earphones:true,case:true,box:true,price:1350,img:"https://placehold.co/400x300?text=Y21s-C"},
-  {id:11,title:"Vivo Y29s 5G",brand:"Vivo",color:"Černá",memory:"6GB / 128GB",demo:true,description:"Y29s 5G předváděcí kus.",note:"",charger:false,cable:true,earphones:false,case:true,box:true,price:3200,img:"https://placehold.co/400x300?text=Y29s"},
-  {id:12,title:"Vivo Y29s 5G",brand:"Vivo",color:"Černá",memory:"6GB / 128GB",demo:true,description:"Druhý kus Y29s 5G.",note:"",charger:false,cable:true,earphones:false,case:true,box:true,price:3000,img:"https://placehold.co/400x300?text=Y29s-2"},
-  {id:13,title:"Vivo Y33s",brand:"Vivo",color:"Modrá",memory:"8GB / 128GB",demo:false,description:"Vivo Y33s, dobrý stav.",note:"",charger:false,cable:true,earphones:true,case:true,box:true,price:2990,img:"https://placehold.co/400x300?text=Y33s-A"},
-  {id:14,title:"Vivo Y33s",brand:"Vivo",color:"Černá",memory:"8GB / 128GB",demo:false,description:"Vivo Y33s, černý.",note:"",charger:true,cable:true,earphones:false,case:true,box:false,price:2800,img:"https://placehold.co/400x300?text=Y33s-B"},
-  {id:15,title:"Vivo Y33s",brand:"Vivo",color:"Modrá",memory:"8GB / 128GB",demo:false,description:"Další kus Vivo Y33s.",note:"",charger:true,cable:true,earphones:false,case:true,box:false,price:2700,img:"https://placehold.co/400x300?text=Y33s-C"},
-  {id:16,title:"Xiaomi Redmi 12",brand:"Xiaomi",color:"Černá",memory:"4GB / 128GB",demo:false,description:"Redmi 12, dobrý stav, dodávám s pouzdrem.",note:"Nové a staré pouzdro",charger:true,cable:false,earphones:true,case:true,box:false,price:2800,img:"https://placehold.co/400x300?text=Redmi12"},
-  {id:17,title:"Xiaomi Redmi 15C",brand:"Xiaomi",color:"Černá",memory:"4GB / 128GB",demo:true,description:"Redmi 15C předváděcí kus.",note:"",charger:false,cable:true,earphones:false,case:true,box:true,price:2900,img:"https://placehold.co/400x300?text=15C"},
-  {id:18,title:"Xiaomi Redmi 15",brand:"Xiaomi",color:"Černá",memory:"6GB / 128GB",demo:true,description:"Redmi 15, výkon 6/128.",note:"",charger:false,cable:true,earphones:false,case:true,box:true,price:3100,img:"https://placehold.co/400x300?text=15"},
-  {id:19,title:"Xiaomi Redmi 9A",brand:"Xiaomi",color:"Černá",memory:"2GB / 32GB",demo:false,description:"Redmi 9A jako základní model.",note:"Nový LCD / ošoupaný zadní kryt",charger:true,cable:true,earphones:true,case:true,box:true,price:900,img:"https://placehold.co/400x300?text=9A"},
-  {id:20,title:"Xiaomi Redmi A5",brand:"Xiaomi",color:"Černá",memory:"3GB / 64GB",demo:true,description:"Redmi A5, v pořádku.",note:"",charger:false,cable:true,earphones:false,case:true,box:false,price:1100,img:"https://placehold.co/400x300?text=A5"},
-  {id:21,title:"Xiaomi Redmi Note 10 pro",brand:"Xiaomi",color:"Černá",memory:"6GB / 128GB",demo:false,description:"Note 10 pro, prasklý zadní kryt (viz foto).",note:"Prasklý zadní kryt",charger:true,cable:true,earphones:true,case:true,box:true,price:4000,img:"https://placehold.co/400x300?text=Note10Pro"},
-  {id:22,title:"Xiaomi Redmi Note 11S",brand:"Xiaomi",color:"Šedá",memory:"6GB / 64GB",demo:false,description:"Note 11S s novým LCD.",note:"Nový LCD",charger:true,cable:true,earphones:true,case:true,box:true,price:2200,img:"https://placehold.co/400x300?text=Note11S"},
-  {id:23,title:"Xiaomi Redmi Note 9",brand:"Xiaomi",color:"Zelená",memory:"3GB / 64GB",demo:false,description:"Note 9, dodávám s pouzdrem.",note:"Pouzdro",charger:true,cable:true,earphones:true,case:false,box:true,price:1700,img:"https://placehold.co/400x300?text=Note9"},
-  {id:24,title:"Doogee S40",brand:"Doogee",color:"Černo-oranžová",memory:"2GB / 16GB",demo:false,description:"Robustní Doogee S40, vhodný i do náročnějších podmínek.",note:"",charger:true,cable:true,earphones:true,case:true,box:true,price:1000,img:"https://placehold.co/400x300?text=S40"}
+  {id:1, title:"Motorola Moto G04", brand:"Motorola", color:"Oranžová", memory:"4GB / 64GB", demo:true,
+   description:`Motorola Moto G04 je cenově dostupný chytrý telefon s 6,56" displejem a solidní výbavou pro běžné použití. Dobrá výdrž baterie a jednoduché ovládání.`,
+   note:"Ochranná folie na LCD", charger:true, cable:true, earphones:false, case:true, box:false, price:1990,
+   img:"https://placehold.co/600x400?text=Motorola+G04"},
+  {id:2, title:"Motorola Moto G54", brand:"Motorola", color:"Zelená", memory:"12GB / 256GB", demo:true,
+   description:"Výkonnější model G54 s větší pamětí, prodávaný jako předváděcí kus.", note:"Drobná známka použití", charger:true, cable:false, earphones:true, case:true, box:true, price:2490,
+   img:"https://placehold.co/600x400?text=Motorola+G54"},
+  {id:3, title:"Motorola Moto G84", brand:"Motorola", color:"Červená", memory:"12GB / 256GB", demo:true,
+   description:"G84 s drobným problémem OLED panelu (částečné vypálení), jinak plně funkční.", note:"Vypálené místo na displeji", charger:true, cable:true, earphones:false, case:true, box:true, price:2900,
+   img:"https://placehold.co/600x400?text=Motorola+G84"},
+  {id:4, title:"Samsung Galaxy A7 (2018)", brand:"Samsung", color:"Modrá", memory:"4GB / 64GB", demo:false,
+   description:"Samsung A7 (2018) s nově vyměněným LCD a drobnými estetickými vadami.", note:"Nové LCD", charger:true, cable:true, earphones:true, case:true, box:true, price:2500,
+   img:"https://placehold.co/600x400?text=Samsung+A7"},
+  {id:5, title:"Samsung Galaxy J4+", brand:"Samsung", color:"Černá", memory:"2GB / 32GB", demo:false,
+   description:"Základní model vhodný jako záložní telefon nebo pro nenáročné použití.", note:"Ošoupaný zadní kryt", charger:true, cable:true, earphones:true, case:true, box:true, price:1200,
+   img:"https://placehold.co/600x400?text=Samsung+J4+"},
+  {id:6, title:"Samsung GT-S5610", brand:"Samsung", color:"Šedá", memory:"-", demo:false,
+   description:"Starší tlačítkový telefon, plně funkční, vhodný do náročných podmínek.", note:"Mechanicky v pořádku", charger:true, cable:true, earphones:true, case:true, box:true, price:500,
+   img:"https://placehold.co/600x400?text=GT-S5610"},
+  {id:7, title:"Samsung Galaxy S9", brand:"Samsung", color:"Černá", memory:"4GB / 64GB", demo:false,
+   description:"Galaxy S9 v dobrém technickém stavu, kosmetické šrámy na zadním krytu.", note:"Lehce poškrábané záda", charger:true, cable:true, earphones:true, case:true, box:true, price:3100,
+   img:"https://placehold.co/600x400?text=Galaxy+S9"},
+  {id:8, title:"Vivo Y21s", brand:"Vivo", color:"Modrá", memory:"4GB / 128GB", demo:false,
+   description:"Vivo Y21s v dobrém stavu, ideální jako každodenní telefon.", note:"Bez dalších poznámek", charger:true, cable:true, earphones:true, case:false, box:true, price:1490,
+   img:"https://placehold.co/600x400?text=Vivo+Y21s-A"},
+  {id:9, title:"Vivo Y21s", brand:"Vivo", color:"Modrá", memory:"4GB / 128GB", demo:false,
+   description:"Další kus Vivo Y21s, standardní stav.", note:"Menší kozmetické vady", charger:false, cable:true, earphones:true, case:true, box:false, price:1390,
+   img:"https://placehold.co/600x400?text=Vivo+Y21s-B"},
+  {id:10, title:"Vivo Y21s", brand:"Vivo", color:"Modrá", memory:"4GB / 128GB", demo:false,
+   description:"Vivo Y21s, dobře fungující zařízení.", note:"", charger:false, cable:true, earphones:true, case:true, box:true, price:1450,
+   img:"https://placehold.co/600x400?text=Vivo+Y21s-C"},
+  {id:11, title:"Vivo Y29s 5G", brand:"Vivo", color:"Černá", memory:"6GB / 128GB", demo:true,
+   description:"Předváděcí kus Y29s 5G, lehce použitý, plně funkční.", note:"Předváděcí", charger:false, cable:true, earphones:false, case:true, box:false, price:2790,
+   img:"https://placehold.co/600x400?text=Vivo+Y29s+5G-1"},
+  {id:12, title:"Vivo Y29s 5G", brand:"Vivo", color:"Černá", memory:"6GB / 128GB", demo:true,
+   description:"Druhý kus Y29s 5G, ideální pro síťové testování nebo demo.", note:"Předváděcí", charger:false, cable:true, earphones:false, case:true, box:true, price:2690,
+   img:"https://placehold.co/600x400?text=Vivo+Y29s+5G-2"},
+  {id:13, title:"Vivo Y33s", brand:"Vivo", color:"Modrá", memory:"8GB / 128GB", demo:false,
+   description:"Vivo Y33s v dobrém technickém stavu, oblíbený pro stabilní výkon.", note:"", charger:false, cable:true, earphones:true, case:true, box:true, price:1890,
+   img:"https://placehold.co/600x400?text=Vivo+Y33s-A"},
+  {id:14, title:"Vivo Y33s", brand:"Vivo", color:"Černá", memory:"8GB / 128GB", demo:false,
+   description:"Další kus Y33s, černá varianta.", note:"", charger:true, cable:true, earphones:false, case:true, box:false, price:1790,
+   img:"https://placehold.co/600x400?text=Vivo+Y33s-B"},
+  {id:15, title:"Vivo Y33s", brand:"Vivo", color:"Modrá", memory:"8GB / 128GB", demo:false,
+   description:"Standardní kus Y33s, vhodný pro každodenní použití.", note:"", charger:true, cable:true, earphones:false, case:true, box:false, price:1690,
+   img:"https://placehold.co/600x400?text=Vivo+Y33s-C"},
+  {id:16, title:"Xiaomi Redmi 12", brand:"Xiaomi", color:"Černá", memory:"4GB / 128GB", demo:false,
+   description:"Redmi 12 s dobrou výdrží baterie a solidním poměrem cena/výkon.", note:"Nové a staré pouzdro", charger:true, cable:true, earphones:false, case:true, box:false, price:2190,
+   img:"https://placehold.co/600x400?text=Redmi+12"},
+  {id:17, title:"Xiaomi Redmi 15C", brand:"Xiaomi", color:"Černá", memory:"4GB / 128GB", demo:true,
+   description:"Předváděcí kus Redmi 15C, lehce použitý, bez závad.", note:"Předváděcí", charger:false, cable:true, earphones:false, case:true, box:true, price:2390,
+   img:"https://placehold.co/600x400?text=Redmi+15C"},
+  {id:18, title:"Xiaomi Redmi 15", brand:"Xiaomi", color:"Černá", memory:"6GB / 128GB", demo:true,
+   description:"Redmi 15 v dobrém stavu, vhodný pro náročnější uživatele díky 6GB RAM.", note:"", charger:false, cable:true, earphones:false, case:true, box:false, price:2590,
+   img:"https://placehold.co/600x400?text=Redmi+15"},
+  {id:19, title:"Xiaomi Redmi 9A", brand:"Xiaomi", color:"Černá", memory:"2GB / 32GB", demo:false,
+   description:"Jednoduchý model Redmi 9A, vhodný jako záložní nebo studentský telefon.", note:"Nový LCD / ošoupaný zadní kryt", charger:true, cable:true, earphones:false, case:true, box:false, price:890,
+   img:"https://placehold.co/600x400?text=Redmi+9A"},
+  {id:20, title:"Xiaomi Redmi A5", brand:"Xiaomi", color:"Černá", memory:"3GB / 64GB", demo:true,
+   description:"Redmi A5 předváděcí kus, dobrý stav.", note:"", charger:false, cable:true, earphones:false, case:true, box:false, price:1290,
+   img:"https://placehold.co/600x400?text=Redmi+A5"},
+  {id:21, title:"Xiaomi Redmi Note 10 Pro", brand:"Xiaomi", color:"Černá", memory:"6GB / 128GB", demo:false,
+   description:"Note 10 Pro s dobrým fotoaparátem, drobné prasknutí zadního krytu.", note:"Prasklý zadní kryt", charger:true, cable:true, earphones:false, case:true, box:false, price:3790,
+   img:"https://placehold.co/600x400?text=Note+10+Pro"},
+  {id:22, title:"Xiaomi Redmi Note 11S", brand:"Xiaomi", color:"Šedá", memory:"6GB / 64GB", demo:false,
+   description:"Note 11S s novým LCD, stabilní výkon.", note:"Nový LCD", charger:true, cable:true, earphones:true, case:true, box:true, price:2690,
+   img:"https://placehold.co/600x400?text=Note+11S"},
+  {id:23, title:"Xiaomi Redmi Note 9", brand:"Xiaomi", color:"Zelená", memory:"3GB / 64GB", demo:false,
+   description:"Note 9, běžný stav, dodává se s pouzdrem.", note:"Pouzdro v balení", charger:true, cable:true, earphones:true, case:true, box:false, price:1890,
+   img:"https://placehold.co/600x400?text=Note+9"},
+  {id:24, title:"Doogee S40", brand:"Doogee", color:"Černo‑oranžová", memory:"2GB / 16GB", demo:false,
+   description:"Robustní Doogee S40 vhodný pro náročnější prostředí, zvýšená odolnost.", note:"Bez dalších poznámek", charger:true, cable:true, earphones:false, case:false, box:false, price:1990,
+   img:"https://placehold.co/600x400?text=Doogee+S40"}
 ];
 /* --------------------------------------------- */
 
@@ -393,6 +465,40 @@ function updatePricePlaceholders(){
     document.getElementById('minPrice').placeholder = '';
     document.getElementById('maxPrice').placeholder = '';
   }
+}
+
+/* Custom confirm helper (returns Promise<boolean>) */
+function showConfirm(message){
+  return new Promise(resolve => {
+    const back = document.getElementById('confirmBack');
+    const msg = document.getElementById('confirmMsg');
+    const okBtn = document.getElementById('confirmOk');
+    const cancelBtn = document.getElementById('confirmCancel');
+    msg.textContent = message;
+    back.style.display = 'flex';
+    // focus management
+    okBtn.focus();
+    function cleanup(val){
+      okBtn.removeEventListener('click', onOk);
+      cancelBtn.removeEventListener('click', onCancel);
+      document.removeEventListener('keydown', onKey);
+      back.style.display = 'none';
+      resolve(val);
+    }
+    function onOk(){ cleanup(true); }
+    function onCancel(){ cleanup(false); }
+    function onKey(e){
+      if(e.key === 'Escape') { cleanup(false); }
+      if(e.key === 'Enter') { cleanup(true); }
+    }
+    okBtn.addEventListener('click', onOk);
+    cancelBtn.addEventListener('click', onCancel);
+    document.addEventListener('keydown', onKey);
+    // backdrop click closes as cancel
+    back.addEventListener('click', function onBackClick(e){
+      if(e.target === back){ cleanup(false); back.removeEventListener('click', onBackClick); }
+    });
+  });
 }
 
 /* Renderers */
@@ -515,7 +621,7 @@ function renderAdminTable(){
     tbody.appendChild(tr);
   });
   tbody.querySelectorAll('.editBtn').forEach(b=>b.addEventListener('click', e=>openEditor(Number(e.currentTarget.dataset.id))));
-  tbody.querySelectorAll('.dupBtn').forEach(b=>b.addEventListener('click', e=>duplicateProduct(Number(e.currentTarget.dataset.id))));
+  tbody.querySelectorAll('.dupBtn').forEach(b=>b.addEventListener('click', async e=>{ await duplicateProduct(Number(e.currentTarget.dataset.id)); }));
 }
 
 function openAdmin(){
@@ -531,7 +637,8 @@ function resetEditor(){
 }
 document.getElementById('addNewBtn').addEventListener('click', ()=>{ resetEditor(); document.getElementById('editTitle').focus(); });
 document.getElementById('resetFormBtn').addEventListener('click', resetEditor);
-document.getElementById('resetDefaultsBtn').addEventListener('click', ()=>{ if(confirm('Resetovat data na výchozí seznam? Toto přepíše uložená data.')){ products = defaultProducts.slice(); saveProducts(); renderMakers(); renderGrid(products); renderAdminTable(); alert('Výchozí data nahrána.'); } });
+// resetDefaults uses custom confirm
+document.getElementById('resetDefaultsBtn').addEventListener('click', async ()=>{ const ok = await showConfirm('Resetovat data na výchozí seznam? Toto přepíše uložená data.'); if(ok){ products = defaultProducts.slice(); saveProducts(); renderMakers(); renderGrid(products); renderAdminTable(); alert('Výchozí data nahrána.'); } });
 
 function openEditor(id){
   const p = products.find(x=>x.id===id); if(!p) return;
@@ -586,15 +693,16 @@ document.getElementById('saveProductBtn').addEventListener('click', async ()=>{
 });
 
 /* Delete */
-document.getElementById('deleteProductBtn').addEventListener('click', ()=>{
+document.getElementById('deleteProductBtn').addEventListener('click', async ()=>{
   const id = Number(document.getElementById('editId').value); if(!id) return;
-  if(!confirm('Smazat tento produkt?')) return;
+  const ok = await showConfirm('Smazat tento produkt?'); if(!ok) return;
   products = products.filter(p=>p.id !== id); saveProducts(); renderMakers(); renderGrid(products); renderAdminTable(); resetEditor();
 });
 
 /* Duplicate */
-function duplicateProduct(id){
-  if(!confirm('Vytvořit kopii tohoto produktu?')) return;
+async function duplicateProduct(id){
+  const confirmed = await showConfirm('Vytvořit kopii tohoto produktu?');
+  if(!confirmed) return;
   const p = products.find(x=>x.id===id);
   if(!p) return;
   const copy = JSON.parse(JSON.stringify(p));
@@ -662,7 +770,7 @@ document.getElementById('adminBack').addEventListener('click', (e)=>{ if(e.targe
 document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ document.getElementById('modalBack').style.display='none'; document.getElementById('adminBack').style.display='none'; document.getElementById('emailModalBack').style.display='none'; } });
 
 /* Sticky messenger on mobile */
-function checkSticky(){ if(window.innerWidth <= 480){ document.getElementById('contactSticky').style.display='flex'; } else { document.getElementById('contactSticky').style.display='none'; } }
+function checkSticky(){ if(window.innerWidth <= 480){ const el=document.getElementById('contactSticky'); if(el) el.style.display='flex'; } else { const el=document.getElementById('contactSticky'); if(el) el.style.display='none'; } }
 window.addEventListener('resize', checkSticky); checkSticky();
 </script>
 </body>

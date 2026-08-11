@@ -82,6 +82,66 @@
   .mutedSmall{font-size:12px;color:var(--muted)}
   .flex{display:flex;gap:8px;align-items:center}
 
+  /* Obrázky: celý obrázek (contain) a centrování */
+  .thumb{ display:flex; align-items:center; justify-content:center; background:#f5f8fb; }
+  .thumb img{ width:100%; height:100%; object-fit:contain; display:block; }
+
+  /* Náhledy (small thumbs) */
+  .thumbSmall img{ width:100%; height:100%; object-fit:contain; display:block; }
+
+  /* Layout karty: tělo karty roste, CTA zůstává dole */
+  .card{ display:flex; flex-direction:column; gap:12px; min-height:320px; }
+  .cardBody{ display:flex; flex-direction:column; gap:8px; flex:1 1 auto; }
+  .cardFooter{ margin-top:auto; }
+
+  /* CTA (primární) - stále primární barva */
+  .cta{ background:var(--accent); color:#fff; border:0; padding:8px 12px; border-radius:8px; cursor:pointer; width:100%; }
+
+  /* Nepodbarvená tlačítka (silnější orámování) */
+  .clearBtn{
+  background:#fff;
+  color:var(--muted);
+  border:2px solid #e6eef8;
+  padding:8px 12px;
+  border-radius:8px;
+  cursor:pointer;
+  box-shadow:none;
+  }
+
+  /* Specificky: Vymazat filtr - jemné modré podbarvení ladící s --accent */
+  #clearFilter{
+  background:#eaf5ff;          /* světlá modrá */
+  color:var(--accent-dark);    /* tmavší modrá text */
+  border:2px solid #cfeefe;
+  padding:8px 12px;
+  border-radius:8px;
+  }
+
+  /* Zavírací tlačítko modalů - podbarvené, výrazné */
+  .modalClose{
+  position:absolute;
+  right:12px;
+  top:12px;
+  width:36px;
+  height:36px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--accent-dark);
+  color:#fff;
+  border:0;
+  border-radius:8px;
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(8,74,134,0.12);
+  font-size:16px;
+  line-height:1;
+  }
+
+  /* Tweak pro title/meta/price v kartě */
+  .title{ font-weight:700; font-size:14px; line-height:1.2; }
+  .meta{ color:var(--muted); font-size:13px; margin-top:4px; }
+  .price{ font-weight:800; color:#111; margin-top:10px; margin-bottom:10px; font-size:20px; }
+  
   /* confirm modal styles */
   .confirmBack{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:none;align-items:center;justify-content:center;padding:20px;z-index:220}
   .confirmBox{background:var(--card);padding:16px;border-radius:10px;max-width:520px;width:100%;box-shadow:0 8px 32px rgba(0,0,0,0.12)}

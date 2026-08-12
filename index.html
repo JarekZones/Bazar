@@ -1,121 +1,92 @@
 <!doctype html>
 <html lang="cs">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Nabídka použitých telefonů</title>
-
 <style>
-  /* --- tvoje původní CSS beze změn --- */
-  /* (ponechal jsem vše, jen jsem odstranil styly admin modalu) */
+  :root{
+    --bg:#f5f6f8;--card:#fff;--muted:#6b7280;--accent:#0b57a4;--accent-dark:#084a86;--badge:#6d28d9;--danger:#e02424;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  body{margin:0;font-family:Inter,Segoe UI,Arial;background:var(--bg);color:#111}
+  .container{max-width:1200px;margin:18px auto;padding:16px}
+  header{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+  .brandImg{width:72px;height:56px;background:#e9eef3;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700}
+  h1{font-size:20px;margin:0}
+  .adminBtn{margin-left:auto;background:#111;color:#fff;padding:8px 12px;border-radius:8px;border:0;cursor:pointer}
+  .layout{display:grid;grid-template-columns:260px 1fr;gap:16px}
+  .filters{background:var(--card);padding:16px;border-radius:10px;box-shadow:0 1px 0 rgba(0,0,0,0.04)}
+  .filterTitle{margin:0 0 8px 0;font-weight:700}
+  .checkboxRow{display:flex;align-items:center;gap:8px;margin:8px 0}
+  .rangeRow input[type="number"]{flex:1;padding:6px;border-radius:6px;border:1px solid #e2e8f0}
+  .applyBtn{background:var(--accent);color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer;margin-top:12px}
+  .clearBtn{background:#fff;color:var(--muted);border:1px solid #e2e8f0;padding:8px 12px;border-radius:8px;cursor:pointer;margin-top:12px;margin-left:8px}
+  .infoBar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .card{background:var(--card);border-radius:10px;padding:10px;box-shadow:0 1px 0 rgba(0,0,0,0.04);display:flex;flex-direction:column;gap:8px}
+  .thumb{width:100%;height:140px;background:#e9eef3;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted);overflow:hidden}
+  .thumb img{width:100%;height:100%;object-fit:contain;display:block}
+  .title{font-weight:700;font-size:14px}
+  .meta{color:var(--muted);font-size:13px}
+  .price{font-weight:800;color:#111;margin-top:18px;margin-bottom:18px;font-size:25px}
+  .cta{background:var(--accent);color:#fff;border:none;padding:8px;border-radius:8px;cursor:pointer;margin-top:auto;width:100%}
+  footer{text-align:center;margin-top:20px;color:var(--muted);font-size:13px}
 </style>
 </head>
 
 <body>
-  <div class="container">
-    <header>
-      <div class="brandImg">IMG</div>
-      <div>
-        <h1>Nabídka použitých telefonů</h1>
-        <div class="small">Přehled dostupných kusů — vyber značku nebo cenu</div>
+<div class="container">
+  <header>
+    <div class="brandImg">IMG</div>
+    <div>
+      <h1>Nabídka použitých telefonů</h1>
+      <div class="small">Přehled dostupných kusů — vyber značku nebo cenu</div>
+    </div>
+    <button class="adminBtn" id="openAdminBtn">Admin</button>
+  </header>
+
+  <div class="layout">
+    <aside class="filters">
+      <div class="filterTitle">Filtr</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:6px">Výrobce</div>
+      <div id="makerList"></div>
+      <div class="rangeRow">
+        <div style="font-size:13px;color:var(--muted);margin-top:10px">Cenový rozsah (Kč)</div>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <input id="minPrice" type="number" placeholder="min">
+          <input id="maxPrice" type="number" placeholder="max">
+        </div>
       </div>
+      <div style="display:flex;gap:8px">
+        <button class="applyBtn" id="applyFilter">Použít filtr</button>
+        <button class="clearBtn" id="clearFilter">Vymazat filtr</button>
+      </div>
+    </aside>
 
-      <!-- ✔️ Opravené tlačítko Admin -->
-      <button class="adminBtn" id="openAdminBtn">Admin</button>
-    </header>
-
-    <div class="layout">
-      <aside class="filters" id="filters">
-        <!-- filtry beze změn -->
-        <div>
-          <div class="filterTitle">Filtr</div>
-          <div style="font-size:13px;color:var(--muted);margin-bottom:6px">Výrobce</div>
-          <div id="makerList"></div>
-
-          <div class="rangeRow">
-            <div style="font-size:13px;color:var(--muted);margin-top:10px">Cenový rozsah (Kč)</div>
-            <div class="priceGroup" style="display:flex;gap:8px;margin-top:8px">
-              <input id="minPrice" type="number" placeholder="min" />
-              <input id="maxPrice" type="number" placeholder="max" />
-            </div>
-          </div>
-
-          <div style="display:flex;gap:8px">
-            <button class="applyBtn" id="applyFilter">Použít filtr</button>
-            <button class="clearBtn" id="clearFilter">Vymazat filtr</button>
-          </div>
-        </div>
-      </aside>
-
-      <main class="main">
-        <div class="infoBar">
-          <div id="resultCount">Zobrazeno 0 položek</div>
-          <div class="mutedSmall">Tento prototyp používá placeholder data + localStorage</div>
-        </div>
-
-        <div class="grid" id="grid"></div>
-
-        <footer>© 2026 — Nabídka použitých telefonů</footer>
-      </main>
-    </div>
+    <main>
+      <div class="infoBar">
+        <div id="resultCount">Zobrazeno 0 položek</div>
+        <div class="mutedSmall">Tento prototyp používá placeholder data + localStorage</div>
+      </div>
+      <div class="grid" id="grid"></div>
+      <footer>© 2026 — Nabídka použitých telefonů</footer>
+    </main>
   </div>
-
-  <!-- ✔️ ponechán pouze produktový modal -->
-  <div class="modalBack" id="modalBack">
-    <div class="modal">
-      <button class="modalClose" id="closeModal">✕</button>
-      <div class="galleryMain" id="modalMain"></div>
-      <div class="thumbRow" id="modalThumbs"></div>
-
-      <aside class="infoBox">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <div>
-            <div id="modalTitle" class="modalTitle"></div>
-            <div id="modalMeta" class="meta"></div>
-          </div>
-          <div id="modalBadge" class="badge" style="display:none"></div>
-        </div>
-
-        <div id="modalPrice" class="price"></div>
-
-        <div style="margin-top:12px">
-          <div class="sectionTitle">Doplňující informace</div>
-          <div id="modalDesc"></div>
-        </div>
-
-        <div style="margin-top:12px">
-          <div class="sectionTitle">Příslušenství</div>
-          <div class="accList" id="modalAcc"></div>
-        </div>
-
-        <div class="buyArea">
-          <div class="sectionTitle">Chci koupit</div>
-          <div class="buyButtons">
-            <button class="msBtn" id="msButton">Messenger</button>
-            <button class="emailBtn" id="emailButton">Kontakt přes e‑mail</button>
-          </div>
-        </div>
-      </aside>
-
-      <div class="spanFull productDescription" id="modalDescription"></div>
-    </div>
-  </div>
+</div>
 
 <script>
-/* ✔️ celý tvůj původní JS beze změn */
-/* ✔️ pouze odstraněny části admin modalu */
-/* ✔️ přidána login kontrola */
-
-document.getElementById("openAdminBtn").addEventListener("click", () => {
-  if(localStorage.getItem("adminLogged") === "true"){
-    location.href = "admin.html";
-  } else {
-    location.href = "login.html";
-  }
-});
-
-/* ✔️ zbytek tvého JS (loadProducts, renderGrid, modal, filtry, email modal) */
+const STORAGE_KEY='usedPhonesProducts_v1';
+const defaultProducts=[{id:1,title:"Motorola Moto G04",brand:"Motorola",color:"Oranžová",memory:"4GB / 64GB",price:1990,img:"https://placehold.co/600x400?text=Motorola+G04"}];
+function loadProducts(){let raw=localStorage.getItem(STORAGE_KEY);if(!raw){localStorage.setItem(STORAGE_KEY,JSON.stringify(defaultProducts));return defaultProducts.slice();}try{const parsed=JSON.parse(raw);return Array.isArray(parsed)?parsed:defaultProducts.slice();}catch(e){return defaultProducts.slice();}}
+let products=loadProducts();
+function renderMakers(){const makers=[...new Set(products.map(p=>p.brand))];const c=document.getElementById('makerList');c.innerHTML='';makers.forEach(m=>{const l=document.createElement('label');l.className='checkboxRow';l.innerHTML=`<input type="checkbox" value="${m}"> ${m}`;l.querySelector('input').addEventListener('change',applyFilter);c.appendChild(l);});}
+function renderGrid(list){const g=document.getElementById('grid');g.innerHTML='';list.forEach(p=>{const c=document.createElement('div');c.className='card';c.innerHTML=`<div class="thumb"><img src="${p.img}" alt="${p.title}"></div><div class="title">${p.title}</div><div class="meta">${p.brand} · ${p.color} · ${p.memory}</div><div class="price">${p.price.toLocaleString('cs-CZ')} Kč</div><button class="cta">Zobrazit detail</button>`;g.appendChild(c);});document.getElementById('resultCount').textContent=`Zobrazeno ${list.length} položek`;}
+function applyFilter(){const checked=[...document.querySelectorAll('#makerList input:checked')].map(i=>i.value);const min=document.getElementById('minPrice').value;const max=document.getElementById('maxPrice').value;let list=products.filter(p=>(!checked.length||checked.includes(p.brand))&&(min==''||p.price>=min)&&(max==''||p.price<=max));renderGrid(list);}
+document.getElementById('applyFilter').addEventListener('click',applyFilter);
+document.getElementById('clearFilter').addEventListener('click',()=>{document.querySelectorAll('#makerList input').forEach(cb=>cb.checked=false);document.getElementById('minPrice').value='';document.getElementById('maxPrice').value='';applyFilter();});
+document.getElementById('openAdminBtn').addEventListener('click',()=>{if(localStorage.getItem("adminLogged")==="true"){location.href="admin.html";}else{location.href="login.html";}});
+renderMakers();renderGrid(products);
 </script>
-
 </body>
 </html>

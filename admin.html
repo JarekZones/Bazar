@@ -6,18 +6,190 @@
 <title>Administrace produktů</title>
 
 <style>
-  body{margin:0;font-family:Inter,Segoe UI,Arial;background:#f5f6f8;color:#111}
-  .container{max-width:1100px;margin:20px auto;padding:16px;background:#fff;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
-  h1{margin:0 0 12px 0;font-size:24px;font-weight:800}
-  .adminActions{display:flex;gap:8px;margin-bottom:16px}
-  .applyBtn{background:#0b57a4;color:#fff;border:0;padding:8px 12px;border-radius:8px;cursor:pointer}
-  .clearBtn{background:#fff;color:#444;border:1px solid #ddd;padding:8px 12px;border-radius:8px;cursor:pointer}
-  .danger{background:#e02424;color:#fff;border:0;padding:8px 12px;border-radius:8px;cursor:pointer}
-  table{width:100%;border-collapse:collapse;margin-top:12px}
-  th,td{padding:8px;border-bottom:1px solid #eee;text-align:left;font-size:14px}
-  .formGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
-  input,textarea{width:100%;padding:8px;border:1px solid #ddd;border-radius:6px}
-  textarea{resize:vertical}
+  *{box-sizing:border-box}
+  :root{
+    --bg:#f5f6f8;
+    --card:#fff;
+    --text:#111827;
+    --muted:#6b7280;
+    --line:#e5e7eb;
+    --blue:#0b57a4;
+    --blue2:#08457f;
+    --red:#e02424;
+    --green:#15803d;
+  }
+  body{
+    margin:0;
+    font-family:Inter,Segoe UI,Arial,Helvetica,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+  }
+  .container{max-width:1180px;margin:28px auto;padding:0 18px}
+  .topbar{
+    background:var(--card);
+    border-radius:14px;
+    padding:20px 22px;
+    box-shadow:0 3px 14px rgba(0,0,0,.07);
+    display:flex;
+    align-items:center;
+    gap:16px;
+    margin-bottom:18px;
+  }
+  .topbar h1{margin:0;font-size:24px;font-weight:800}
+  .topbar p{margin:4px 0 0;color:var(--muted);font-size:13px}
+  .topbarText{flex:1}
+  .actions{display:flex;gap:8px;flex-wrap:wrap}
+  button,.fileBtn{
+    font:inherit;
+    border-radius:8px;
+    padding:9px 13px;
+    cursor:pointer;
+    border:1px solid transparent;
+    transition:.15s;
+  }
+  .primary{background:var(--blue);color:#fff}
+  .primary:hover{background:var(--blue2)}
+  .secondary{background:#fff;color:#374151;border-color:var(--line)}
+  .secondary:hover{background:#f9fafb}
+  .danger{background:var(--red);color:#fff}
+  .danger:hover{background:#b91c1c}
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-bottom:18px;
+  }
+  .stat{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:15px 18px;
+  }
+  .statLabel{font-size:12px;color:var(--muted)}
+  .statValue{font-size:22px;font-weight:800;margin-top:4px}
+  .panel{
+    background:#fff;
+    border-radius:14px;
+    box-shadow:0 3px 14px rgba(0,0,0,.06);
+    margin-bottom:18px;
+    overflow:hidden;
+  }
+  .panelHeader{
+    padding:16px 18px;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+  }
+  .panelHeader h2{margin:0;font-size:17px}
+  .panelHeader span{font-size:12px;color:var(--muted)}
+  .tableWrap{overflow-x:auto}
+  table{width:100%;border-collapse:collapse}
+  th,td{
+    padding:11px 12px;
+    border-bottom:1px solid var(--line);
+    text-align:left;
+    font-size:13px;
+    vertical-align:middle;
+  }
+  th{background:#f9fafb;color:#4b5563;font-weight:700;white-space:nowrap}
+  tbody tr:hover{background:#fafcff}
+  .productName{font-weight:700}
+  .productMeta{font-size:12px;color:var(--muted);margin-top:2px}
+  .price{font-weight:800;white-space:nowrap}
+  .badge{
+    display:inline-block;
+    padding:4px 8px;
+    border-radius:999px;
+    font-size:11px;
+    background:#eef4fb;
+    color:var(--blue);
+    white-space:nowrap;
+  }
+  .rowActions{display:flex;gap:6px;white-space:nowrap}
+  .smallBtn{padding:6px 9px;font-size:12px}
+  .editor{padding:18px}
+  .formGrid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:14px;
+  }
+  .field label{
+    display:block;
+    font-size:12px;
+    color:#4b5563;
+    font-weight:700;
+    margin-bottom:6px;
+  }
+  input,textarea{
+    width:100%;
+    padding:9px 10px;
+    border:1px solid #d9dee7;
+    border-radius:8px;
+    font:inherit;
+    background:#fff;
+  }
+  input:focus,textarea:focus{
+    outline:none;
+    border-color:var(--blue);
+    box-shadow:0 0 0 3px rgba(11,87,164,.10);
+  }
+  textarea{resize:vertical;min-height:120px}
+  .full{grid-column:1/-1}
+  .checkGrid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
+    margin-top:14px;
+  }
+  .check{
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:10px;
+    background:#fafafa;
+    font-size:13px;
+  }
+  .check input{width:auto;margin-right:6px}
+  .editorActions{
+    margin-top:16px;
+    padding-top:16px;
+    border-top:1px solid var(--line);
+    display:flex;
+    gap:8px;
+    justify-content:flex-end;
+  }
+  .empty{
+    padding:35px;
+    text-align:center;
+    color:var(--muted);
+  }
+  .hidden{display:none}
+  .notice{
+    padding:10px 12px;
+    background:#eff6ff;
+    color:#1e40af;
+    border:1px solid #dbeafe;
+    border-radius:8px;
+    font-size:12px;
+    margin-bottom:14px;
+  }
+  @media(max-width:800px){
+    .topbar{align-items:flex-start;flex-direction:column}
+    .actions{width:100%}
+    .actions button,.actions .fileBtn{flex:1}
+    .stats{grid-template-columns:1fr}
+    .formGrid{grid-template-columns:1fr 1fr}
+    .checkGrid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:520px){
+    .container{margin:14px auto;padding:0 10px}
+    .topbar{padding:16px}
+    .formGrid{grid-template-columns:1fr}
+    .checkGrid{grid-template-columns:1fr}
+    .editorActions{justify-content:stretch;flex-wrap:wrap}
+    .editorActions button{flex:1}
+  }
 </style>
 </head>
 
@@ -25,116 +197,466 @@
 
 <div class="container">
 
-  <h1>Administrace produktů</h1>
-
-  <div class="adminActions">
-    <button id="addNewBtn" class="applyBtn">Nový produkt</button>
-    <button id="exportBtn" class="clearBtn">Export JSON</button>
-    <label class="clearBtn" style="cursor:pointer">Import JSON
-      <input id="importFile" type="file" accept="application/json" style="display:none">
-    </label>
-    <button id="resetDefaultsBtn" class="clearBtn">Reset to defaults</button>
-    <button id="logoutBtn" class="danger">Odhlásit</button>
+  <div class="topbar">
+    <div class="topbarText">
+      <h1>Administrace produktů</h1>
+      <p>Správa nabídky použitých telefonů</p>
+    </div>
+    <div class="actions">
+      <button id="addNewBtn" class="primary">＋ Nový produkt</button>
+      <button id="exportBtn" class="secondary">Export JSON</button>
+      <label class="fileBtn secondary">Import JSON
+        <input id="importFile" type="file" accept="application/json" hidden>
+      </label>
+      <button id="resetDefaultsBtn" class="secondary">Obnovit výchozí</button>
+      <button id="logoutBtn" class="danger">Odhlásit</button>
+    </div>
   </div>
 
-  <table>
-    <thead>
-      <tr><th>ID</th><th>Název</th><th>Značka</th><th>Cena</th><th>Akce</th></tr>
-    </thead>
-    <tbody id="adminTbody"></tbody>
-  </table>
-
-  <h2 style="margin-top:20px">Editor produktu</h2>
-  <div class="formGrid">
-    <input type="hidden" id="editId">
-
-    <div>
-      <label>Název</label>
-      <input id="editTitle" type="text">
-    </div>
-
-    <div>
-      <label>Značka</label>
-      <input id="editBrand" type="text">
-    </div>
-
-    <div>
-      <label>Cena (Kč)</label>
-      <input id="editPrice" type="number">
-    </div>
-
-    <div>
-      <label>Barva</label>
-      <input id="editColor" type="text">
-    </div>
-
-    <div>
-      <label>Paměť</label>
-      <input id="editMemory" type="text">
-    </div>
-
-    <div>
-      <label>Demo</label><br>
-      <input id="editDemo" type="checkbox">
-    </div>
-
-    <div style="grid-column:1/4">
-      <label>Popis</label>
-      <textarea id="editDescription" rows="5"></textarea>
-    </div>
-
-    <div>
-      <label>Poznámka</label>
-      <input id="editNote" type="text">
-    </div>
-
-    <div>
-      <label>Obrázek (URL)</label>
-      <input id="editImgUrl" type="text">
-    </div>
-
-    <div>
-      <label>Nahrát obrázek</label><br>
-      <input id="editImgFile" type="file" accept="image/*">
-    </div>
-
-    <div><label>Nabíječka</label><br><input id="editCharger" type="checkbox"></div>
-    <div><label>Datový kabel</label><br><input id="editCable" type="checkbox"></div>
-    <div><label>Sluchátka</label><br><input id="editEarphones" type="checkbox"></div>
-    <div><label>Pouzdro</label><br><input id="editCase" type="checkbox"></div>
-    <div><label>Krabička</label><br><input id="editBox" type="checkbox"></div>
+  <div class="stats">
+    <div class="stat"><div class="statLabel">Celkem produktů</div><div id="statTotal" class="statValue">0</div></div>
+    <div class="stat"><div class="statLabel">Předváděcí kusy</div><div id="statDemo" class="statValue">0</div></div>
+    <div class="stat"><div class="statLabel">Nejnižší cena</div><div id="statMin" class="statValue">–</div></div>
   </div>
 
-  <div style="margin-top:16px;display:flex;gap:8px">
-    <button id="saveProductBtn" class="applyBtn">Uložit</button>
-    <button id="deleteProductBtn" class="danger" style="display:none">Smazat</button>
-    <button id="resetFormBtn" class="clearBtn">Reset</button>
+  <div class="panel">
+    <div class="panelHeader">
+      <h2>Produkty</h2>
+      <span id="tableInfo">Načítám…</span>
+    </div>
+    <div class="tableWrap">
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Produkt</th><th>Značka</th><th>Cena</th><th>Stav</th><th>Akce</th></tr>
+        </thead>
+        <tbody id="adminTbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panelHeader">
+      <h2 id="editorTitle">Editor produktu</h2>
+      <span id="editorState">Nový produkt</span>
+    </div>
+
+    <div class="editor">
+      <div class="notice">
+        Změny se ukládají do localStorage a jsou společné pro <strong>index.html</strong> i tuto administraci.
+      </div>
+
+      <div class="formGrid">
+        <input type="hidden" id="editId">
+
+        <div class="field">
+          <label for="editTitle">Název</label>
+          <input id="editTitle" type="text">
+        </div>
+
+        <div class="field">
+          <label for="editBrand">Značka</label>
+          <input id="editBrand" type="text">
+        </div>
+
+        <div class="field">
+          <label for="editPrice">Cena (Kč)</label>
+          <input id="editPrice" type="number" min="0">
+        </div>
+
+        <div class="field">
+          <label for="editColor">Barva</label>
+          <input id="editColor" type="text">
+        </div>
+
+        <div class="field">
+          <label for="editMemory">Paměť</label>
+          <input id="editMemory" type="text">
+        </div>
+
+        <div class="field">
+          <label for="editNote">Poznámka</label>
+          <input id="editNote" type="text">
+        </div>
+
+        <div class="field full">
+          <label for="editDescription">Popis</label>
+          <textarea id="editDescription"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="editImgUrl">Obrázek (URL)</label>
+          <input id="editImgUrl" type="text" placeholder="https://...">
+        </div>
+
+        <div class="field">
+          <label for="editImgFile">Nahrát obrázek</label>
+          <input id="editImgFile" type="file" accept="image/*">
+        </div>
+
+        <div class="field">
+          <label>Předváděcí kus</label>
+          <div class="check"><input id="editDemo" type="checkbox"> Ano</div>
+        </div>
+      </div>
+
+      <div class="checkGrid">
+        <label class="check"><input id="editCharger" type="checkbox"> Nabíječka</label>
+        <label class="check"><input id="editCable" type="checkbox"> Datový kabel</label>
+        <label class="check"><input id="editEarphones" type="checkbox"> Sluchátka</label>
+        <label class="check"><input id="editCase" type="checkbox"> Pouzdro</label>
+        <label class="check"><input id="editBox" type="checkbox"> Krabička</label>
+      </div>
+
+      <div class="editorActions">
+        <button id="deleteProductBtn" class="danger hidden">Smazat produkt</button>
+        <button id="resetFormBtn" class="secondary">Vyčistit formulář</button>
+        <button id="saveProductBtn" class="primary">Uložit produkt</button>
+      </div>
+    </div>
   </div>
 
 </div>
 
 <script>
-/* ✔️ LOGIN OCHRANA */
+/* =========================================================
+   Přihlášení
+   ========================================================= */
 if(localStorage.getItem("adminLogged") !== "true"){
-  location.href = "login.html";
+  window.location.href = "login.html";
 }
 
-/* ✔️ LOGOUT */
-document.getElementById("logoutBtn").addEventListener("click", () => {
-  localStorage.removeItem("adminLogged");
-  location.href = "index.html";
+/* =========================================================
+   Data – stejný klíč jako index.html
+   ========================================================= */
+const STORAGE_KEY = "usedPhonesProducts_v1";
+
+const defaultProducts = [
+  {id:1,title:"Motorola Moto G04",brand:"Motorola",color:"Oranžová",memory:"4GB / 64GB",demo:true,description:`Motorola Moto G04 je cenově dostupný chytrý telefon s 6,56" displejem a solidní výbavou pro běžné použití. Dobrá výdrž baterie a jednoduché ovládání.`,note:"Ochranná folie na LCD",charger:true,cable:true,earphones:false,case:true,box:false,price:1990,img:"https://placehold.co/600x400?text=Motorola+G04"},
+  {id:2,title:"Motorola Moto G54",brand:"Motorola",color:"Zelená",memory:"12GB / 256GB",demo:true,description:"Výkonnější model G54 s větší pamětí, prodávaný jako předváděcí kus.",note:"Drobná známka použití",charger:true,cable:false,earphones:true,case:true,box:true,price:2490,img:"https://placehold.co/600x400?text=Motorola+G54"},
+  {id:3,title:"Motorola Moto G84",brand:"Motorola",color:"Červená",memory:"12GB / 256GB",demo:true,description:"G84 s drobným problémem OLED panelu (částečné vypálení), jinak plně funkční.",note:"Vypálené místo na displeji",charger:true,cable:true,earphones:false,case:true,box:true,price:2900,img:"https://placehold.co/600x400?text=Motorola+G84"},
+  {id:4,title:"Samsung Galaxy A7 (2018)",brand:"Samsung",color:"Modrá",memory:"4GB / 64GB",demo:false,description:"Samsung A7 (2018) s nově vyměněným LCD a drobnými estetickými vadami.",note:"Nové LCD",charger:true,cable:true,earphones:true,case:true,box:true,price:2500,img:"https://placehold.co/600x400?text=Samsung+A7"},
+  {id:5,title:"Samsung Galaxy J4+",brand:"Samsung",color:"Černá",memory:"2GB / 32GB",demo:false,description:"Základní model vhodný jako záložní telefon nebo pro nenáročné použití.",note:"Ošoupaný zadní kryt",charger:true,cable:true,earphones:true,case:true,box:true,price:1200,img:"https://placehold.co/600x400?text=Samsung+J4+"},
+  {id:6,title:"Samsung GT-S5610",brand:"Samsung",color:"Šedá",memory:"-",demo:false,description:"Starší tlačítkový telefon, plně funkční, vhodný do náročných podmínek.",note:"Mechanicky v pořádku",charger:true,cable:true,earphones:true,case:true,box:true,price:500,img:"https://placehold.co/600x400?text=GT-S5610"},
+  {id:7,title:"Samsung Galaxy S9",brand:"Samsung",color:"Černá",memory:"4GB / 64GB",demo:false,description:"Galaxy S9 v dobrém technickém stavu, kosmetické šrámy na zadním krytu.",note:"Lehce poškrábané záda",charger:true,cable:true,earphones:true,case:true,box:true,price:3100,img:"https://placehold.co/600x400?text=Galaxy+S9"},
+  {id:8,title:"Vivo Y21s",brand:"Vivo",color:"Modrá",memory:"4GB / 128GB",demo:false,description:"Vivo Y21s v dobrém stavu, ideální jako každodenní telefon.",note:"Bez dalších poznámek",charger:true,cable:true,earphones:true,case:false,box:true,price:1490,img:"https://placehold.co/600x400?text=Vivo+Y21s-A"},
+  {id:9,title:"Vivo Y21s",brand:"Vivo",color:"Modrá",memory:"4GB / 128GB",demo:false,description:"Další kus Vivo Y21s, standardní stav.",note:"Menší kozmetické vady",charger:false,cable:true,earphones:true,case:true,box:false,price:1390,img:"https://placehold.co/600x400?text=Vivo+Y21s-B"},
+  {id:10,title:"Vivo Y21s",brand:"Vivo",color:"Modrá",memory:"4GB / 128GB",demo:false,description:"Vivo Y21s, dobře fungující zařízení.",note:"",charger:false,cable:true,earphones:true,case:true,box:true,price:1450,img:"https://placehold.co/600x400?text=Vivo+Y21s-C"},
+  {id:11,title:"Vivo Y29s 5G",brand:"Vivo",color:"Černá",memory:"6GB / 128GB",demo:true,description:"Předváděcí kus Y29s 5G, lehce použitý, plně funkční.",note:"Předváděcí",charger:false,cable:true,earphones:false,case:true,box:false,price:2790,img:"https://placehold.co/600x400?text=Vivo+Y29s+5G-1"},
+  {id:12,title:"Vivo Y29s 5G",brand:"Vivo",color:"Černá",memory:"6GB / 128GB",demo:true,description:"Druhý kus Y29s 5G, ideální pro síťové testování nebo demo.",note:"Předváděcí",charger:false,cable:true,earphones:false,case:true,box:true,price:2690,img:"https://placehold.co/600x400?text=Vivo+Y29s+5G-2"},
+  {id:13,title:"Vivo Y33s",brand:"Vivo",color:"Modrá",memory:"8GB / 128GB",demo:false,description:"Vivo Y33s v dobrém technickém stavu, oblíbený pro stabilní výkon.",note:"",charger:false,cable:true,earphones:true,case:true,box:true,price:1890,img:"https://placehold.co/600x400?text=Vivo+Y33s-A"},
+  {id:14,title:"Vivo Y33s",brand:"Vivo",color:"Černá",memory:"8GB / 128GB",demo:false,description:"Další kus Y33s, černá varianta.",note:"",charger:true,cable:true,earphones:false,case:true,box:false,price:1790,img:"https://placehold.co/600x400?text=Vivo+Y33s-B"},
+  {id:15,title:"Vivo Y33s",brand:"Vivo",color:"Modrá",memory:"8GB / 128GB",demo:false,description:"Standardní kus Y33s, vhodný pro každodenní použití.",note:"",charger:true,cable:true,earphones:false,case:true,box:false,price:1690,img:"https://placehold.co/600x400?text=Vivo+Y33s-C"},
+  {id:16,title:"Xiaomi Redmi 12",brand:"Xiaomi",color:"Černá",memory:"4GB / 128GB",demo:false,description:"Redmi 12 s dobrou výdrží baterie a solidním poměrem cena/výkon.",note:"Nové a staré pouzdro",charger:true,cable:true,earphones:false,case:true,box:false,price:2190,img:"https://placehold.co/600x400?text=Redmi+12"},
+  {id:17,title:"Xiaomi Redmi 15C",brand:"Xiaomi",color:"Černá",memory:"4GB / 128GB",demo:true,description:"Předváděcí kus Redmi 15C, lehce použitý, bez závad.",note:"Předváděcí",charger:false,cable:true,earphones:false,case:true,box:true,price:2390,img:"https://placehold.co/600x400?text=Redmi+15C"},
+  {id:18,title:"Xiaomi Redmi 15",brand:"Xiaomi",color:"Černá",memory:"6GB / 128GB",demo:true,description:"Redmi 15 v dobrém stavu, vhodný pro náročnější uživatele díky 6GB RAM.",note:"",charger:false,cable:true,earphones:false,case:true,box:false,price:2590,img:"https://placehold.co/600x400?text=Redmi+15"},
+  {id:19,title:"Xiaomi Redmi 9A",brand:"Xiaomi",color:"Černá",memory:"2GB / 32GB",demo:false,description:"Jednoduchý model Redmi 9A, vhodný jako záložní nebo studentský telefon.",note:"Nový LCD / ošoupaný zadní kryt",charger:true,cable:true,earphones:false,case:true,box:false,price:890,img:"https://placehold.co/600x400?text=Redmi+9A"},
+  {id:20,title:"Xiaomi Redmi A5",brand:"Xiaomi",color:"Černá",memory:"3GB / 64GB",demo:true,description:"Redmi A5 předváděcí kus, dobrý stav.",note:"",charger:false,cable:true,earphones:false,case:true,box:false,price:1290,img:"https://placehold.co/600x400?text=Redmi+A5"},
+  {id:21,title:"Xiaomi Redmi Note 10 Pro",brand:"Xiaomi",color:"Černá",memory:"6GB / 128GB",demo:false,description:"Note 10 Pro s dobrým fotoaparátem, drobné prasknutí zadního krytu.",note:"Prasklý zadní kryt",charger:true,cable:true,earphones:false,case:true,box:false,price:3790,img:"https://placehold.co/600x400?text=Note+10+Pro"},
+  {id:22,title:"Xiaomi Redmi Note 11S",brand:"Xiaomi",color:"Šedá",memory:"6GB / 64GB",demo:false,description:"Note 11S s novým LCD, stabilní výkon.",note:"Nový LCD",charger:true,cable:true,earphones:true,case:true,box:true,price:2690,img:"https://placehold.co/600x400?text=Note+11S"},
+  {id:23,title:"Xiaomi Redmi Note 9",brand:"Xiaomi",color:"Zelená",memory:"3GB / 64GB",demo:false,description:"Note 9, běžný stav, dodává se s pouzdrem.",note:"Pouzdro v balení",charger:true,cable:true,earphones:true,case:true,box:false,price:1890,img:"https://placehold.co/600x400?text=Note+9"},
+  {id:24,title:"Doogee S40",brand:"Doogee",color:"Černo‑oranžová",memory:"2GB / 16GB",demo:false,description:"Robustní Doogee S40 vhodný pro náročnější prostředí, zvýšená odolnost.",note:"Bez dalších poznámek",charger:true,cable:true,earphones:false,case:false,box:false,price:1990,img:"https://placehold.co/600x400?text=Doogee+S40"}
+];
+
+function uid(){return Date.now()+Math.floor(Math.random()*1000)}
+
+function loadProducts(){
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      const parsed=JSON.parse(raw);
+      if(Array.isArray(parsed) && parsed.length) return parsed;
+    }
+  }catch(e){console.warn("Chyba localStorage:",e)}
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(defaultProducts));
+  return defaultProducts.map(p=>({...p}));
+}
+
+let products=loadProducts();
+
+function saveProducts(){
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(products));
+  renderAdminTable();
+  updateStats();
+}
+
+function formatPrice(n){
+  return Number(n)?Number(n).toLocaleString("cs-CZ")+" Kč":"Na dotaz";
+}
+
+function escapeHtml(s){
+  return String(s??"").replace(/[&<>"']/g,c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
+}
+
+/* =========================================================
+   Tabulka
+   ========================================================= */
+function renderAdminTable(){
+  const tbody=document.getElementById("adminTbody");
+  tbody.innerHTML="";
+
+  const list=products.slice().sort((a,b)=>Number(a.id)-Number(b.id));
+
+  if(!list.length){
+    tbody.innerHTML='<tr><td colspan="6" class="empty">Žádné produkty.</td></tr>';
+    document.getElementById("tableInfo").textContent="0 položek";
+    return;
+  }
+
+  list.forEach(p=>{
+    const tr=document.createElement("tr");
+    tr.innerHTML=`
+      <td>${p.id}</td>
+      <td>
+        <div class="productName">${escapeHtml(p.title)}</div>
+        <div class="productMeta">${escapeHtml(p.color||"")} · ${escapeHtml(p.memory||"")}</div>
+      </td>
+      <td>${escapeHtml(p.brand)}</td>
+      <td class="price">${formatPrice(p.price)}</td>
+      <td>${p.demo?'<span class="badge">Předváděcí</span>':'<span style="color:#6b7280">Běžný kus</span>'}</td>
+      <td>
+        <div class="rowActions">
+          <button class="primary smallBtn editBtn" data-id="${p.id}">Upravit</button>
+          <button class="secondary smallBtn dupBtn" data-id="${p.id}">Kopírovat</button>
+        </div>
+      </td>`;
+    tbody.appendChild(tr);
+  });
+
+  tbody.querySelectorAll(".editBtn").forEach(btn=>{
+    btn.addEventListener("click",()=>openEditor(Number(btn.dataset.id)));
+  });
+
+  tbody.querySelectorAll(".dupBtn").forEach(btn=>{
+    btn.addEventListener("click",()=>duplicateProduct(Number(btn.dataset.id)));
+  });
+
+  document.getElementById("tableInfo").textContent=`${list.length} položek`;
+}
+
+function updateStats(){
+  const demo=products.filter(p=>p.demo).length;
+  const prices=products.map(p=>Number(p.price)).filter(n=>n>0);
+  document.getElementById("statTotal").textContent=products.length;
+  document.getElementById("statDemo").textContent=demo;
+  document.getElementById("statMin").textContent=prices.length?Math.min(...prices).toLocaleString("cs-CZ")+" Kč":"–";
+}
+
+/* =========================================================
+   Editor
+   ========================================================= */
+function resetEditor(){
+  ["editId","editTitle","editBrand","editPrice","editColor","editMemory","editDescription","editNote","editImgUrl"].forEach(id=>{
+    document.getElementById(id).value="";
+  });
+  document.getElementById("editImgFile").value="";
+  ["editDemo","editCharger","editCable","editEarphones","editCase","editBox"].forEach(id=>{
+    document.getElementById(id).checked=false;
+  });
+  document.getElementById("deleteProductBtn").classList.add("hidden");
+  document.getElementById("editorState").textContent="Nový produkt";
+  document.getElementById("editorTitle").textContent="Editor produktu";
+}
+
+function openEditor(id){
+  const p=products.find(x=>Number(x.id)===Number(id));
+  if(!p)return;
+
+  document.getElementById("editId").value=p.id;
+  document.getElementById("editTitle").value=p.title||"";
+  document.getElementById("editBrand").value=p.brand||"";
+  document.getElementById("editPrice").value=p.price||"";
+  document.getElementById("editColor").value=p.color||"";
+  document.getElementById("editMemory").value=p.memory||"";
+  document.getElementById("editDescription").value=p.description||"";
+  document.getElementById("editNote").value=p.note||"";
+  document.getElementById("editImgUrl").value=(p.img&&p.img.startsWith("data:"))?"":(p.img||"");
+  document.getElementById("editImgFile").value="";
+
+  document.getElementById("editDemo").checked=!!p.demo;
+  document.getElementById("editCharger").checked=!!p.charger;
+  document.getElementById("editCable").checked=!!p.cable;
+  document.getElementById("editEarphones").checked=!!p.earphones;
+  document.getElementById("editCase").checked=!!p.case;
+  document.getElementById("editBox").checked=!!p.box;
+
+  document.getElementById("deleteProductBtn").classList.remove("hidden");
+  document.getElementById("editorState").textContent=`Upravujete produkt #${p.id}`;
+  document.getElementById("editorTitle").textContent=`Editor: ${p.title}`;
+
+  document.querySelector(".panel:last-child").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function fileToDataURL(file){
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=()=>resolve(reader.result);
+    reader.onerror=()=>reject(reader.error);
+    reader.readAsDataURL(file);
+  });
+}
+
+document.getElementById("saveProductBtn").addEventListener("click",async()=>{
+  const idValue=document.getElementById("editId").value.trim();
+  const title=document.getElementById("editTitle").value.trim();
+  const brand=document.getElementById("editBrand").value.trim();
+
+  if(!title||!brand){
+    alert("Název a značka jsou povinné.");
+    return;
+  }
+
+  let img=document.getElementById("editImgUrl").value.trim();
+  const file=document.getElementById("editImgFile").files[0];
+
+  if(file){
+    try{img=await fileToDataURL(file)}catch(e){alert("Obrázek se nepodařilo načíst.");return}
+  }else if(idValue){
+    const old=products.find(p=>Number(p.id)===Number(idValue));
+    if(old && old.img && !img) img=old.img;
+  }
+
+  const data={
+    id:idValue?Number(idValue):uid(),
+    title,
+    brand,
+    price:Number(document.getElementById("editPrice").value)||0,
+    color:document.getElementById("editColor").value.trim(),
+    memory:document.getElementById("editMemory").value.trim(),
+    demo:document.getElementById("editDemo").checked,
+    description:document.getElementById("editDescription").value,
+    note:document.getElementById("editNote").value,
+    charger:document.getElementById("editCharger").checked,
+    cable:document.getElementById("editCable").checked,
+    earphones:document.getElementById("editEarphones").checked,
+    case:document.getElementById("editCase").checked,
+    box:document.getElementById("editBox").checked,
+    img:img||""
+  };
+
+  const index=products.findIndex(p=>Number(p.id)===data.id);
+  if(index>=0) products[index]=data;
+  else products.push(data);
+
+  saveProducts();
+  resetEditor();
+  alert("Produkt byl uložen.");
 });
 
-/* ✔️ TVŮJ PŮVODNÍ ADMIN KÓD — BEZE ZMĚN */
-const STORAGE_KEY = 'usedPhonesProducts_v1';
-const sellerEmail = "seller@example.com";
-const sellerMessenger = "yourPageUsername";
+document.getElementById("deleteProductBtn").addEventListener("click",()=>{
+  const id=Number(document.getElementById("editId").value);
+  if(!id)return;
+  const p=products.find(x=>Number(x.id)===id);
+  if(!p)return;
 
-/* defaultProducts — ponechány beze změny */
-/* loadProducts(), saveProducts(), uid(), formatPrice() — beze změny */
-/* renderAdminTable(), openEditor(), duplicateProduct(), deleteProduct(), import/export — beze změny */
-/* celý tvůj admin JS sem vložím přesně tak, jak byl v indexu */
+  if(!confirm(`Opravdu chcete smazat produkt „${p.title}“?`))return;
 
+  products=products.filter(x=>Number(x.id)!==id);
+  saveProducts();
+  resetEditor();
+});
+
+document.getElementById("addNewBtn").addEventListener("click",()=>{
+  resetEditor();
+  document.getElementById("editTitle").focus();
+  document.querySelector(".panel:last-child").scrollIntoView({behavior:"smooth",block:"start"});
+});
+
+document.getElementById("resetFormBtn").addEventListener("click",resetEditor);
+
+async function duplicateProduct(id){
+  const p=products.find(x=>Number(x.id)===Number(id));
+  if(!p)return;
+  if(!confirm(`Vytvořit kopii produktu „${p.title}“?`))return;
+
+  const copy=JSON.parse(JSON.stringify(p));
+  copy.id=uid();
+  copy.title=copy.title+" (kopie)";
+
+  /* Data-URI obrázek nekopírujeme, aby zbytečně nezvětšoval localStorage. */
+  if(typeof copy.img==="string" && copy.img.startsWith("data:"))copy.img="";
+
+  products.push(copy);
+  saveProducts();
+  openEditor(copy.id);
+}
+
+/* =========================================================
+   Reset výchozích dat
+   ========================================================= */
+document.getElementById("resetDefaultsBtn").addEventListener("click",()=>{
+  if(!confirm("Resetovat produkty na výchozích 24 položek? Tím se přepíší současná data."))return;
+
+  products=defaultProducts.map(p=>({...p}));
+  saveProducts();
+  resetEditor();
+  alert("Výchozí data byla obnovena.");
+});
+
+/* =========================================================
+   Export / Import
+   ========================================================= */
+function downloadBlob(filename,content,mime="application/json"){
+  const blob=new Blob([content],{type:mime});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download=filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+document.getElementById("exportBtn").addEventListener("click",()=>{
+  downloadBlob("products.json",JSON.stringify(products,null,2));
+});
+
+document.getElementById("importFile").addEventListener("change",e=>{
+  const file=e.target.files[0];
+  if(!file)return;
+
+  const reader=new FileReader();
+
+  reader.onload=()=>{
+    try{
+      const arr=JSON.parse(reader.result);
+
+      if(!Array.isArray(arr))throw new Error("JSON není pole produktů.");
+
+      products=arr
+        .filter(p=>p&&p.title)
+        .map(p=>({...p,id:p.id?Number(p.id):uid()}));
+
+      saveProducts();
+      resetEditor();
+      alert(`Import dokončen. Načteno ${products.length} produktů.`);
+    }catch(err){
+      alert("Chyba při čtení JSON souboru.");
+      console.error(err);
+    }
+
+    e.target.value="";
+  };
+
+  reader.readAsText(file);
+});
+
+/* =========================================================
+   Odhlášení
+   ========================================================= */
+document.getElementById("logoutBtn").addEventListener("click",()=>{
+  localStorage.removeItem("adminLogged");
+  window.location.href="index.html";
+});
+
+/* =========================================================
+   Start
+   ========================================================= */
+renderAdminTable();
+updateStats();
+resetEditor();
 </script>
 
 </body>

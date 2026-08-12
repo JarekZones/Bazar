@@ -645,19 +645,26 @@ function renderGrid(list){
     const imgTag = p.img ? `<img src="${p.img}" alt="${escapeHtml(p.title)}" onerror="this.style.display='none'">` : '';
     card.innerHTML = `
       <div class="thumb" role="img">${imgTag}</div>
-      <div class="title">${escapeHtml(p.title)}</div>
-      <div class="meta">${escapeHtml(p.brand)} · ${escapeHtml(p.color)} · ${escapeHtml(p.memory)}</div>
-      <div class="price">${formatPrice(p.price)}</div>
-      <button class="cta" data-id="${p.id}">Zobrazit detail / Kontaktovat</button>
+      <div class="cardBody">
+        <div class="title">${escapeHtml(p.title)}</div>
+        <div class="meta">${escapeHtml(p.brand)} · ${escapeHtml(p.color)} · ${escapeHtml(p.memory)}</div>
+        <div class="price">${formatPrice(p.price)}</div>
+      </div>
+      <div class="cardFooter">
+        <button class="cta" data-id="${p.id}">Zobrazit detail</button>
+      </div>
     `;
     grid.appendChild(card);
   });
+
+  // Přidej posluchače po vytvoření všech karet
   grid.querySelectorAll('.cta').forEach(btn=>{
     btn.addEventListener('click', (e)=>{
       const id = Number(e.currentTarget.getAttribute('data-id'));
       openModal(id);
     });
   });
+
   document.getElementById('resultCount').textContent = `Zobrazeno ${list.length} položek`;
 }
 

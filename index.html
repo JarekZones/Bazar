@@ -578,7 +578,6 @@ document.getElementById('closeModal').addEventListener('click', ()=>{ modalBackE
 modalBackEl.addEventListener('click', (e)=>{ if(e.target === modalBackEl){ modalBackEl.style.display='none'; modalBackEl.setAttribute('aria-hidden','true'); } });
 
 /* Admin */
-const adminBack = document.getElementById('adminBack');
 document.getElementById('openAdminBtn').addEventListener('click', () => {
   location.href = "login.html";
 });
@@ -600,9 +599,6 @@ function renderAdminTable(){
   tbody.querySelectorAll('.dupBtn').forEach(b=>b.addEventListener('click', async e=>{ await duplicateProduct(Number(e.currentTarget.dataset.id)); }));
 }
 
-// function openAdmin(){
-//  renderAdminTable(); adminBack.style.display='flex'; adminBack.setAttribute('aria-hidden','false'); resetEditor();
-// }
 
 /* Editor helpers */
 function resetEditor(){
@@ -615,7 +611,7 @@ document.getElementById('addNewBtn').addEventListener('click', ()=>{ resetEditor
 document.getElementById('resetFormBtn').addEventListener('click', resetEditor);
 // resetDefaults uses custom confirm
 document.getElementById('resetDefaultsBtn').addEventListener('click', async ()=>{ const ok = await showConfirm('Resetovat data na výchozí seznam? Toto přepíše uložená data.'); if(ok){ products = defaultProducts.slice(); saveProducts(); renderMakers(); renderGrid(products); renderAdminTable(); alert('Výchozí data nahrána.'); } });
-
+  
 function openEditor(id){
   const p = products.find(x=>x.id===id); if(!p) return;
   document.getElementById('editId').value = p.id;
@@ -693,6 +689,11 @@ async function duplicateProduct(id){
   renderMakers();
   renderGrid(products);
   renderAdminTable();
+  document.getElementById('openAdminBtn').addEventListener('click', () => {
+  location.href = "login.html";
+});
+  </script>
+  
   // otevřít editor pro nově vytvořenou kopii (upravíš ihned)
   openAdmin();
   openEditor(copy.id);

@@ -560,7 +560,16 @@ function loadProducts(){
       // pokud má uložené méně položek než default, přepíšu defaulty (vývojová volba)
     }
   }catch(e){}
-  // seed with defaults
+  // pokud vůbec nic není v localStorage, seedni defaulty; jinak ponech co uživatel má
+  if(!raw){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultProducts));
+    return defaultProducts.slice();
+  }
+  // pokud bylo něco, vrať parsed (pokud validní), nebo default jako fallback
+  try{
+    const parsed = JSON.parse(raw || '[]');
+    if(Array.isArray(parsed) && parsed.length) return parsed;
+  }catch(e){}
   localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultProducts));
   return defaultProducts.slice();
 }
@@ -838,7 +847,10 @@ async function duplicateProduct(id){
   copy.id = uid();
   copy.title = copy.title + ' (kopie)';
   // volitelné: pokud nechceš duplikovat data-URI obrázek (šetří localStorage), vymaž ho:
-  // if (copy.img && copy.img.startsWith('data:')) copy.img = '';
+  // volejte to, aby se nekopírovaly velké data-URI do localStorage
+  if (copy.img && typeof copy.img === 'string' && copy.img.startsWith('data:')) {
+    copy.img = '';
+  }
   products.push(copy);
   saveProducts();
   renderMakers();
@@ -849,9 +861,32 @@ async function duplicateProduct(id){
   openEditor(copy.id);
 }
 /* Export/Import */
+function downloadBlob(filename, content, mime='application/json'){
+  const blob = new Blob([content], {type: mime});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+}
+
 document.getElementById('exportBtn').addEventListener('click', ()=>{
-  const dataStr = JSON.stringify(products, null, 2); const blob = new Blob([dataStr], {type:'application/json'});
-  const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'products.json'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+  const dataStr = JSON.stringify(products, null, 2);
+  downloadBlob('products.json', dataStr);
+
+  const manifest = {};
+  products.forEach(p=>{
+    if(p.img && typeof p.img === 'string' && p.img.startsWith('data:')) {
+      const safe = (p.title || 'img').replace(/[^a-z0-9\-_\.]/gi,'_').slice(0,60);
+      const filename = `${p.id || Date.now()}_${safe}.png`;
+      manifest[filename] = p.img;
+    }
+  });
+
+  if(Object.keys(manifest).length){
+    downloadBlob('image_manifest.json', JSON.stringify(manifest, null, 2));
+    alert('Stáhl jsem products.json a image_manifest.json. Pokračuj lokálně skriptem extract_images.py.');
+  } else {
+    alert('Stáhl jsem products.json. Nebyly nalezeny žádné data‑URI obrázky.');
+  }
 });
 document.getElementById('importFile').addEventListener('change', (e)=>{
   const f = e.target.files[0]; if(!f) return; const reader = new FileReader();

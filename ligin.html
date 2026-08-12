@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Přihlášení do administrace</title>
+<style>
+  body{font-family:Inter,Segoe UI,Arial,Helvetica,sans-serif;background:#f5f6f8;color:#111;margin:0;display:flex;align-items:center;justify-content:center;height:100vh}
+  .loginBox{background:#fff;padding:24px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,0.1);width:100%;max-width:320px;text-align:center}
+  input[type="password"]{width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;margin-top:12px}
+  button{background:#0b57a4;color:#fff;border:none;padding:10px 14px;border-radius:8px;cursor:pointer;margin-top:16px;width:100%}
+  .error{color:#e02424;font-size:13px;margin-top:8px}
+</style>
+</head>
+<body>
+  <div class="loginBox">
+    <h2>Admin přihlášení</h2>
+    <input type="password" id="password" placeholder="Zadej heslo">
+    <button onclick="checkLogin()">Přihlásit</button>
+    <div id="errorMsg" class="error"></div>
+  </div>
+
+<script>
+function checkLogin(){
+  const pass = document.getElementById('password').value;
+  const correct = "TvojeHeslo123"; // 🔒 změň si heslo
+
+  if(pass === correct){
+    localStorage.setItem("adminLogged", "true");
+    window.location.href = "admin.html"; // přesměrování na admin
+  } else {
+    document.getElementById('errorMsg').textContent = "Špatné heslo!";
+  }
+}
+</script>
+</body>
+</html>

@@ -247,111 +247,7 @@
     </div>
   </div>
 
-  <!-- Admin modal -->
-  <div class="adminBack" id="adminBack" aria-hidden="true">
-    <div class="adminPanel" role="dialog" aria-modal="true">
-      <div class="adminHeader">
-        <div style="font-weight:800">Administrace produktů</div>
-        <div class="adminActions">
-          <button id="addNewBtn" class="applyBtn">Nový produkt</button>
-          <button id="exportBtn" class="clearBtn">Export JSON</button>
-          <label class="clearBtn" style="cursor:pointer">Import JSON
-            <input id="importFile" type="file" accept="application/json" style="display:none">
-          </label>
-          <button id="resetDefaultsBtn" class="clearBtn" title="Vrátit výchozí seznam">Reset to defaults</button>
-          <button id="closeAdmin" class="clearBtn">Zavřít</button>
-        </div>
-      </div>
-
-      <div>
-        <table class="table" id="adminTable">
-          <thead>
-            <tr><th>Id</th><th>Název</th><th>Značka</th><th>Cena</th><th>Akce</th></tr>
-          </thead>
-          <tbody id="adminTbody"></tbody>
-        </table>
-      </div>
-
-      <div style="margin-top:12px">
-        <div style="font-weight:700">Editor produktu</div>
-        <div class="mutedSmall">Vyplň pole a klikni Uložit. Obrázek může být URL nebo nahraj soubor (bude uložen jako data URL).</div>
-
-        <div class="formGrid" style="margin-top:8px">
-          <input type="hidden" id="editId">
-          <div>
-            <label>Název</label>
-            <input id="editTitle" type="text">
-          </div>
-          <div>
-            <label>Značka</label>
-            <input id="editBrand" type="text">
-          </div>
-          <div>
-            <label>Cena (Kč)</label>
-            <input id="editPrice" type="number">
-          </div>
-
-          <div>
-            <label>Barva</label>
-            <input id="editColor" type="text">
-          </div>
-          <div>
-            <label>Paměť</label>
-            <input id="editMemory" type="text">
-          </div>
-          <div>
-            <label>Demo (checkbox)</label><br>
-            <input id="editDemo" type="checkbox">
-          </div>
-
-          <div style="grid-column:1/4">
-            <label>Hlavní popis (odstavce odděluj prázdným řádkem)</label>
-            <textarea id="editDescription" rows="5"></textarea>
-          </div>
-
-          <div>
-            <label>Doplňující informace</label>
-            <input id="editNote" type="text">
-          </div>
-          <div>
-            <label>Obrázek (URL)</label>
-            <input id="editImgUrl" type="text" placeholder="https://...">
-          </div>
-          <div>
-            <label>Nahrát obrázek</label><br>
-            <input id="editImgFile" type="file" accept="image/*">
-          </div>
-
-          <div>
-            <label>Nabíječka</label><br><input id="editCharger" type="checkbox">
-          </div>
-          <div>
-            <label>Datový kabel</label><br><input id="editCable" type="checkbox">
-          </div>
-          <div>
-            <label>Sluchátka</label><br><input id="editEarphones" type="checkbox">
-          </div>
-
-          <div>
-            <label>Pouzdro</label><br><input id="editCase" type="checkbox">
-          </div>
-          <div>
-            <label>Krabička</label><br><input id="editBox" type="checkbox">
-          </div>
-
-        </div>
-
-        <div class="formRow" style="margin-top:12px;display:flex;gap:8px">
-          <button id="saveProductBtn" class="applyBtn">Uložit</button>
-          <button id="deleteProductBtn" class="danger" style="display:none">Smazat</button>
-          <button id="resetFormBtn" class="clearBtn">Reset</button>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- email modal -->
+   <!-- email modal -->
   <div class="emailModalBack" id="emailModalBack" aria-hidden="true">
     <div class="adminPanel" role="dialog" aria-modal="true">
       <div style="display:flex;justify-content:space-between;align-items:center">
@@ -683,7 +579,9 @@ modalBackEl.addEventListener('click', (e)=>{ if(e.target === modalBackEl){ modal
 
 /* Admin */
 const adminBack = document.getElementById('adminBack');
-document.getElementById('openAdminBtn').addEventListener('click', ()=> openAdmin());
+document.getElementById('openAdminBtn').addEventListener('click', () => {
+  location.href = "login.html";
+});
 document.getElementById('closeAdmin').addEventListener('click', ()=>{ adminBack.style.display='none'; adminBack.setAttribute('aria-hidden','true'); });
 
 function renderAdminTable(){
@@ -702,9 +600,9 @@ function renderAdminTable(){
   tbody.querySelectorAll('.dupBtn').forEach(b=>b.addEventListener('click', async e=>{ await duplicateProduct(Number(e.currentTarget.dataset.id)); }));
 }
 
-function openAdmin(){
-  renderAdminTable(); adminBack.style.display='flex'; adminBack.setAttribute('aria-hidden','false'); resetEditor();
-}
+// function openAdmin(){
+//  renderAdminTable(); adminBack.style.display='flex'; adminBack.setAttribute('aria-hidden','false'); resetEditor();
+// }
 
 /* Editor helpers */
 function resetEditor(){

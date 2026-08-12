@@ -504,6 +504,11 @@ function openModal(id){
 document.getElementById('closeModal').addEventListener('click', ()=>{ modalBackEl.style.display='none'; modalBackEl.setAttribute('aria-hidden','true'); });
 modalBackEl.addEventListener('click', (e)=>{ if(e.target === modalBackEl){ modalBackEl.style.display='none'; modalBackEl.setAttribute('aria-hidden','true'); } });
 
+/* Admin - přechod na samostatnou přihlašovací stránku */
+document.getElementById('openAdminBtn').addEventListener('click', () => {
+  window.location.href = './login.html';
+});
+
 /* Email modal */
 function openEmailModal(product){
   currentProductForEmail = product; document.getElementById('senderName').value = ''; document.getElementById('senderEmail').value = '';

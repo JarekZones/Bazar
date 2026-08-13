@@ -165,6 +165,28 @@
     color:var(--muted);
   }
   .hidden{display:none}
+  .imageManager{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
+    gap:10px;
+    padding:10px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:#fafafa;
+    min-height:90px;
+  }
+  .imageItem{
+    position:relative;
+    border:1px solid var(--line);
+    border-radius:8px;
+    overflow:hidden;
+    background:#fff;
+  }
+  .imageItem img{width:100%;height:100px;object-fit:contain;display:block;background:#f3f4f6}
+  .imageItem .imageTools{display:flex;gap:5px;padding:6px}
+  .imageItem button{padding:5px 7px;font-size:11px;flex:1}
+  .imageEmpty{grid-column:1/-1;color:var(--muted);font-size:12px;text-align:center;padding:20px}
+
   .notice{
     padding:10px 12px;
     background:#eff6ff;
@@ -227,7 +249,7 @@
     <div class="tableWrap">
       <table>
         <thead>
-          <tr><th>ID</th><th>Produkt</th><th>Značka</th><th>Cena</th><th>Stav</th><th>Akce</th></tr>
+          <tr><th>ID</th><th>Produkt</th><th>Značka</th><th>IMEI</th><th>Cena</th><th>Stav</th><th>Akce</th></tr>
         </thead>
         <tbody id="adminTbody"></tbody>
       </table>
@@ -284,13 +306,24 @@
         </div>
 
         <div class="field">
-          <label for="editImgUrl">Obrázek (URL)</label>
-          <input id="editImgUrl" type="text" placeholder="https://...">
+          <label for="editImei">IMEI</label>
+          <input id="editImei" type="text" inputmode="numeric" autocomplete="off" placeholder="IMEI – pouze pro administraci">
         </div>
 
         <div class="field">
-          <label for="editImgFile">Nahrát obrázek</label>
-          <input id="editImgFile" type="file" accept="image/*">
+          <label for="editImgUrl">Obrázky z URL</label>
+          <textarea id="editImgUrl" rows="4" placeholder="Jedna URL na řádek"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="editImgFile">Nahrát obrázky</label>
+          <input id="editImgFile" type="file" accept="image/*" multiple>
+          <div style="font-size:11px;color:#6b7280;margin-top:6px">Můžeš vybrat více obrázků najednou.</div>
+        </div>
+
+        <div class="field full">
+          <label>Galerie</label>
+          <div id="imageManager" class="imageManager"></div>
         </div>
 
         <div class="field">
@@ -373,7 +406,21 @@ function loadProducts(){
 
 let products=loadProducts();
 
+/* Převod starého formátu img -> images a doplnění IMEI. */
+function normalizeProduct(p){
+  const copy={...p};
+  if(!Array.isArray(copy.images)){
+    copy.images=copy.img ? [copy.img] : [];
+  }
+  copy.images=copy.images.filter(x=>typeof x === "string" && x.trim());
+  copy.img=copy.images[0] || copy.img || "";
+  copy.imei=copy.imei ? String(copy.imei) : "";
+  return copy;
+}
+products=products.map(normalizeProduct);
+
 function saveProducts(){
+  products=products.map(normalizeProduct);
   localStorage.setItem(STORAGE_KEY,JSON.stringify(products));
   renderAdminTable();
   updateStats();
@@ -399,7 +446,7 @@ function renderAdminTable(){
   const list=products.slice().sort((a,b)=>Number(a.id)-Number(b.id));
 
   if(!list.length){
-    tbody.innerHTML='<tr><td colspan="6" class="empty">Žádné produkty.</td></tr>';
+    tbody.innerHTML='<tr><td colspan="7" class="empty">Žádné produkty.</td></tr>';
     document.getElementById("tableInfo").textContent="0 položek";
     return;
   }
@@ -413,6 +460,7 @@ function renderAdminTable(){
         <div class="productMeta">${escapeHtml(p.color||"")} · ${escapeHtml(p.memory||"")}</div>
       </td>
       <td>${escapeHtml(p.brand)}</td>
+      <td style="font-family:monospace;font-size:12px">${escapeHtml(p.imei||"–")}</td>
       <td class="price">${formatPrice(p.price)}</td>
       <td>${p.demo?'<span class="badge">Předváděcí</span>':'<span style="color:#6b7280">Běžný kus</span>'}</td>
       <td>
@@ -447,16 +495,59 @@ function updateStats(){
    Editor
    ========================================================= */
 function resetEditor(){
-  ["editId","editTitle","editBrand","editPrice","editColor","editMemory","editDescription","editNote","editImgUrl"].forEach(id=>{
+  ["editId","editTitle","editBrand","editPrice","editColor","editMemory","editDescription","editNote","editImgUrl","editImei"].forEach(id=>{
     document.getElementById(id).value="";
   });
   document.getElementById("editImgFile").value="";
+  renderImageManager([]);
   ["editDemo","editCharger","editCable","editEarphones","editCase","editBox"].forEach(id=>{
     document.getElementById(id).checked=false;
   });
   document.getElementById("deleteProductBtn").classList.add("hidden");
   document.getElementById("editorState").textContent="Nový produkt";
   document.getElementById("editorTitle").textContent="Editor produktu";
+}
+
+function getProductImages(p){
+  if(!p)return [];
+  if(Array.isArray(p.images)) return p.images.filter(Boolean);
+  return p.img ? [p.img] : [];
+}
+
+function renderImageManager(images){
+  const box=document.getElementById("imageManager");
+  box.innerHTML="";
+  if(!images.length){
+    box.innerHTML='<div class="imageEmpty">Galerie je zatím prázdná. Přidej obrázky pomocí URL nebo výběrem souborů.</div>';
+    return;
+  }
+  images.forEach((src,index)=>{
+    const item=document.createElement("div");
+    item.className="imageItem";
+    item.innerHTML=`<img src="${src}" alt="Obrázek ${index+1}" onerror="this.style.opacity=.35">
+      <div class="imageTools">
+        <button type="button" class="secondary moveLeft">←</button>
+        <button type="button" class="secondary moveRight">→</button>
+        <button type="button" class="danger removeImg">×</button>
+      </div>`;
+    item.querySelector(".moveLeft").disabled=index===0;
+    item.querySelector(".moveRight").disabled=index===images.length-1;
+    item.querySelector(".moveLeft").onclick=()=>{
+      if(index>0){[images[index-1],images[index]]=[images[index],images[index-1]];renderImageManager(images);}
+    };
+    item.querySelector(".moveRight").onclick=()=>{
+      if(index<images.length-1){[images[index+1],images[index]]=[images[index],images[index+1]];renderImageManager(images);}
+    };
+    item.querySelector(".removeImg").onclick=()=>{images.splice(index,1);renderImageManager(images);};
+    box.appendChild(item);
+  });
+}
+
+function getEditorImages(){
+  const box=document.getElementById("imageManager");
+  return Array.from(box.querySelectorAll(".imageItem img"))
+    .map(img=>img.getAttribute("src"))
+    .filter(Boolean);
 }
 
 function openEditor(id){
@@ -471,8 +562,11 @@ function openEditor(id){
   document.getElementById("editMemory").value=p.memory||"";
   document.getElementById("editDescription").value=p.description||"";
   document.getElementById("editNote").value=p.note||"";
-  document.getElementById("editImgUrl").value=(p.img&&p.img.startsWith("data:"))?"":(p.img||"");
+  document.getElementById("editImei").value=p.imei||"";
+  const images=getProductImages(p);
+  document.getElementById("editImgUrl").value=images.filter(x=>!x.startsWith("data:")).join("\n");
   document.getElementById("editImgFile").value="";
+  renderImageManager(images);
 
   document.getElementById("editDemo").checked=!!p.demo;
   document.getElementById("editCharger").checked=!!p.charger;
@@ -497,6 +591,25 @@ function fileToDataURL(file){
   });
 }
 
+document.getElementById("editImgFile").addEventListener("change",async(e)=>{
+  const files=Array.from(e.target.files||[]);
+  if(!files.length)return;
+  const current=getEditorImages();
+  try{
+    const added=await Promise.all(files.map(fileToDataURL));
+    renderImageManager([...current,...added]);
+  }catch(err){
+    alert("Alespoň jeden obrázek se nepodařilo načíst.");
+  }
+  e.target.value="";
+});
+
+document.getElementById("editImgUrl").addEventListener("input",()=>{
+  const urls=document.getElementById("editImgUrl").value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+  const existing=getEditorImages().filter(x=>x.startsWith("data:"));
+  renderImageManager([...existing,...urls]);
+});
+
 document.getElementById("saveProductBtn").addEventListener("click",async()=>{
   const idValue=document.getElementById("editId").value.trim();
   const title=document.getElementById("editTitle").value.trim();
@@ -507,14 +620,17 @@ document.getElementById("saveProductBtn").addEventListener("click",async()=>{
     return;
   }
 
-  let img=document.getElementById("editImgUrl").value.trim();
-  const file=document.getElementById("editImgFile").files[0];
+  const images=[...new Set(getEditorImages())];
 
-  if(file){
-    try{img=await fileToDataURL(file)}catch(e){alert("Obrázek se nepodařilo načíst.");return}
-  }else if(idValue){
-    const old=products.find(p=>Number(p.id)===Number(idValue));
-    if(old && old.img && !img) img=old.img;
+  let imei=document.getElementById("editImei").value.trim().replace(/[^0-9]/g,"");
+  if(imei && !/^\d{15}$/.test(imei)){
+    alert("IMEI musí obsahovat přesně 15 číslic.");
+    return;
+  }
+  const duplicateImei=imei && products.some(p=>String(p.imei||"").replace(/[^0-9]/g,"")===imei && Number(p.id)!==Number(idValue));
+  if(duplicateImei){
+    alert("Toto IMEI už má přiřazený jiný produkt. IMEI musí být jedinečné.");
+    return;
   }
 
   const data={
@@ -527,12 +643,14 @@ document.getElementById("saveProductBtn").addEventListener("click",async()=>{
     demo:document.getElementById("editDemo").checked,
     description:document.getElementById("editDescription").value,
     note:document.getElementById("editNote").value,
+    imei:imei,
+    images:images,
+    img:images[0]||"",
     charger:document.getElementById("editCharger").checked,
     cable:document.getElementById("editCable").checked,
     earphones:document.getElementById("editEarphones").checked,
     case:document.getElementById("editCase").checked,
     box:document.getElementById("editBox").checked,
-    img:img||""
   };
 
   const index=products.findIndex(p=>Number(p.id)===data.id);
@@ -573,9 +691,10 @@ async function duplicateProduct(id){
   const copy=JSON.parse(JSON.stringify(p));
   copy.id=uid();
   copy.title=copy.title+" (kopie)";
-
-  /* Data-URI obrázek nekopírujeme, aby zbytečně nezvětšoval localStorage. */
-  if(typeof copy.img==="string" && copy.img.startsWith("data:"))copy.img="";
+  /* Kopie představuje jiný fyzický telefon – IMEI nesmí být duplikováno. */
+  copy.imei="";
+  copy.images=getProductImages(copy);
+  copy.img=copy.images[0]||"";
 
   products.push(copy);
   saveProducts();
@@ -588,7 +707,7 @@ async function duplicateProduct(id){
 document.getElementById("resetDefaultsBtn").addEventListener("click",()=>{
   if(!confirm("Resetovat produkty na výchozích 24 položek? Tím se přepíší současná data."))return;
 
-  products=defaultProducts.map(p=>({...p}));
+  products=defaultProducts.map(p=>normalizeProduct({...p}));
   saveProducts();
   resetEditor();
   alert("Výchozí data byla obnovena.");

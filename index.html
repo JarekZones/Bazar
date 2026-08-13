@@ -48,28 +48,39 @@
   .cta{background:var(--accent);color:#fff;border:none;padding:8px;border-radius:8px;cursor:pointer;margin-top:8px;width:100%}
   .small{font-size:13px;color:var(--muted)}
 
-  .modalBack,.emailModalBack{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:none;align-items:center;justify-content:center;padding:20px;z-index:60}
-  .modal{width:100%;max-width:960px;background:var(--card);border-radius:10px;padding:14px;display:grid;grid-template-columns:1fr 360px;grid-auto-rows:auto;gap:12px;max-height:90vh;overflow:auto}
-  .galleryMain{width:100%;height:360px;background:#e9eef3;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted);overflow:hidden}
+  .modalBack,.emailModalBack,.contactModalBack{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;padding:20px;z-index:60}
+  .modal{width:100%;max-width:980px;background:var(--card);border-radius:14px;padding:18px;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(300px,.9fr);gap:20px;max-height:92vh;overflow:auto;box-shadow:0 18px 50px rgba(0,0,0,.18)}
+  .galleryMain{width:100%;height:430px;background:#f0f3f6;border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--muted);overflow:hidden}
   .galleryMain img{width:100%;height:100%;object-fit:contain;display:block}
-  .thumbRow{display:flex;gap:8px;margin-top:8px}
-  .thumbSmall{width:72px;height:56px;background:#f0f5f9;border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--muted);cursor:pointer;overflow:hidden}
+  .thumbRow{display:flex;gap:10px;margin-top:10px;overflow-x:auto;padding-bottom:2px}
+  .thumbSmall{width:68px;height:56px;flex:0 0 68px;background:#f0f5f9;border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--muted);cursor:pointer;overflow:hidden;border:2px solid transparent}
   .thumbSmall img{width:100%;height:100%;object-fit:contain;display:block}
-  .thumbSmall.active{outline:2px solid var(--accent);outline-offset:1px}
+  .thumbSmall.active{border-color:var(--accent);outline:none}
   .galleryCount{font-size:11px;color:var(--muted);margin-top:6px}
-  .infoBox{background:transparent}
-  .badge{display:inline-block;background:var(--badge);color:#fff;padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px}
+  .infoBox{background:transparent;padding:6px 4px 0 0}
+  .badge{display:inline-block;background:var(--badge);color:#fff;padding:5px 9px;border-radius:999px;font-weight:700;font-size:11px}
   .accList{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-  .accItem{display:flex;align-items:center;gap:8px}
-  .productDescription p{margin:0 0 10px 0;line-height:1.45}
-  .sectionTitle{font-size:20px;font-weight:700}
-  .modalTitle{font-size:25px;font-weight:800}
-  .buyArea{display:flex;flex-direction:column;gap:10px;align-items:stretch;margin-top:24px}
-  .buyButtons{display:flex;gap:12px;width:100%}
-  .buyButtons button{flex:1;padding:10px;border-radius:8px;border:0;color:#fff;cursor:pointer}
-  .msBtn{background:#0084ff}
-  .emailBtn{background:var(--accent)}
-  .spanFull{grid-column:1 / -1}
+  .accItem{display:flex;align-items:center;gap:8px;font-size:12px}
+  .productDescription{margin-top:14px;color:var(--muted);font-size:13px;line-height:1.5}
+  .productDescription p{margin:0 0 8px}
+  .sectionTitle{font-size:14px;font-weight:700}
+  .modalTitle{font-size:20px;font-weight:800;line-height:1.2}
+  .modalPrice{font-size:23px;font-weight:800;color:#111;margin-top:18px}
+  .modalDescriptionBox{margin-top:18px;padding-top:14px;border-top:1px solid #edf0f3}
+  .modalNote{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.45}
+  .modalDescriptionText{font-size:13px;color:#4b5563;line-height:1.5;margin-top:10px}
+  .buyArea{margin-top:20px}
+  .buyButton{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;background:#1769d2;color:#fff;border:0;padding:11px 14px;border-radius:7px;cursor:pointer;font-weight:700;font-size:14px;box-shadow:0 2px 5px rgba(23,105,210,.18)}
+  .buyButton:hover{background:#0f5bbd}
+  .buyArrow{font-size:16px;line-height:1}
+  .contactModal{width:100%;max-width:420px;background:#fff;border-radius:14px;padding:22px;box-shadow:0 18px 50px rgba(0,0,0,.2);position:relative}
+  .contactTitle{font-size:20px;font-weight:800;margin:0}
+  .contactText{font-size:13px;color:var(--muted);margin:7px 0 18px;line-height:1.45}
+  .contactButtons{display:grid;gap:10px}
+  .contactBtn{width:100%;border:0;border-radius:8px;padding:12px 14px;color:#fff;cursor:pointer;font-size:14px;font-weight:700;text-align:center}
+  .contactMessenger{background:#0084ff}
+  .contactEmail{background:var(--accent)}
+  .contactCancel{width:100%;margin-top:10px;background:#fff;color:#4b5563;border:1px solid #dfe5ec;border-radius:8px;padding:10px 14px;cursor:pointer}
 
   .adminPanel{width:100%;max-width:1100px;background:var(--card);border-radius:10px;padding:16px;max-height:90vh;overflow:auto}
   .mutedSmall{font-size:12px;color:var(--muted)}
@@ -133,7 +144,8 @@
     .layout{grid-template-columns:1fr;gap:12px}
     .grid{grid-template-columns:repeat(2,1fr)}
     .modal{grid-template-columns:1fr;max-width:720px}
-    .galleryMain{height:260px}
+    .galleryMain{height:320px}
+    .infoBox{padding-right:0}
     .formGrid{grid-template-columns:1fr}
   }
 </style>
@@ -195,36 +207,45 @@
       </div>
 
       <aside class="infoBox">
-        <div style="display:flex;justify-content:space-between;align-items:center">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
           <div>
             <div id="modalTitle" class="modalTitle">Název</div>
-            <div id="modalMeta" style="color:var(--muted);font-size:13px">barva · paměť</div>
+            <div id="modalMeta" style="color:var(--muted);font-size:12px;margin-top:4px">barva · paměť</div>
           </div>
           <div id="modalBadge" class="badge" style="display:none">Předváděcí</div>
         </div>
 
-        <div id="modalPrice" class="price">1 990 Kč</div>
+        <div id="modalPrice" class="modalPrice">1 990 Kč</div>
 
-        <div style="margin-top:12px">
+        <div class="modalDescriptionBox">
           <div class="sectionTitle">Doplňující informace</div>
-          <div id="modalDesc" style="color:var(--muted);margin-top:6px">Poznámka / detaily</div>
+          <div id="modalDesc" class="modalNote">Poznámka / detaily</div>
+          <div id="modalDescription" class="modalDescriptionText"></div>
         </div>
 
-        <div style="margin-top:12px">
+        <div style="margin-top:18px">
           <div class="sectionTitle">Příslušenství</div>
           <div class="accList" id="modalAcc"></div>
         </div>
 
-        <div class="buyArea" id="buyArea">
-          <div class="sectionTitle">Chci koupit</div>
-          <div class="buyButtons">
-            <button class="msBtn" id="msButton">Messenger</button>
-            <button class="emailBtn" id="emailButton">Kontakt přes e‑mail</button>
-          </div>
+        <div class="buyArea">
+          <button class="buyButton" id="buyButton"><span>Koupit</span><span class="buyArrow">⌄</span></button>
         </div>
       </aside>
+    </div>
+  </div>
 
-      <div class="spanFull productDescription" id="modalDescription"></div>
+  <!-- Kontakt po stisknutí Koupit -->
+  <div class="contactModalBack" id="contactModalBack" aria-hidden="true">
+    <div class="contactModal" role="dialog" aria-modal="true">
+      <button class="modalClose" id="closeContactModal" title="Zavřít">✕</button>
+      <h3 class="contactTitle">Jak chcete kontaktovat prodejce?</h3>
+      <div class="contactText" id="contactProductText">Vyberte způsob kontaktu.</div>
+      <div class="contactButtons">
+        <button class="contactBtn contactMessenger" id="contactMessengerBtn">Kontakt přes Messenger</button>
+        <button class="contactBtn contactEmail" id="contactEmailBtn">Kontakt přes e‑mail</button>
+      </div>
+      <button class="contactCancel" id="cancelContactModal">Zrušit</button>
     </div>
   </div>
 
@@ -259,8 +280,8 @@
 <script>
 /* -------- Konfigurace -------- */
 const STORAGE_KEY = 'usedPhonesProducts_v1';
-const sellerMessenger = "yourPageUsername";
-const sellerEmail = "seller@example.com";
+const sellerMessenger = "https://m.me/jaroslav.preclik";
+const sellerEmail = "j.preclik@mobilmax.cz";
 /* ----------------------------- */
 
 /* --- Kompletní výchozí data (24 produktů) --- */
@@ -474,6 +495,9 @@ function applyFilter(){
 
 /* Modal detail */
 const modalBackEl = document.getElementById('modalBack');
+const contactModalBackEl = document.getElementById('contactModalBack');
+let currentProductForContact = null;
+
 function openModal(id){
   const p = products.find(x=>x.id===id);
   if(!p) return;
@@ -482,67 +506,74 @@ function openModal(id){
   const thumbs = document.getElementById('modalThumbs');
   const oldCount = document.querySelector('#modalGalleryWrapper .galleryCount');
   if(oldCount) oldCount.remove();
-  main.innerHTML = '';
-  thumbs.innerHTML = '';
+  main.innerHTML = ''; thumbs.innerHTML = '';
 
   if(images.length){
     const mainImg = document.createElement('img');
-    mainImg.src = images[0];
-    mainImg.alt = p.title || '';
+    mainImg.src = images[0]; mainImg.alt = p.title || '';
     mainImg.onerror = ()=>{ mainImg.style.display='none'; };
     main.appendChild(mainImg);
-
     images.forEach((src,index)=>{
       const t = document.createElement('div');
       t.className = 'thumbSmall' + (index===0 ? ' active' : '');
       t.innerHTML = `<img src="${src}" alt="">`;
       t.addEventListener('click', ()=>{
-        mainImg.style.display='block';
-        mainImg.src=src;
+        mainImg.style.display='block'; mainImg.src=src;
         thumbs.querySelectorAll('.thumbSmall').forEach(x=>x.classList.remove('active'));
         t.classList.add('active');
       });
       thumbs.appendChild(t);
     });
-
     const count = document.createElement('div');
     count.className='galleryCount';
     count.textContent = images.length === 1 ? '1 obrázek' : `${images.length} obrázků`;
     document.getElementById('modalGalleryWrapper').appendChild(count);
+  } else {
+    main.innerHTML = '<span class="small">Bez fotografie</span>';
   }
+
   document.getElementById('modalTitle').textContent = p.title;
-  document.getElementById('modalMeta').textContent = `${p.color} · ${p.memory}`;
+  document.getElementById('modalMeta').textContent = `${p.color || ''} · ${p.memory || ''}`;
   document.getElementById('modalPrice').textContent = formatPrice(p.price);
   const badge = document.getElementById('modalBadge');
-  if(p.demo){ badge.style.display='inline-block'; badge.textContent='Předváděcí'; } else { badge.style.display='none'; }
-  document.getElementById('modalDesc').textContent = p.note || "Bez doplňujících informací.";
-  const acc = document.getElementById('modalAcc'); acc.innerHTML='';
-  const items = [
-    {k:'charger', label:'Nabíječka', v:p.charger},
-    {k:'cable', label:'Datový kabel', v:p.cable},
-    {k:'earphones', label:'Sluchátka', v:p.earphones},
-    {k:'case', label:'Pouzdro', v:p.case},
-    {k:'box', label:'Krabička', v:p.box}
-  ];
-  items.forEach(it=>{
-    const node = document.createElement('label'); node.className='accItem';
-    node.innerHTML = `<input type="checkbox" ${it.v ? 'checked' : ''} disabled> <span style="color:var(--muted)">${it.label}</span>`;
-    acc.appendChild(node);
-  });
-  const descContainer = document.getElementById('modalDescription'); descContainer.innerHTML = '';
+  if(p.demo){ badge.style.display='inline-block'; badge.textContent='Předváděcí'; } else badge.style.display='none';
+
+  document.getElementById('modalDesc').textContent = p.note || 'Bez doplňujících informací.';
+  const descContainer = document.getElementById('modalDescription');
+  descContainer.innerHTML = '';
   if(p.description){
-    const paragraphs = p.description.split(/\n\s*\n/);
-    paragraphs.forEach(par=>{
-      const pEl = document.createElement('p'); pEl.textContent = par.trim(); descContainer.appendChild(pEl);
+    p.description.split(/\n\s*\n/).forEach(par=>{
+      const pEl=document.createElement('p'); pEl.textContent=par.trim(); descContainer.appendChild(pEl);
     });
-  } else descContainer.textContent = 'Bez hlavního popisu.';
-  document.getElementById('msButton').onclick = ()=> window.open(`https://m.me/${sellerMessenger}`, '_blank');
-  document.getElementById('emailButton').onclick = ()=> openEmailModal(p);
-  modalBackEl.style.display = 'flex';
-  modalBackEl.setAttribute('aria-hidden','false');
+  }
+
+  const acc=document.getElementById('modalAcc'); acc.innerHTML='';
+  [{label:'Nabíječka',v:p.charger},{label:'Datový kabel',v:p.cable},{label:'Sluchátka',v:p.earphones},{label:'Pouzdro',v:p.case},{label:'Krabička',v:p.box}]
+    .filter(it=>it.v).forEach(it=>{
+      const node=document.createElement('div'); node.className='accItem';
+      node.innerHTML=`<span style="color:var(--accent)">✓</span><span>${it.label}</span>`; acc.appendChild(node);
+    });
+  if(!acc.children.length) acc.innerHTML='<div class="mutedSmall">Bez příslušenství.</div>';
+
+  document.getElementById('buyButton').onclick=()=>openContactModal(p);
+  modalBackEl.style.display='flex'; modalBackEl.setAttribute('aria-hidden','false');
 }
-document.getElementById('closeModal').addEventListener('click', ()=>{ modalBackEl.style.display='none'; modalBackEl.setAttribute('aria-hidden','true'); });
-modalBackEl.addEventListener('click', (e)=>{ if(e.target === modalBackEl){ modalBackEl.style.display='none'; modalBackEl.setAttribute('aria-hidden','true'); } });
+function closeProductModal(){ modalBackEl.style.display='none'; modalBackEl.setAttribute('aria-hidden','true'); }
+document.getElementById('closeModal').addEventListener('click',closeProductModal);
+modalBackEl.addEventListener('click',e=>{if(e.target===modalBackEl)closeProductModal();});
+
+/* Kontakt po stisknutí Koupit */
+function openContactModal(product){
+  currentProductForContact=product;
+  document.getElementById('contactProductText').textContent=`Kontaktujete nás kvůli produktu ${product.title} (${product.color || ''}, ${product.memory || ''}).`;
+  contactModalBackEl.style.display='flex'; contactModalBackEl.setAttribute('aria-hidden','false');
+}
+function closeContactModal(){ contactModalBackEl.style.display='none'; contactModalBackEl.setAttribute('aria-hidden','true'); }
+document.getElementById('closeContactModal').addEventListener('click',closeContactModal);
+document.getElementById('cancelContactModal').addEventListener('click',closeContactModal);
+contactModalBackEl.addEventListener('click',e=>{if(e.target===contactModalBackEl)closeContactModal();});
+document.getElementById('contactMessengerBtn').addEventListener('click',()=>{if(!currentProductForContact)return; closeContactModal(); window.open(sellerMessenger,'_blank');});
+document.getElementById('contactEmailBtn').addEventListener('click',()=>{if(!currentProductForContact)return; const p=currentProductForContact; closeContactModal(); openEmailModal(p);});
 
 /* Admin - přechod na samostatnou přihlašovací stránku */
 document.getElementById('openAdminBtn').addEventListener('click', () => {
@@ -552,7 +583,7 @@ document.getElementById('openAdminBtn').addEventListener('click', () => {
 /* Email modal */
 function openEmailModal(product){
   currentProductForEmail = product; document.getElementById('senderName').value = ''; document.getElementById('senderEmail').value = '';
-  document.getElementById('senderMessage').value = `Dobrý den, mám zájem o ${product.title} (${product.color}, ${product.memory}).\n\nProsím o info, zda je k dispozici.`;
+  document.getElementById('senderMessage').value = `Dobrý den, mám zájem o ${product.title} (${product.color}, ${product.memory}).\n\nProsím o info, zda je telefon stále k dispozici.`;
   document.getElementById('emailModalBack').style.display='flex';
 }
 document.getElementById('closeEmailModal').addEventListener('click', ()=>{ document.getElementById('emailModalBack').style.display='none'; });
@@ -581,7 +612,7 @@ document.getElementById('clearFilter').addEventListener('click', ()=>{
   applyFilter();
 });
 /* Esc closes modals */
-document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ document.getElementById('modalBack').style.display='none'; document.getElementById('emailModalBack').style.display='none'; } });
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ closeProductModal(); closeContactModal(); document.getElementById('emailModalBack').style.display='none'; } });
 
 /* Sticky messenger on mobile */
 function checkSticky(){ if(window.innerWidth <= 480){ const el=document.getElementById('contactSticky'); if(el) el.style.display='flex'; } else { const el=document.getElementById('contactSticky'); if(el) el.style.display='none'; } }

@@ -55,6 +55,8 @@
   .thumbRow{display:flex;gap:8px;margin-top:8px}
   .thumbSmall{width:72px;height:56px;background:#f0f5f9;border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--muted);cursor:pointer;overflow:hidden}
   .thumbSmall img{width:100%;height:100%;object-fit:contain;display:block}
+  .thumbSmall.active{outline:2px solid var(--accent);outline-offset:1px}
+  .galleryCount{font-size:11px;color:var(--muted);margin-top:6px}
   .infoBox{background:transparent}
   .badge{display:inline-block;background:var(--badge);color:#fff;padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px}
   .accList{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
@@ -172,7 +174,8 @@
 
       <main class="main">
         <div class="infoBar">
-          <div id="resultCount">Zobrazeno 0 položek</div>          
+          <div id="resultCount">Zobrazeno 0 položek</div>
+          <div class="mutedSmall">Data jsou načítána z localStorage</div>
         </div>
 
         <div class="grid" id="grid"></div>
@@ -373,6 +376,18 @@ function loadProducts(){
 
 let products = loadProducts();
 
+/* Galerie: nový formát používá images[], starší data pouze img. */
+function getProductImages(p){
+  if(!p) return [];
+  if(Array.isArray(p.images) && p.images.length) return p.images.filter(Boolean);
+  return p.img ? [p.img] : [];
+}
+
+products = products.map(p=>{
+  const images = getProductImages(p);
+  return {...p, images, img: images[0] || p.img || ""};
+});
+
 /* Helpers */
 function saveProducts(){
   localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
@@ -413,7 +428,9 @@ function renderGrid(list){
   list.forEach(p=>{
     const card = document.createElement('div');
     card.className = 'card';
-    const imgTag = p.img ? `<img src="${p.img}" alt="${escapeHtml(p.title)}" onerror="this.style.display='none'">` : '';
+    const images = getProductImages(p);
+    const cover = images[0] || '';
+    const imgTag = cover ? `<img src="${cover}" alt="${escapeHtml(p.title)}" onerror="this.style.display='none'">` : '';
     card.innerHTML = `
       <div class="thumb" role="img">${imgTag}</div>
       <div class="cardBody">
@@ -460,14 +477,38 @@ const modalBackEl = document.getElementById('modalBack');
 function openModal(id){
   const p = products.find(x=>x.id===id);
   if(!p) return;
+  const images = getProductImages(p);
   const main = document.getElementById('modalMain');
-  main.innerHTML = p.img ? `<img src="${p.img}" alt="${escapeHtml(p.title)}" onerror="this.style.display='none'">` : '';
-  const thumbs = document.getElementById('modalThumbs'); thumbs.innerHTML = '';
-  for(let i=0;i<4;i++){
-    const t = document.createElement('div'); t.className='thumbSmall';
-    t.innerHTML = p.img ? `<img src="${p.img}" alt="" onerror="this.style.display='none'">` : '';
-    t.addEventListener('click', ()=>{ main.querySelector('img') && (main.querySelector('img').src = p.img); });
-    thumbs.appendChild(t);
+  const thumbs = document.getElementById('modalThumbs');
+  const oldCount = document.querySelector('#modalGalleryWrapper .galleryCount');
+  if(oldCount) oldCount.remove();
+  main.innerHTML = '';
+  thumbs.innerHTML = '';
+
+  if(images.length){
+    const mainImg = document.createElement('img');
+    mainImg.src = images[0];
+    mainImg.alt = p.title || '';
+    mainImg.onerror = ()=>{ mainImg.style.display='none'; };
+    main.appendChild(mainImg);
+
+    images.forEach((src,index)=>{
+      const t = document.createElement('div');
+      t.className = 'thumbSmall' + (index===0 ? ' active' : '');
+      t.innerHTML = `<img src="${src}" alt="">`;
+      t.addEventListener('click', ()=>{
+        mainImg.style.display='block';
+        mainImg.src=src;
+        thumbs.querySelectorAll('.thumbSmall').forEach(x=>x.classList.remove('active'));
+        t.classList.add('active');
+      });
+      thumbs.appendChild(t);
+    });
+
+    const count = document.createElement('div');
+    count.className='galleryCount';
+    count.textContent = images.length === 1 ? '1 obrázek' : `${images.length} obrázků`;
+    document.getElementById('modalGalleryWrapper').appendChild(count);
   }
   document.getElementById('modalTitle').textContent = p.title;
   document.getElementById('modalMeta').textContent = `${p.color} · ${p.memory}`;

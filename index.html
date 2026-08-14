@@ -362,7 +362,7 @@ const defaultProducts = [
 ];
 /* --------------------------------------------- */
 
-/* Load products: pokud uložené pole neexistuje seedni defaulty; jinak nech uložená data */
+/* Load products: pokud uložené pole neexistuje seedni defaulty; jinak nech uložená data 
 function loadProducts(){
   let raw = null;
   try{
@@ -395,7 +395,28 @@ function loadProducts(){
   return defaultProducts.slice();
 }
 
-let products = loadProducts();
+let products = loadProducts();*/
+
+  async function loadProductsFromGitHub() {
+  const url = "https://raw.githubusercontent.com/TVŮJ_USERNAME/TVŮJ_REPO/main/data.json";
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
+}
+
+let products = [];
+
+loadProductsFromGitHub().then(data => {
+  products = data.map(p => {
+    const images = getProductImages(p);
+    return { ...p, images, img: images[0] || p.img || "" };
+  });
+
+  renderMakers();
+  renderGrid(products);
+  updatePricePlaceholders();
+});
+ 
 
 /* Galerie: nový formát používá images[], starší data pouze img. */
 function getProductImages(p){

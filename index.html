@@ -362,7 +362,8 @@ const defaultProducts = [
 ];
 /* --------------------------------------------- */
 
-/* Load products: pokud uložené pole neexistuje seedni defaulty; jinak nech uložená data 
+/*
+Load products: pokud uložené pole neexistuje seedni defaulty; jinak nech uložená data 
 function loadProducts(){
   let raw = null;
   try{
@@ -395,7 +396,8 @@ function loadProducts(){
   return defaultProducts.slice();
 }
 
-let products = loadProducts();*/
+let products = loadProducts();
+*/
 
   async function loadProductsFromGitHub() {
   const url = "https://raw.githubusercontent.com/JarekZones/Bazar/main/data.json";
@@ -425,10 +427,12 @@ function getProductImages(p){
   return p.img ? [p.img] : [];
 }
 
+/*
 products = products.map(p=>{
   const images = getProductImages(p);
   return {...p, images, img: images[0] || p.img || ""};
 });
+*/
 
 /* Helpers */
 function saveProducts(){

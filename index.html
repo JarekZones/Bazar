@@ -398,7 +398,7 @@ function loadProducts(){
 let products = loadProducts();*/
 
   async function loadProductsFromGitHub() {
-  const url = "https://raw.githubusercontent.com/TVŮJ_USERNAME/TVŮJ_REPO/main/data.json";
+  const url = "https://raw.githubusercontent.com/JarekZones/Bazar/main/data.json";
   const response = await fetch(url);
   const data = await response.json();
   return data;

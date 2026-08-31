@@ -536,7 +536,7 @@
     "color": "",
     "memory": "",
     "condition": "regular",
-    "sold": false,
+    "sold": true,
     "description": "test",
     "note": "rest",
     "features": [],

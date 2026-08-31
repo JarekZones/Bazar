@@ -540,8 +540,10 @@
     "description": "test",
     "note": "rest",
     "features": [],
-    "images": [],
-    "img": "",
+    "images": [
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788210372452-0-20161226204802_IMG_1365.jpg"
+    ],
+    "img": "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788210372452-0-20161226204802_IMG_1365.jpg",
     "demo": false
   }
 ]

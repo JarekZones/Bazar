@@ -400,10 +400,17 @@ let products = loadProducts();
 */
 
   async function loadProductsFromGitHub() {
-  const url = "https://raw.githubusercontent.com/JarekZones/Bazar/main/data.json";
-  const response = await fetch(url);
+  const url = "https://mobilmax-bazar-api.j-preclik.workers.dev/api/products";
+
+  const response = await fetch(url, {
+    cache: "no-store"
+  });
+
   const data = await response.json();
-  return data;
+
+  return Array.isArray(data.products)
+    ? data.products
+    : [];
 }
 
 let products = [];

@@ -1,3 +1,8 @@
 name = "mobilmax-bazar-api"
 main = "worker.js"
 compatibility_date = "2026-08-31"
+
+[vars]
+GITHUB_BRANCH = "main"
+GITHUB_OWNER = "JarekZones"
+GITHUB_REPO = "Bazar"

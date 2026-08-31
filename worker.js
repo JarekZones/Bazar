@@ -63,10 +63,25 @@ async function handleContact(request,env,origin){
   const email=String(body.email||"").trim().toLowerCase();
   const message=String(body.message||"").trim();
   const productId=String(body.productId??"").trim();
+  const website=String(body.website||"").trim();
+  const startedAt=Number(body.startedAt||0);
+
+  if(website)return json({ok:true,message:"Zpráva byla úspěšně odeslána."},200,origin);
+  if(startedAt&&Date.now()-startedAt<1500)return json({error:"Formulář byl odeslán příliš rychle. Zkuste to prosím znovu."},429,origin);
   if(name.length<2||name.length>100)return json({error:"Zadejte prosím jméno."},400,origin);
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||email.length>254)return json({error:"Zadejte platnou e-mailovou adresu."},400,origin);
   if(message.length<3||message.length>4000)return json({error:"Zpráva musí mít 3 až 4000 znaků."},400,origin);
   if(!productId)return json({error:"Chybí vybraný produkt."},400,origin);
+
+  if(env.IMEI_KV){
+    const ip=request.headers.get("CF-Connecting-IP")||"unknown";
+    const ipHash=await sha256Hex(ip);
+    const bucket=Math.floor(Date.now()/3600000);
+    const rateKey=`contact-rate:${ipHash}:${bucket}`;
+    const count=Number(await env.IMEI_KV.get(rateKey)||0);
+    if(count>=5)return json({error:"Bylo odesláno příliš mnoho zpráv. Zkuste to prosím později."},429,origin);
+    await env.IMEI_KV.put(rateKey,String(count+1),{expirationTtl:7200});
+  }
 
   const products=await getGitHubData(env);
   const product=products.find(p=>String(p.id)===productId&&!p.sold);
@@ -250,6 +265,7 @@ function bytesToBase64(bytes){let binary="";const chunk=0x8000;for(let i=0;i<byt
 function decodeBase64Utf8(base64){const binary=atob(base64.replace(/\n/g,""));const bytes=Uint8Array.from(binary,c=>c.charCodeAt(0));return new TextDecoder().decode(bytes)}
 function base64url(input){return btoa(input).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"")}
 function fromBase64url(input){const padded=input.replace(/-/g,"+").replace(/_/g,"/");return atob(padded+"=".repeat((4-padded.length%4)%4))}
+async function sha256Hex(value){const hash=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(String(value)));return [...new Uint8Array(hash)].map(b=>b.toString(16).padStart(2,"0")).join("")}
 async function hmac(secret,value){const key=await crypto.subtle.importKey("raw",new TextEncoder().encode(secret),{name:"HMAC",hash:"SHA-256"},false,["sign"]);return new Uint8Array(await crypto.subtle.sign("HMAC",key,new TextEncoder().encode(value)))}
 async function createToken(secret){if(!secret)throw new Error("SESSION_SECRET není nastavený.");const payload={exp:Math.floor(Date.now()/1000)+8*60*60,iat:Math.floor(Date.now()/1000)};const encodedPayload=base64url(JSON.stringify(payload));const signatureBytes=await hmac(secret,encodedPayload);const signature=base64url(String.fromCharCode(...signatureBytes));return encodedPayload+"."+signature}
 async function verifyToken(token,secret){try{if(!secret)return false;const parts=token.split(".");if(parts.length!==2)return false;const payload=JSON.parse(fromBase64url(parts[0]));if(!payload.exp||payload.exp<Math.floor(Date.now()/1000))return false;const expected=await hmac(secret,parts[0]);const supplied=Uint8Array.from(fromBase64url(parts[1]),c=>c.charCodeAt(0));if(expected.length!==supplied.length)return false;let diff=0;for(let i=0;i<expected.length;i++)diff|=expected[i]^supplied[i];return diff===0}catch{return false}}

@@ -485,21 +485,21 @@
   {
     "id": 23,
     "title": "Doogee S40",
+    "category": "electronics",
     "brand": "Doogee",
     "price": 600,
     "color": "Černá/oranžová",
     "memory": "2GB / 16GB",
-    "demo": false,
+    "condition": "regular",
+    "sold": true,
     "description": "",
     "note": "Nový LCD",
-    "img": "https://placehold.co/400x300?text=Note11Pro",
+    "features": [],
     "images": [
       "https://placehold.co/400x300?text=Note11Pro"
     ],
-    "sold": false,
-    "category": "electronics",
-    "condition": "regular",
-    "features": []
+    "img": "https://placehold.co/400x300?text=Note11Pro",
+    "demo": false
   },
   {
     "id": 1788200853100,

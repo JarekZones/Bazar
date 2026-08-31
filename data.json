@@ -14,11 +14,13 @@
       "https://www.huramobil.cz/fotocache/bigorig/IRMOTOG04ORN.jpg"
     ],
     "img": "https://www.huramobil.cz/fotocache/bigorig/IRMOTOG04ORN.jpg",
-    "charger": true,
-    "cable": true,
-    "earphones": false,
-    "case": true,
-    "box": false
+    "category": "electronics",
+    "condition": "demo",
+    "features": [
+      "charger",
+      "cable",
+      "case"
+    ]
   },
   {
     "id": 2,
@@ -30,16 +32,19 @@
     "demo": true,
     "description": "Motorola Moto G54 je telefon střední třídy, který nabízí výborný poměr výkonu a ceny. Díky 6,5\" displeji s 120Hz obnovovací frekvencí působí systém i aplikace velmi plynule a telefon je tak ideální pro běžné používání, sociální sítě i multimédia. Konstrukce je pevná, příjemná na držení a zelená varianta působí elegantně.\n\nO výkon se stará procesor Dimensity 7020, který ve spojení s 12GB RAM poskytuje dostatek síly i pro náročnější aplikace a multitasking. Velké 256GB úložiště nabízí dostatek prostoru pro fotografie, videa i aplikace. Hlavní 50Mpx fotoaparát s optickou stabilizací dokáže zachytit kvalitní snímky i za horšího světla a doplňuje jej 8Mpx širokoúhlý objektiv.\n\nTento kus je prodáván jako předváděcí, což znamená minimální známky použití, ale plnou funkčnost. Díky velké baterii s kapacitou 6000mAh nabízí telefon dlouhou výdrž a podporuje rychlé nabíjení. G54 je skvělou volbou pro uživatele, kteří hledají výkonný a spolehlivý telefon za dostupnou cenu.",
     "note": "Ochranná folie na LCD",
-    "charger": true,
-    "cable": false,
-    "earphones": true,
-    "case": true,
-    "box": true,
     "img": "https://placehold.co/400x300?text=G54",
     "images": [
       "https://placehold.co/400x300?text=G54"
     ],
-    "sold": false
+    "sold": false,
+    "category": "electronics",
+    "condition": "demo",
+    "features": [
+      "charger",
+      "earphones",
+      "case",
+      "box"
+    ]
   },
   {
     "id": 3,
@@ -51,16 +56,19 @@
     "demo": true,
     "description": "Motorola Moto G84 je elegantní telefon s kvalitním 6,5\" OLED displejem, který nabízí živé barvy a vysoký kontrast. Díky modernímu designu a příjemné konstrukci se dobře drží v ruce a je vhodný pro každodenní používání. Tento kus má drobné vypálení OLED panelu, které však neovlivňuje funkčnost telefonu.\n\nO výkon se stará procesor Snapdragon 695, který zajišťuje plynulý chod aplikací i multitasking. 12GB RAM poskytuje dostatek výkonu i pro náročnější uživatele. Hlavní 50Mpx fotoaparát s optickou stabilizací dokáže zachytit ostré snímky i za horšího světla a doplňuje jej 8Mpx širokoúhlý objektiv.\n\nMoto G84 je vhodná pro uživatele, kteří hledají telefon s kvalitním displejem, stabilním výkonem a dobrou výdrží. Díky moderním funkcím, jako je NFC, stereo reproduktory a velká 5000mAh baterie, jde o skvělou volbu pro běžné i náročnější použití.",
     "note": "OLED LCD je vypálený od demo smičky, Ochranná folie na LCD",
-    "charger": true,
-    "cable": true,
-    "earphones": false,
-    "case": true,
-    "box": true,
     "img": "https://placehold.co/400x300?text=G84",
     "images": [
       "https://placehold.co/400x300?text=G84"
     ],
-    "sold": false
+    "sold": false,
+    "category": "electronics",
+    "condition": "demo",
+    "features": [
+      "charger",
+      "cable",
+      "case",
+      "box"
+    ]
   },
   {
     "id": 4,
@@ -72,16 +80,20 @@
     "demo": false,
     "description": "Samsung Galaxy A7 (2018) je oblíbený telefon střední třídy, který nabízí kvalitní konstrukci a příjemný 6\" Super AMOLED displej. Díky živým barvám a dobré čitelnosti je vhodný pro sledování videí, sociální sítě i běžné používání. Tento kus má nově vyměněné LCD, což zvyšuje jeho spolehlivost.\n\nUvnitř najdeme osmijádrový procesor Exynos, který poskytuje dostatek výkonu pro běžné aplikace a 4GB RAM zajišťuje stabilní chod systému. Trojitý fotoaparát umožňuje pořizovat širokoúhlé snímky i portréty a stále nabízí solidní kvalitu.\n\nGalaxy A7 (2018) je vhodný jako spolehlivý telefon pro každodenní použití. Díky dobré výdrži baterie, kvalitnímu displeji a moderním funkcím je stále atraktivní volbou pro nenáročné i běžné uživatele.",
     "note": "Nový LCD",
-    "charger": true,
-    "cable": true,
-    "earphones": true,
-    "case": true,
-    "box": true,
     "img": "https://placehold.co/400x300?text=A7",
     "images": [
       "https://placehold.co/400x300?text=A7"
     ],
-    "sold": false
+    "sold": false,
+    "category": "electronics",
+    "condition": "regular",
+    "features": [
+      "charger",
+      "cable",
+      "earphones",
+      "case",
+      "box"
+    ]
   },
   {
     "id": 5,
@@ -93,16 +105,20 @@
     "demo": false,
     "description": "Samsung Galaxy J4+ je jednoduchý a dostupný telefon, který je ideální pro nenáročné uživatele nebo jako záložní zařízení. Díky velkému 6\" displeji je vhodný pro běžné používání, komunikaci a prohlížení internetu. Konstrukce je lehká, dobře se drží a telefon působí moderně.\n\nUvnitř najdeme základní hardware, který postačí pro běžné aplikace, sociální sítě a jednoduché hry. 2GB RAM a 32GB úložiště jsou vhodné pro uživatele, kteří nepotřebují vysoký výkon. Fotoaparát dokáže zachytit slušné snímky za dobrého světla a baterie poskytuje solidní výdrž.\n\nJ4+ je vhodný jako telefon pro děti, seniory nebo jako druhé zařízení. Díky jednoduchému ovládání, dostupné ceně a spolehlivému chodu je praktickou volbou pro každodenní komunikaci.",
     "note": "Nový LCD, Podřený zadní kryt",
-    "charger": true,
-    "cable": true,
-    "earphones": true,
-    "case": true,
-    "box": true,
     "img": "https://placehold.co/400x300?text=J4+",
     "images": [
       "https://placehold.co/400x300?text=J4+"
     ],
-    "sold": false
+    "sold": false,
+    "category": "electronics",
+    "condition": "regular",
+    "features": [
+      "charger",
+      "cable",
+      "earphones",
+      "case",
+      "box"
+    ]
   },
   {
     "id": 6,
@@ -114,16 +130,20 @@
     "demo": false,
     "description": "Samsung GT‑S5610 je klasický tlačítkový telefon, který vyniká svou jednoduchostí a vysokou odolností. Díky kompaktnímu tělu a fyzickým klávesám je ideální pro uživatele, kteří preferují tradiční ovládání. Telefon je vhodný do náročných podmínek, kde je potřeba spolehlivost a dlouhá výdrž.\n\nModel nabízí základní funkce, jako je volání, SMS, jednoduchý fotoaparát a přehrávání hudby. Baterie poskytuje velmi dlouhou výdrž, což je hlavní předností tlačítkových telefonů. Konstrukce je pevná a odolná proti běžnému opotřebení.\n\nGT‑S5610 je ideální jako pracovní telefon, zařízení do dílny, na stavbu nebo pro uživatele, kteří chtějí jednoduchý a spolehlivý mobil bez složitostí. Díky své robustnosti a dlouhé výdrži je stále velmi praktickou volbou.",
     "note": "",
-    "charger": true,
-    "cable": true,
-    "earphones": true,
-    "case": true,
-    "box": true,
     "img": "https://placehold.co/400x300?text=S5610",
     "images": [
       "https://placehold.co/400x300?text=S5610"
     ],
-    "sold": false
+    "sold": false,
+    "category": "electronics",
+    "condition": "regular",
+    "features": [
+      "charger",
+      "cable",
+      "earphones",
+      "case",
+      "box"
+    ]
   },
   {
     "id": 7,
@@ -135,16 +155,20 @@
     "demo": false,
     "description": "Samsung Galaxy S9 je prémiový telefon, který i po letech nabízí vysoký výkon a kvalitní zpracování. Je vybaven 5,8\" Super AMOLED displejem s vysokým rozlišením, který poskytuje krásný obraz a skvělou čitelnost. Konstrukce z kovu a skla působí luxusně a telefon se příjemně drží.\n\nUvnitř najdeme výkonný procesor Exynos 9810, který zvládá náročné aplikace, hry i multitasking. 12Mpx fotoaparát s variabilní clonou patří mezi nejlepší ve své době a dokáže pořizovat velmi kvalitní snímky i za horšího světla. Baterie nabízí solidní výdrž a podporuje rychlé nabíjení.\n\nGalaxy S9 je vhodný pro uživatele, kteří hledají kvalitní telefon s výborným fotoaparátem, krásným displejem a stále velmi dobrým výkonem. I přes drobné kosmetické vady jde o skvělou volbu pro náročnější použití.",
     "note": "Lehce poškrábaná záda",
-    "charger": true,
-    "cable": true,
-    "earphones": true,
-    "case": true,
-    "box": true,
     "img": "https://placehold.co/400x300?text=S9",
     "images": [
       "https://placehold.co/400x300?text=S9"
     ],
-    "sold": false
+    "sold": false,
+    "category": "electronics",
+    "condition": "regular",
+    "features": [
+      "charger",
+      "cable",
+      "earphones",
+      "case",
+      "box"
+    ]
   },
   {
     "id": 9,
@@ -156,16 +180,18 @@
     "demo": false,
     "description": "Vivo Y21s nabízí vyvážený výkon a praktické funkce v kompaktním těle. Je vybaven 6,5\" displejem, který je ideální pro běžné používání, komunikaci a prohlížení internetu. Telefon působí moderně a je vhodný pro uživatele, kteří hledají spolehlivé zařízení.\n\nProcesor Helio G80 zajišťuje stabilní chod aplikací, zatímco 4GB RAM umožňuje pohodlný multitasking. 128GB úložiště poskytuje dostatek prostoru pro fotografie, aplikace a soubory. 50Mpx fotoaparát dokáže zachytit kvalitní snímky za dobrého světla.\n\nTento kus je vhodný jako každodenní telefon pro nenáročné i běžné uživatele. Díky dobré výdrži baterie a stabilnímu výkonu je praktickou volbou pro široké použití.",
     "note": "",
-    "charger": false,
-    "cable": true,
-    "earphones": true,
-    "case": true,
-    "box": false,
     "img": "https://placehold.co/400x300?text=Y21s-B",
     "images": [
       "https://placehold.co/400x300?text=Y21s-B"
     ],
-    "sold": false
+    "sold": false,
+    "category": "electronics",
+    "condition": "regular",
+    "features": [
+      "cable",
+      "earphones",
+      "case"
+    ]
   },
   {
     "id": 10,
@@ -177,16 +203,19 @@
     "demo": false,
     "description": "Vivo Y21s je telefon střední třídy, který nabízí dobrý poměr cena/výkon. Díky velkému displeji je vhodný pro sledování videí, sociální sítě i běžné používání. Konstrukce je lehká a telefon se pohodlně drží.\n\nProcesor Helio G80 poskytuje stabilní výkon a 4GB RAM umožňuje plynulý chod aplikací. 128GB úložiště je dostatečné pro běžné potřeby. 50Mpx fotoaparát dokáže zachytit kvalitní snímky a baterie s kapacitou 5000mAh nabízí dlouhou výdrž.\n\nY21s je vhodný jako univerzální telefon pro každodenní použití. Díky stabilnímu výkonu, dobré výdrži a moderním funkcím je praktickou volbou pro širokou škálu uživatelů.",
     "note": "",
-    "charger": false,
-    "cable": true,
-    "earphones": true,
-    "case": true,
-    "box": true,
     "img": "https://placehold.co/400x300?text=Y21s-C",
     "images": [
       "https://placehold.co/400x300?text=Y21s-C"
     ],
-    "sold": false
+    "sold": false,
+    "category": "electronics",
+    "condition": "regular",
+    "features": [
+      "cable",
+      "earphones",
+      "case",
+      "box"
+    ]
   },
   {
     "id": 11,
@@ -198,16 +227,18 @@
     "demo": true,
     "description": "Vivo Y29s 5G je moderní telefon s podporou rychlých 5G sítí, který nabízí elegantní design a praktické funkce. Díky velkému displeji je vhodný pro sledování videí, sociální sítě i běžné používání. Telefon působí moderně a je příjemný na držení.\n\nProcesor Dimensity 700 poskytuje stabilní výkon a 6GB RAM umožňuje pohodlný multitasking. 128GB úložiště je dostatečné pro běžné potřeby. 50Mpx fotoaparát dokáže zachytit kvalitní snímky a baterie s kapacitou 5000mAh nabízí dlouhou výdrž.\n\nY29s 5G je vhodný jako univerzální telefon pro uživatele, kteří chtějí moderní zařízení s podporou 5G. Díky stabilnímu výkonu a dobré výdrži je praktickou volbou pro každodenní použití.",
     "note": "",
-    "charger": false,
-    "cable": true,
-    "earphones": false,
-    "case": true,
-    "box": true,
     "img": "https://placehold.co/400x300?text=Y29s",
     "images": [
       "https://placehold.co/400x300?text=Y29s"
     ],
-    "sold": false
+    "sold": false,
+    "category": "electronics",
+    "condition": "demo",
+    "features": [
+      "cable",
+      "case",
+      "box"
+    ]
   },
   {
     "id": 12,
@@ -219,16 +250,18 @@
     "demo": true,
     "description": "Vivo Y29s 5G je elegantní telefon s podporou rychlých 5G sítí, který nabízí moderní funkce a stabilní výkon. Díky velkému displeji je vhodný pro sledování videí, sociální sítě i běžné používání. Konstrukce je lehká a telefon se dobře drží.\n\nProcesor Dimensity 700 poskytuje stabilní výkon a 6GB RAM umožňuje plynulý chod aplikací. 128GB úložiště je dostatečné pro běžné potřeby. 50Mpx fotoaparát dokáže zachytit kvalitní snímky a baterie s kapacitou 5000mAh nabízí dlouhou výdrž.\n\nY29s 5G je vhodný jako univerzální telefon pro uživatele, kteří hledají moderní zařízení s podporou 5G. Díky stabilnímu výkonu a dobré výdrži je praktickou volbou pro každodenní použití.",
     "note": "",
-    "charger": false,
-    "cable": true,
-    "earphones": false,
-    "case": true,
-    "box": true,
     "img": "https://placehold.co/400x300?text=Y29s-2",
     "images": [
       "https://placehold.co/400x300?text=Y29s-2"
     ],
-    "sold": false
+    "sold": false,
+    "category": "electronics",
+    "condition": "demo",
+    "features": [
+      "cable",
+      "case",
+      "box"
+    ]
   },
   {
     "id": 13,
@@ -240,16 +273,20 @@
     "demo": false,
     "description": "Vivo Y33s je telefon střední třídy, který nabízí elegantní design a praktické funkce pro každodenní používání. Díky velkému displeji je vhodný pro sledování videí, sociální sítě i běžnou práci. Telefon působí moderně a dobře se drží.\n\nProcesor Helio G80 poskytuje stabilní výkon a 8GB RAM umožňuje pohodlný multitasking. 128GB úložiště je dostatečné pro běžné potřeby a umožňuje ukládání velkého množství fotografií, aplikací a souborů. 50Mpx fotoaparát dokáže zachytit kvalitní snímky i za horšího světla.\n\nY33s je vhodný jako univerzální telefon pro uživatele, kteří hledají stabilní výkon, dobrou výdrž a moderní funkce. Díky vyvážené výbavě je praktickou volbou pro každodenní použití.",
     "note": "",
-    "charger": true,
-    "cable": true,
-    "earphones": true,
-    "case": true,
-    "box": true,
     "img": "https://placehold.co/400x300?text=Y33s-A",
     "images": [
       "https://placehold.co/400x300?text=Y33s-A"
     ],
-    "sold": false
+    "sold": false,
+    "category": "electronics",
+    "condition": "regular",
+    "features": [
+      "charger",
+      "cable",
+      "earphones",
+      "case",
+      "box"
+    ]
   },
   {
     "id": 14,
@@ -266,11 +303,13 @@
       "https://placehold.co/400x300?text=Y33s-B"
     ],
     "img": "https://placehold.co/400x300?text=Y33s-B",
-    "charger": true,
-    "cable": true,
-    "earphones": false,
-    "case": true,
-    "box": false
+    "category": "electronics",
+    "condition": "regular",
+    "features": [
+      "charger",
+      "cable",
+      "case"
+    ]
   },
   {
     "id": 15,
@@ -282,16 +321,18 @@
     "demo": true,
     "description": "Xiaomi Redmi 12 je moderní telefon střední třídy, který nabízí velký 6,79\" displej a elegantní design. Díky vysokému jasu a dobré čitelnosti je vhodný pro sledování videí, sociální sítě i běžné používání. Konstrukce je pevná a telefon se příjemně drží.\n\nProcesor Helio G88 poskytuje stabilní výkon a 4GB RAM umožňuje plynulý chod aplikací. 128GB úložiště je dostatečné pro běžné potřeby. 50Mpx fotoaparát dokáže zachytit kvalitní snímky a baterie s kapacitou 5000mAh nabízí dlouhou výdrž.\n\nTento kus je předváděcí, což znamená minimální známky použití, ale plnou funkčnost. Redmi 12 je vhodný jako univerzální telefon pro uživatele, kteří hledají stabilní výkon, moderní funkce a dobrou výdrž.",
     "note": "",
-    "charger": false,
-    "cable": true,
-    "earphones": false,
-    "case": true,
-    "box": true,
     "img": "https://placehold.co/400x300?text=Redmi12",
     "images": [
       "https://placehold.co/400x300?text=Redmi12"
     ],
-    "sold": false
+    "sold": false,
+    "category": "electronics",
+    "condition": "demo",
+    "features": [
+      "cable",
+      "case",
+      "box"
+    ]
   },
   {
     "id": 16,
@@ -310,11 +351,13 @@
       "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788187953274-1-16-Vivo_Y33s_2.jpg"
     ],
     "img": "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788187931069-0-16-Vivo_Y33s_1.jpg",
-    "charger": false,
-    "cable": false,
-    "earphones": true,
-    "case": true,
-    "box": true
+    "category": "electronics",
+    "condition": "regular",
+    "features": [
+      "earphones",
+      "case",
+      "box"
+    ]
   },
   {
     "id": 17,
@@ -326,16 +369,18 @@
     "demo": true,
     "description": "Xiaomi Redmi 15C je moderní telefon určený pro běžné uživatele, kteří hledají spolehlivé zařízení s velkým displejem. Díky 6,74\" panelu je vhodný pro sledování videí, sociální sítě i každodenní práci. Konstrukce je lehká, dobře se drží a působí moderně.\n\nProcesor Helio G85 poskytuje stabilní výkon pro běžné aplikace a nenáročné hry. 4GB RAM umožňuje plynulý chod systému a 128GB úložiště nabízí dostatek prostoru pro fotografie, aplikace a soubory. 50Mpx fotoaparát dokáže zachytit kvalitní snímky za dobrého světla.\n\nTento kus je předváděcí, což znamená minimální známky použití, ale plnou funkčnost. Redmi 15C je vhodný jako univerzální telefon pro každodenní použití díky dobré výdrži baterie a stabilnímu výkonu.",
     "note": "",
-    "charger": false,
-    "cable": true,
-    "earphones": false,
-    "case": true,
-    "box": true,
     "img": "https://placehold.co/400x300?text=15C",
     "images": [
       "https://placehold.co/400x300?text=15C"
     ],
-    "sold": false
+    "sold": false,
+    "category": "electronics",
+    "condition": "demo",
+    "features": [
+      "cable",
+      "case",
+      "box"
+    ]
   },
   {
     "id": 18,
@@ -347,16 +392,14 @@
     "demo": false,
     "description": "",
     "note": "Nový LCD, Ošoupaný zadní kryt.",
-    "charger": false,
-    "cable": false,
-    "earphones": false,
-    "case": false,
-    "box": false,
     "img": "https://placehold.co/400x300?text=15",
     "images": [
       "https://placehold.co/400x300?text=15"
     ],
-    "sold": false
+    "sold": false,
+    "category": "electronics",
+    "condition": "regular",
+    "features": []
   },
   {
     "id": 19,
@@ -368,16 +411,16 @@
     "demo": false,
     "description": "",
     "note": "",
-    "charger": false,
-    "cable": true,
-    "earphones": false,
-    "case": false,
-    "box": false,
     "img": "https://placehold.co/400x300?text=Note10",
     "images": [
       "https://placehold.co/400x300?text=Note10"
     ],
-    "sold": false
+    "sold": false,
+    "category": "electronics",
+    "condition": "regular",
+    "features": [
+      "cable"
+    ]
   },
   {
     "id": 20,
@@ -389,16 +432,16 @@
     "demo": false,
     "description": "",
     "note": "",
-    "charger": false,
-    "cable": false,
-    "earphones": false,
-    "case": true,
-    "box": false,
     "img": "https://placehold.co/400x300?text=Note10-B",
     "images": [
       "https://placehold.co/400x300?text=Note10-B"
     ],
-    "sold": false
+    "sold": false,
+    "category": "electronics",
+    "condition": "regular",
+    "features": [
+      "case"
+    ]
   },
   {
     "id": 21,
@@ -410,16 +453,14 @@
     "demo": false,
     "description": "Xiaomi Redmi Note 10 Pro je oblíbený telefon střední třídy, který nabízí špičkový 6,67\" AMOLED displej s vysokým jasem a krásnými barvami. Díky 120Hz obnovovací frekvenci je ideální pro sledování videí, hraní her i běžné používání. Konstrukce působí prémiově a telefon se příjemně drží.\n\nProcesor Snapdragon 732G poskytuje stabilní výkon pro náročnější aplikace i hry. 6GB RAM umožňuje plynulý multitasking a 128GB úložiště nabízí dostatek prostoru pro fotografie, videa a aplikace. 108Mpx fotoaparát dokáže zachytit detailní snímky a patří mezi nejlepší ve své třídě.\n\nTento kus má prasklý zadní kryt, což je pouze kosmetická vada a nemá vliv na funkčnost. Redmi Note 10 Pro je skvělou volbou pro uživatele, kteří hledají výkonný telefon s kvalitním displejem a výborným fotoaparátem.",
     "note": "Prasklý zadní kryt",
-    "charger": false,
-    "cable": false,
-    "earphones": false,
-    "case": false,
-    "box": false,
     "img": "https://placehold.co/400x300?text=Note10Pro",
     "images": [
       "https://placehold.co/400x300?text=Note10Pro"
     ],
-    "sold": false
+    "sold": false,
+    "category": "electronics",
+    "condition": "regular",
+    "features": []
   },
   {
     "id": 22,
@@ -431,16 +472,14 @@
     "demo": false,
     "description": "",
     "note": "Nový LCD",
-    "charger": false,
-    "cable": false,
-    "earphones": false,
-    "case": false,
-    "box": false,
     "img": "https://placehold.co/400x300?text=Note11",
     "images": [
       "https://placehold.co/400x300?text=Note11"
     ],
-    "sold": false
+    "sold": false,
+    "category": "electronics",
+    "condition": "regular",
+    "features": []
   },
   {
     "id": 23,
@@ -452,15 +491,40 @@
     "demo": false,
     "description": "",
     "note": "Nový LCD",
-    "charger": false,
-    "cable": false,
-    "earphones": false,
-    "case": false,
-    "box": false,
     "img": "https://placehold.co/400x300?text=Note11Pro",
     "images": [
       "https://placehold.co/400x300?text=Note11Pro"
     ],
-    "sold": false
+    "sold": false,
+    "category": "electronics",
+    "condition": "regular",
+    "features": []
+  },
+  {
+    "id": 1788200853100,
+    "title": "Dětský nábytek Ikea Mammut",
+    "category": "furniture",
+    "brand": "IKEA",
+    "price": 2690,
+    "color": "Modrá",
+    "memory": "",
+    "condition": "regular",
+    "sold": false,
+    "description": "Sestava dětského nábytku IKEA MAMMUT. Jedná se o velkou šatní skříň, malou šatní skříň, 2x komoda se třemi šuplíky, 2x policová skříň. ",
+    "note": "",
+    "features": [],
+    "images": [
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788200827414-0-Mammut_1.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788200829354-1-Mammut_2.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788200830847-2-Mammut_3.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788200832274-3-Mammut_4.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788200833613-4-Mammut_5.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788200835037-5-Mammut_6.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788200836479-6-Mammut_7.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788200837966-7-Mammut_8.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788200840039-8-Mammut_9.jpg"
+    ],
+    "img": "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788200827414-0-Mammut_1.jpg",
+    "demo": false
   }
 ]

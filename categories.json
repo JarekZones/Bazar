@@ -51,7 +51,7 @@
   {
     "id": "furniture",
     "name": "Nábytek a bydlení",
-    "image": "",
+    "image": "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788207136832-0-N-bytek.jpg",
     "visible": true,
     "fields": {
       "brand": true,

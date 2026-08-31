@@ -4,6 +4,7 @@
     "name": "Elektronika",
     "image": "",
     "visible": true,
+    "fields": {"brand": true, "color": true, "memory": true, "imei": true, "note": true},
     "features": [
       { "id": "charger", "name": "Nabíječka" },
       { "id": "cable", "name": "Datový kabel" },
@@ -17,6 +18,7 @@
     "name": "Hračky a dětské",
     "image": "",
     "visible": true,
+    "fields": {"brand": true, "color": true, "memory": false, "imei": false, "note": true},
     "features": []
   },
   {
@@ -24,6 +26,7 @@
     "name": "Nábytek a bydlení",
     "image": "",
     "visible": true,
+    "fields": {"brand": true, "color": true, "memory": false, "imei": false, "note": true},
     "features": []
   },
   {
@@ -31,6 +34,7 @@
     "name": "Dům, dílna a zahrada",
     "image": "",
     "visible": true,
+    "fields": {"brand": true, "color": true, "memory": false, "imei": false, "note": true},
     "features": []
   },
   {
@@ -38,6 +42,7 @@
     "name": "Sport a volný čas",
     "image": "",
     "visible": true,
+    "fields": {"brand": true, "color": true, "memory": false, "imei": false, "note": true},
     "features": []
   },
   {
@@ -45,6 +50,7 @@
     "name": "Oblečení a móda",
     "image": "",
     "visible": true,
+    "fields": {"brand": true, "color": true, "memory": false, "imei": false, "note": true},
     "features": []
   },
   {
@@ -52,6 +58,7 @@
     "name": "Auto-moto",
     "image": "",
     "visible": true,
+    "fields": {"brand": true, "color": true, "memory": false, "imei": false, "note": true},
     "features": []
   },
   {
@@ -59,6 +66,7 @@
     "name": "Ostatní",
     "image": "",
     "visible": true,
+    "fields": {"brand": true, "color": true, "memory": false, "imei": false, "note": true},
     "features": []
   }
 ]

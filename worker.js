@@ -126,7 +126,7 @@ async function handleContact(request,env,origin){
     "Ozvu se vám co nejdříve.",
     "",
     "S pozdravem",
-    "Soukromý bazárek"
+    "Soukromý bazárek rodiny Preclíků 🥨"
   ].join("\n");
 
   const confirmation=await fetch("https://api.resend.com/emails",{

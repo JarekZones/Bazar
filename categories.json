@@ -2,7 +2,7 @@
   {
     "id": "electronics",
     "name": "Elektronika",
-    "image": "",
+    "image": "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788207073050-0-Elektronika.jpg",
     "visible": true,
     "fields": {
       "brand": true,

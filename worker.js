@@ -14,7 +14,17 @@ export default {
     }
 
     try {
-      const url = new URL(request.url);
+      const url = new URL(request.url); 
+      if (url.pathname === "/api/test-env") {
+  return json(
+    {
+      hasAdminPassword: !!env.ADMIN_PASSWORD,
+      hasSessionSecret: !!env.SESSION_SECRET
+    },
+    200,
+    origin
+  );
+}
 
       // Přihlášení administrátora
       if (url.pathname === "/api/auth" && request.method === "POST") {

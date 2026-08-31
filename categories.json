@@ -2,41 +2,49 @@
   {
     "id": "electronics",
     "name": "Elektronika",
-    "image": ""
+    "image": "",
+    "visible": true
   },
   {
     "id": "toys",
     "name": "Hračky a dětské",
-    "image": ""
+    "image": "",
+    "visible": true
   },
   {
     "id": "furniture",
     "name": "Nábytek a bydlení",
-    "image": ""
+    "image": "",
+    "visible": true
   },
   {
     "id": "home-garden",
     "name": "Dům, dílna a zahrada",
-    "image": ""
+    "image": "",
+    "visible": true
   },
   {
     "id": "sport",
     "name": "Sport a volný čas",
-    "image": ""
+    "image": "",
+    "visible": true
   },
   {
     "id": "fashion",
     "name": "Oblečení a móda",
-    "image": ""
+    "image": "",
+    "visible": true
   },
   {
     "id": "auto-moto",
     "name": "Auto-moto",
-    "image": ""
+    "image": "",
+    "visible": true
   },
   {
     "id": "other",
     "name": "Ostatní",
-    "image": ""
+    "image": "",
+    "visible": true
   }
 ]

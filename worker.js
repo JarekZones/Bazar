@@ -1,4 +1,7 @@
 const JSON_HEADERS={"Content-Type":"application/json; charset=utf-8"};
+const FIELD_KEYS=["brand","color","memory","imei","note"];
+const DEFAULT_FIELDS={brand:true,color:true,memory:false,imei:false,note:true};
+const ELECTRONICS_FIELDS={brand:true,color:true,memory:true,imei:true,note:true};
 
 export default {
   async fetch(request,env){
@@ -58,19 +61,31 @@ function normalizeFeature(f){
   const id=String(f?.id||slugify(name)).trim();
   return{id,name};
 }
+function normalizeFields(fields,id){
+  const base=id==="electronics"?ELECTRONICS_FIELDS:DEFAULT_FIELDS;
+  const result={};
+  for(const key of FIELD_KEYS)result[key]=fields&&typeof fields[key]==="boolean"?fields[key]:base[key];
+  return result;
+}
 function normalizeCategory(c){
+  const id=String(c?.id||"").trim();
   const features=Array.isArray(c?.features)?c.features.map(normalizeFeature).filter(f=>f.id&&f.name):[];
   return{
-    id:String(c?.id||"").trim(),
+    id,
     name:String(c?.name||"").trim(),
     image:typeof c?.image==="string"&&!c.image.startsWith("data:")?c.image.trim():"",
     visible:c?.visible!==false,
+    fields:normalizeFields(c?.fields,id),
     features
   };
 }
 function normalizeProduct(product,categories=[]){
   const p={...product};
   p.category=String(p.category||"electronics");
+  p.brand=String(p.brand||"").trim();
+  p.color=String(p.color||"").trim();
+  p.memory=String(p.memory||"").trim();
+  p.note=String(p.note||"");
   p.condition=["regular","demo","new"].includes(p.condition)?p.condition:(p.demo?"demo":"regular");
   p.demo=p.condition==="demo";
   p.sold=!!p.sold;
@@ -103,7 +118,8 @@ async function handleSave(request,env,origin){
 
   const imeiMap={};
   for(const product of normalized){
-    const imei=String(product.imei||"").replace(/\D/g,"");
+    const cat=categories.find(c=>c.id===product.category);
+    const imei=cat?.fields?.imei?String(product.imei||"").replace(/\D/g,""):"";
     if(imei){
       if(!/^\d{15}$/.test(imei))return json({error:`Neplatné IMEI u produktu ${product.id}.`},400,origin);
       imeiMap[String(product.id)]=imei;
@@ -150,7 +166,7 @@ async function handleImageUpload(request,env,origin){
 }
 
 async function getGitHubData(env){return await getJsonArray(env,"data.json",[])}
-async function getCategories(env){return await getJsonArray(env,"categories.json",[{id:"electronics",name:"Elektronika",image:"",visible:true,features:[]}])}
+async function getCategories(env){return await getJsonArray(env,"categories.json",[{id:"electronics",name:"Elektronika",image:"",visible:true,fields:ELECTRONICS_FIELDS,features:[]}])}
 async function getJsonArray(env,path,fallback){const file=await getGitHubFile(env,path);if(!file)return fallback;const data=JSON.parse(decodeBase64Utf8(file.content));if(!Array.isArray(data))throw new Error(`${path} nemá správný formát.`);return data}
 async function getGitHubFile(env,path){const branch=env.GITHUB_BRANCH||"main";const url=`https://api.github.com/repos/${env.GITHUB_OWNER}/${env.GITHUB_REPO}/contents/${encodePath(path)}?ref=${encodeURIComponent(branch)}`;const response=await githubFetch(env,url);if(response.status===404)return null;if(!response.ok){const text=await response.text();throw new Error(`GitHub GET ${path} selhal (${response.status}): ${text.slice(0,500)}`)}return await response.json()}
 async function putGitHubFile(env,path,content,message){return await putGitHubBytes(env,path,new TextEncoder().encode(content),message)}
@@ -160,7 +176,7 @@ async function githubFetch(env,url,options={}){const headers=new Headers(options
 function validateProducts(products,categories){
   const ids=new Set(),categoryIds=new Set(categories.map(c=>c.id));
   for(const product of products){
-    if(!product||product.id===undefined||!product.title||!product.brand)throw new HttpError("Každý produkt musí mít ID, název a značku.",400);
+    if(!product||product.id===undefined||!product.title)throw new HttpError("Každý produkt musí mít ID a název.",400);
     const id=String(product.id);if(ids.has(id))throw new HttpError(`Duplicitní ID produktu: ${id}`,400);ids.add(id);
     if(!categoryIds.has(product.category))throw new HttpError(`Neplatná kategorie u produktu ${product.id}.`,400);
   }
@@ -171,6 +187,7 @@ function validateCategories(categories){
   for(const c of categories){
     if(!c.id||!c.name)throw new HttpError("Každá kategorie musí mít ID a název.",400);
     if(ids.has(c.id))throw new HttpError(`Duplicitní ID kategorie: ${c.id}`,400);ids.add(c.id);
+    for(const key of FIELD_KEYS)if(typeof c.fields?.[key]!=="boolean")throw new HttpError(`Neplatné nastavení polí v kategorii ${c.name}.`,400);
     const featureIds=new Set();
     for(const f of c.features){if(!f.id||!f.name)throw new HttpError(`Neplatná vlastnost v kategorii ${c.name}.`,400);if(featureIds.has(f.id))throw new HttpError(`Duplicitní vlastnost v kategorii ${c.name}: ${f.name}`,400);featureIds.add(f.id)}
   }

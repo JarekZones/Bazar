@@ -21,6 +21,16 @@ export default {
         return await handleAuth(request, env, origin);
       }
 
+      // Veřejné načtení produktů pro frontend
+      if (url.pathname === "/api/products" && request.method === "GET") {
+        const products = await getGitHubData(env);
+
+        return json(
+        { products },
+        200,
+        origin
+            );
+      }
       // Načtení produktů pro administraci
       if (url.pathname === "/api/admin/data" && request.method === "GET") {
         await requireAuth(request, env);

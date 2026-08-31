@@ -825,8 +825,8 @@ document.getElementById("importFile").addEventListener("change",e=>{
    Odhlášení
    ========================================================= */
 document.getElementById("logoutBtn").addEventListener("click",()=>{
-  localStorage.removeItem("adminLogged");
-  window.location.href="index.html";
+  localStorage.removeItem("adminToken");
+  window.location.href="login.html";
 });
 
 /* =========================================================

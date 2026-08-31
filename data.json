@@ -301,18 +301,18 @@
     "color": "Modrá",
     "memory": "8GB / 128GB",
     "demo": false,
+    "sold": false,
     "description": "Vivo Y33s je elegantní telefon střední třídy, který nabízí moderní design a praktické funkce. Díky velkému displeji je vhodný pro sledování videí, sociální sítě i běžné používání. Černá varianta působí decentně a profesionálně.\n\nProcesor Helio G80 poskytuje stabilní výkon a 8GB RAM umožňuje plynulý chod aplikací. 128GB úložiště je dostatečné pro běžné potřeby. 50Mpx fotoaparát dokáže zachytit kvalitní snímky a baterie s kapacitou 5000mAh nabízí dlouhou výdrž.\n\nY33s je vhodný jako univerzální telefon pro uživatele, kteří hledají stabilní výkon, dobrou výdrž a moderní funkce. Díky vyvážené výbavě je praktickou volbou pro každodenní použití.",
     "note": "",
+    "images": [
+      "https://placehold.co/400x300?text=12C"
+    ],
+    "img": "https://placehold.co/400x300?text=12C",
     "charger": false,
     "cable": false,
     "earphones": true,
     "case": true,
-    "box": true,
-    "img": "https://placehold.co/400x300?text=12C",
-    "images": [
-      "https://placehold.co/400x300?text=12C"
-    ],
-    "sold": false
+    "box": true
   },
   {
     "id": 17,

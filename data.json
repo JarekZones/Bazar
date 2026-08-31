@@ -510,8 +510,8 @@
     "memory": "",
     "condition": "regular",
     "sold": false,
-    "description": "Sestava dětského nábytku IKEA MAMMUT. Jedná se o velkou šatní skříň, malou šatní skříň, 2x komoda se třemi šuplíky, 2x policová skříň. ",
-    "note": "",
+    "description": "Sestava dětského nábytku IKEA MAMMUT. \nSestava obsahuje:\n1x velkou šatní skříň\n1x malou šatní skříň\n2x komoda se třemi šuplíky\n2x policová skříň ",
+    "note": "velkou šatní skříň, malou šatní skříň, 2x komoda se třemi šuplíky, 2x policová skříň.",
     "features": [],
     "images": [
       "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788200827414-0-Mammut_1.jpg",

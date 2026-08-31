@@ -92,15 +92,39 @@
   </div>
 
 <script>
-function checkLogin() {
-  const pass = document.getElementById('password').value;
-  const correct = "Abcd123"; // 🔒 změň si heslo
+const API_URL = "https://mobilmax-bazar-api.j-preclik.workers.dev";
 
-  if (pass === correct) {
-    localStorage.setItem("adminLogged", "true");
+async function checkLogin() {
+  const pass = document.getElementById("password").value;
+  const errorMsg = document.getElementById("errorMsg");
+
+  errorMsg.textContent = "";
+
+  try {
+    const response = await fetch(API_URL + "/api/auth", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        password: pass
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      errorMsg.textContent = data.error || "Špatné heslo!";
+      return;
+    }
+
+    localStorage.setItem("adminToken", data.token);
+
     window.location.href = "admin.html";
-  } else {
-    document.getElementById('errorMsg').textContent = "Špatné heslo!";
+
+  } catch (error) {
+    console.error(error);
+    errorMsg.textContent = "Nepodařilo se spojit se serverem.";
   }
 }
 </script>

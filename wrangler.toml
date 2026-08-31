@@ -6,3 +6,7 @@ compatibility_date = "2026-08-31"
 GITHUB_BRANCH = "main"
 GITHUB_OWNER = "JarekZones"
 GITHUB_REPO = "Bazar"
+
+[[kv_namespaces]]
+binding = "IMEI_KV"
+id = "SEM_PATŘÍ_ID_TVÉ_KV_INSTANCE"

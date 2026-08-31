@@ -8,12 +8,10 @@ export default {
       const url=new URL(request.url);
       if(url.pathname==="/api/auth"&&request.method==="POST")return await handleAuth(request,env,origin);
       if(url.pathname==="/api/products"&&request.method==="GET"){
-        const products=(await getGitHubData(env)).map(normalizeProductCategory);
-        const categories=await getCategories(env);
-        const activeCategoryIds=new Set(products.filter(p=>!p.sold).map(p=>String(p.category||"electronics")));
-        const publicCategories=categories
-          .map(normalizeCategory)
-          .filter(c=>c.visible&&activeCategoryIds.has(c.id));
+        const categories=(await getCategories(env)).map(normalizeCategory);
+        const products=(await getGitHubData(env)).map(p=>normalizeProduct(p,categories));
+        const activeCategoryIds=new Set(products.filter(p=>!p.sold).map(p=>p.category));
+        const publicCategories=categories.filter(c=>c.visible&&activeCategoryIds.has(c.id));
         return json({products,categories:publicCategories},200,origin);
       }
       if(url.pathname==="/api/admin/data"&&request.method==="GET"){
@@ -54,18 +52,40 @@ async function requireAuth(request,env){
   if(!token||!(await verifyToken(token,env.SESSION_SECRET)))throw new HttpError("Neplatné nebo prošlé přihlášení.",401);
 }
 
+function normalizeFeature(f){
+  if(typeof f==="string"){const name=f.trim();return{id:slugify(name),name}}
+  const name=String(f?.name||"").trim();
+  const id=String(f?.id||slugify(name)).trim();
+  return{id,name};
+}
 function normalizeCategory(c){
+  const features=Array.isArray(c?.features)?c.features.map(normalizeFeature).filter(f=>f.id&&f.name):[];
   return{
     id:String(c?.id||"").trim(),
     name:String(c?.name||"").trim(),
     image:typeof c?.image==="string"&&!c.image.startsWith("data:")?c.image.trim():"",
-    visible:c?.visible!==false
+    visible:c?.visible!==false,
+    features
   };
+}
+function normalizeProduct(product,categories=[]){
+  const p={...product};
+  p.category=String(p.category||"electronics");
+  p.condition=["regular","demo","new"].includes(p.condition)?p.condition:(p.demo?"demo":"regular");
+  p.demo=p.condition==="demo";
+  p.sold=!!p.sold;
+  let features=Array.isArray(p.features)?p.features.map(String):[];
+  if(!features.length&&p.category==="electronics"){
+    [["charger",p.charger],["cable",p.cable],["earphones",p.earphones],["case",p.case],["box",p.box]].forEach(([id,on])=>{if(on)features.push(id)});
+  }
+  const allowed=new Set((categories.find(c=>c.id===p.category)?.features||[]).map(f=>f.id));
+  p.features=[...new Set(features.filter(id=>!allowed.size||allowed.has(id)))];
+  return p;
 }
 
 async function handleAdminData(env,origin){
-  const products=(await getGitHubData(env)).map(normalizeProductCategory);
   const categories=(await getCategories(env)).map(normalizeCategory);
+  const products=(await getGitHubData(env)).map(p=>normalizeProduct(p,categories));
   let imeiMap={};
   if(env.IMEI_KV)imeiMap=(await env.IMEI_KV.get("imei-map","json"))||{};
   const result=products.map(product=>({...product,imei:imeiMap[String(product.id)]||""}));
@@ -76,12 +96,13 @@ async function handleSave(request,env,origin){
   const body=await request.json().catch(()=>({}));
   const incoming=Array.isArray(body.products)?body.products:null;
   if(!incoming)return json({error:"Očekáváno pole products."},400,origin);
-  const categories=Array.isArray(body.categories)?body.categories:await getCategories(env);
+  const categories=(Array.isArray(body.categories)?body.categories:await getCategories(env)).map(normalizeCategory);
   validateCategories(categories);
-  validateProducts(incoming,categories);
+  const normalized=incoming.map(p=>normalizeProduct(p,categories));
+  validateProducts(normalized,categories);
 
   const imeiMap={};
-  for(const product of incoming){
+  for(const product of normalized){
     const imei=String(product.imei||"").replace(/\D/g,"");
     if(imei){
       if(!/^\d{15}$/.test(imei))return json({error:`Neplatné IMEI u produktu ${product.id}.`},400,origin);
@@ -91,26 +112,24 @@ async function handleSave(request,env,origin){
   const imeis=Object.values(imeiMap);
   if(new Set(imeis).size!==imeis.length)return json({error:"IMEI musí být jedinečné."},400,origin);
 
-  const cleanProducts=incoming.map(product=>{
+  const cleanProducts=normalized.map(product=>{
     const copy={...product};
     delete copy.imei;
-    copy.category=String(copy.category||"electronics");
+    delete copy.charger;delete copy.cable;delete copy.earphones;delete copy.case;delete copy.box;
     const cleanImages=Array.isArray(copy.images)?copy.images.filter(image=>typeof image==="string"&&image.trim()&&!image.startsWith("data:")):[];
     const fallbackImg=typeof copy.img==="string"&&copy.img.trim()&&!copy.img.startsWith("data:")?copy.img.trim():"";
     copy.images=cleanImages.length?cleanImages:(fallbackImg?[fallbackImg]:[]);
     copy.img=copy.images[0]||"";
     return copy;
   });
-  const cleanCategories=categories.map(normalizeCategory);
 
   await putGitHubFile(env,"data.json",JSON.stringify(cleanProducts,null,2)+"\n",`Aktualizace katalogu ${new Date().toISOString()}`);
-  await putGitHubFile(env,"categories.json",JSON.stringify(cleanCategories,null,2)+"\n",`Aktualizace kategorií ${new Date().toISOString()}`);
+  await putGitHubFile(env,"categories.json",JSON.stringify(categories,null,2)+"\n",`Aktualizace kategorií ${new Date().toISOString()}`);
 
   if(!env.IMEI_KV)throw new HttpError("Není nastaven Cloudflare KV binding IMEI_KV.",500);
   await env.IMEI_KV.put("imei-map",JSON.stringify(imeiMap));
-
   const result=cleanProducts.map(product=>({...product,imei:imeiMap[String(product.id)]||""}));
-  return json({ok:true,products:result,categories:cleanCategories},200,origin);
+  return json({ok:true,products:result,categories},200,origin);
 }
 
 async function handleImageUpload(request,env,origin){
@@ -130,53 +149,34 @@ async function handleImageUpload(request,env,origin){
   return json({ok:true,path,url:result.content?.download_url||`https://raw.githubusercontent.com/${env.GITHUB_OWNER}/${env.GITHUB_REPO}/${env.GITHUB_BRANCH||"main"}/${path}`},200,origin);
 }
 
-function normalizeProductCategory(product){return{...product,category:String(product.category||"electronics")}}
 async function getGitHubData(env){return await getJsonArray(env,"data.json",[])}
-async function getCategories(env){return await getJsonArray(env,"categories.json",[{id:"electronics",name:"Elektronika",image:"",visible:true}])}
-async function getJsonArray(env,path,fallback){
-  const file=await getGitHubFile(env,path);if(!file)return fallback;
-  const data=JSON.parse(decodeBase64Utf8(file.content));
-  if(!Array.isArray(data))throw new Error(`${path} nemá správný formát.`);
-  return data;
-}
-
-async function getGitHubFile(env,path){
-  const branch=env.GITHUB_BRANCH||"main";
-  const url=`https://api.github.com/repos/${env.GITHUB_OWNER}/${env.GITHUB_REPO}/contents/${encodePath(path)}?ref=${encodeURIComponent(branch)}`;
-  const response=await githubFetch(env,url);
-  if(response.status===404)return null;
-  if(!response.ok){const text=await response.text();throw new Error(`GitHub GET ${path} selhal (${response.status}): ${text.slice(0,500)}`)}
-  return await response.json();
-}
+async function getCategories(env){return await getJsonArray(env,"categories.json",[{id:"electronics",name:"Elektronika",image:"",visible:true,features:[]}])}
+async function getJsonArray(env,path,fallback){const file=await getGitHubFile(env,path);if(!file)return fallback;const data=JSON.parse(decodeBase64Utf8(file.content));if(!Array.isArray(data))throw new Error(`${path} nemá správný formát.`);return data}
+async function getGitHubFile(env,path){const branch=env.GITHUB_BRANCH||"main";const url=`https://api.github.com/repos/${env.GITHUB_OWNER}/${env.GITHUB_REPO}/contents/${encodePath(path)}?ref=${encodeURIComponent(branch)}`;const response=await githubFetch(env,url);if(response.status===404)return null;if(!response.ok){const text=await response.text();throw new Error(`GitHub GET ${path} selhal (${response.status}): ${text.slice(0,500)}`)}return await response.json()}
 async function putGitHubFile(env,path,content,message){return await putGitHubBytes(env,path,new TextEncoder().encode(content),message)}
-async function putGitHubBytes(env,path,bytes,message){
-  const existing=await getGitHubFile(env,path);
-  const body={message,content:bytesToBase64(bytes),branch:env.GITHUB_BRANCH||"main"};
-  if(existing?.sha)body.sha=existing.sha;
-  const response=await githubFetch(env,`https://api.github.com/repos/${env.GITHUB_OWNER}/${env.GITHUB_REPO}/contents/${encodePath(path)}`,{method:"PUT",body:JSON.stringify(body)});
-  if(!response.ok){const text=await response.text();throw new Error(`GitHub PUT ${path} selhal (${response.status}): ${text.slice(0,500)}`)}
-  return await response.json();
-}
-async function githubFetch(env,url,options={}){
-  const headers=new Headers(options.headers||{});
-  headers.set("Accept","application/vnd.github+json");headers.set("Authorization",`Bearer ${env.GITHUB_TOKEN}`);headers.set("X-GitHub-Api-Version","2022-11-28");headers.set("User-Agent","bazar-admin-worker");
-  if(options.body)headers.set("Content-Type","application/json");
-  return fetch(url,{...options,headers});
-}
+async function putGitHubBytes(env,path,bytes,message){const existing=await getGitHubFile(env,path);const body={message,content:bytesToBase64(bytes),branch:env.GITHUB_BRANCH||"main"};if(existing?.sha)body.sha=existing.sha;const response=await githubFetch(env,`https://api.github.com/repos/${env.GITHUB_OWNER}/${env.GITHUB_REPO}/contents/${encodePath(path)}`,{method:"PUT",body:JSON.stringify(body)});if(!response.ok){const text=await response.text();throw new Error(`GitHub PUT ${path} selhal (${response.status}): ${text.slice(0,500)}`)}return await response.json()}
+async function githubFetch(env,url,options={}){const headers=new Headers(options.headers||{});headers.set("Accept","application/vnd.github+json");headers.set("Authorization",`Bearer ${env.GITHUB_TOKEN}`);headers.set("X-GitHub-Api-Version","2022-11-28");headers.set("User-Agent","bazar-admin-worker");if(options.body)headers.set("Content-Type","application/json");return fetch(url,{...options,headers})}
 
 function validateProducts(products,categories){
-  const ids=new Set(),categoryIds=new Set(categories.map(c=>String(c.id)));
+  const ids=new Set(),categoryIds=new Set(categories.map(c=>c.id));
   for(const product of products){
     if(!product||product.id===undefined||!product.title||!product.brand)throw new HttpError("Každý produkt musí mít ID, název a značku.",400);
     const id=String(product.id);if(ids.has(id))throw new HttpError(`Duplicitní ID produktu: ${id}`,400);ids.add(id);
-    const category=String(product.category||"electronics");if(!categoryIds.has(category))throw new HttpError(`Neplatná kategorie u produktu ${product.id}.`,400);
+    if(!categoryIds.has(product.category))throw new HttpError(`Neplatná kategorie u produktu ${product.id}.`,400);
   }
 }
 function validateCategories(categories){
   if(!categories.length)throw new HttpError("Musí existovat alespoň jedna kategorie.",400);
-  const ids=new Set();for(const c of categories){const id=String(c?.id||"").trim(),name=String(c?.name||"").trim();if(!id||!name)throw new HttpError("Každá kategorie musí mít ID a název.",400);if(ids.has(id))throw new HttpError(`Duplicitní ID kategorie: ${id}`,400);ids.add(id)}
+  const ids=new Set();
+  for(const c of categories){
+    if(!c.id||!c.name)throw new HttpError("Každá kategorie musí mít ID a název.",400);
+    if(ids.has(c.id))throw new HttpError(`Duplicitní ID kategorie: ${c.id}`,400);ids.add(c.id);
+    const featureIds=new Set();
+    for(const f of c.features){if(!f.id||!f.name)throw new HttpError(`Neplatná vlastnost v kategorii ${c.name}.`,400);if(featureIds.has(f.id))throw new HttpError(`Duplicitní vlastnost v kategorii ${c.name}: ${f.name}`,400);featureIds.add(f.id)}
+  }
 }
 
+function slugify(s){return String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")}
 function sanitizeFilename(value){return String(value).replace(/[^a-zA-Z0-9._-]+/g,"-").replace(/-+/g,"-").replace(/^\.+/,"").slice(0,140)}
 function encodePath(path){return path.split("/").map(encodeURIComponent).join("/")}
 function bytesToBase64(bytes){let binary="";const chunk=0x8000;for(let i=0;i<bytes.length;i+=chunk)binary+=String.fromCharCode(...bytes.subarray(i,i+chunk));return btoa(binary)}
@@ -185,6 +185,4 @@ function base64url(input){return btoa(input).replace(/\+/g,"-").replace(/\//g,"_
 function fromBase64url(input){const padded=input.replace(/-/g,"+").replace(/_/g,"/");return atob(padded+"=".repeat((4-padded.length%4)%4))}
 async function hmac(secret,value){const key=await crypto.subtle.importKey("raw",new TextEncoder().encode(secret),{name:"HMAC",hash:"SHA-256"},false,["sign"]);return new Uint8Array(await crypto.subtle.sign("HMAC",key,new TextEncoder().encode(value)))}
 async function createToken(secret){if(!secret)throw new Error("SESSION_SECRET není nastavený.");const payload={exp:Math.floor(Date.now()/1000)+8*60*60,iat:Math.floor(Date.now()/1000)};const encodedPayload=base64url(JSON.stringify(payload));const signatureBytes=await hmac(secret,encodedPayload);const signature=base64url(String.fromCharCode(...signatureBytes));return encodedPayload+"."+signature}
-async function verifyToken(token,secret){
-  try{if(!secret)return false;const parts=token.split(".");if(parts.length!==2)return false;const payload=JSON.parse(fromBase64url(parts[0]));if(!payload.exp||payload.exp<Math.floor(Date.now()/1000))return false;const expected=await hmac(secret,parts[0]);const supplied=Uint8Array.from(fromBase64url(parts[1]),c=>c.charCodeAt(0));if(expected.length!==supplied.length)return false;let diff=0;for(let i=0;i<expected.length;i++)diff|=expected[i]^supplied[i];return diff===0}catch{return false}
-}
+async function verifyToken(token,secret){try{if(!secret)return false;const parts=token.split(".");if(parts.length!==2)return false;const payload=JSON.parse(fromBase64url(parts[0]));if(!payload.exp||payload.exp<Math.floor(Date.now()/1000))return false;const expected=await hmac(secret,parts[0]);const supplied=Uint8Array.from(fromBase64url(parts[1]),c=>c.charCodeAt(0));if(expected.length!==supplied.length)return false;let diff=0;for(let i=0;i<expected.length;i++)diff|=expected[i]^supplied[i];return diff===0}catch{return false}}

@@ -10,7 +10,11 @@ export default {
       if(url.pathname==="/api/products"&&request.method==="GET"){
         const products=(await getGitHubData(env)).map(normalizeProductCategory);
         const categories=await getCategories(env);
-        return json({products,categories},200,origin);
+        const activeCategoryIds=new Set(products.filter(p=>!p.sold).map(p=>String(p.category||"electronics")));
+        const publicCategories=categories
+          .map(normalizeCategory)
+          .filter(c=>c.visible&&activeCategoryIds.has(c.id));
+        return json({products,categories:publicCategories},200,origin);
       }
       if(url.pathname==="/api/admin/data"&&request.method==="GET"){
         await requireAuth(request,env);
@@ -50,9 +54,18 @@ async function requireAuth(request,env){
   if(!token||!(await verifyToken(token,env.SESSION_SECRET)))throw new HttpError("Neplatné nebo prošlé přihlášení.",401);
 }
 
+function normalizeCategory(c){
+  return{
+    id:String(c?.id||"").trim(),
+    name:String(c?.name||"").trim(),
+    image:typeof c?.image==="string"&&!c.image.startsWith("data:")?c.image.trim():"",
+    visible:c?.visible!==false
+  };
+}
+
 async function handleAdminData(env,origin){
   const products=(await getGitHubData(env)).map(normalizeProductCategory);
-  const categories=await getCategories(env);
+  const categories=(await getCategories(env)).map(normalizeCategory);
   let imeiMap={};
   if(env.IMEI_KV)imeiMap=(await env.IMEI_KV.get("imei-map","json"))||{};
   const result=products.map(product=>({...product,imei:imeiMap[String(product.id)]||""}));
@@ -88,7 +101,7 @@ async function handleSave(request,env,origin){
     copy.img=copy.images[0]||"";
     return copy;
   });
-  const cleanCategories=categories.map(c=>({id:String(c.id).trim(),name:String(c.name).trim(),image:typeof c.image==="string"&&!c.image.startsWith("data:")?c.image.trim():""}));
+  const cleanCategories=categories.map(normalizeCategory);
 
   await putGitHubFile(env,"data.json",JSON.stringify(cleanProducts,null,2)+"\n",`Aktualizace katalogu ${new Date().toISOString()}`);
   await putGitHubFile(env,"categories.json",JSON.stringify(cleanCategories,null,2)+"\n",`Aktualizace kategorií ${new Date().toISOString()}`);
@@ -119,7 +132,7 @@ async function handleImageUpload(request,env,origin){
 
 function normalizeProductCategory(product){return{...product,category:String(product.category||"electronics")}}
 async function getGitHubData(env){return await getJsonArray(env,"data.json",[])}
-async function getCategories(env){return await getJsonArray(env,"categories.json",[{id:"electronics",name:"Elektronika",image:""}])}
+async function getCategories(env){return await getJsonArray(env,"categories.json",[{id:"electronics",name:"Elektronika",image:"",visible:true}])}
 async function getJsonArray(env,path,fallback){
   const file=await getGitHubFile(env,path);if(!file)return fallback;
   const data=JSON.parse(decodeBase64Utf8(file.content));

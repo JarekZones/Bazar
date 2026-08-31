@@ -7,6 +7,7 @@
     "color": "Oranžová",
     "memory": "4GB / 64GB",
     "demo": true,
+    "sold": true,
     "description": "Motorola Moto G04 je cenově dostupný chytrý telefon, který vyniká svým stylovým designem a solidní výbavou pro každodenní použití. K jeho hlavním přednostem patří velký 6,56\" IPS HD+ displej s rozlišením 1612 x 720 pixelů a obnovovací frekvencí 90 Hz. Displej zajišťuje plynulý pohyb veškerého zobrazovaného obsahu i dobrou čitelnost na denním světle. Jeho kompaktní tělo je tenké, lehké a vyrobené z kvalitních materiálů, přičemž speciální matná povrchová úprava telefonu nejen dobře vypadá, ale i příjemně sedí v ruce. K výbavě patří také děrovaný design displeje pro decentně umístěnou přední kameru a podpora Dolby Atmos pro lepší zážitek ze sledování videí i poslechu hudby.\n\nVýkon telefonu zajišťuje osmijádrový procesor Unisoc T606 s taktem až 1,6 GHz ve spojení se 4 GB RAM. Díky tomu i v této cenové kategorii nabídne plynulý chod systému Android 14 i náročnějších běžných aplikací. Interní úložiště má kapacitu 64 GB a lze jej rozšířit paměťovou kartou microSD až o 1 TB, což potěší uživatele s větším množstvím fotografií, videí či aplikací. Telefon je vybaven moderními technologiemi jako je čtečka otisků prstů na boku, odemykání obličejem, USB-C konektor a stále oblíbený 3,5mm jack na sluchátka. Samozřejmostí je podpora Dual SIM, LTE a bezkontaktní komunikace Bluetooth a Wi‑Fi.\n\nFotovýbava jednoznačně předčí většinu konkurentů v této třídě – hlavní fotoaparát s rozlišením 16 Mpx je vybaven PDAF ostřením a podporou nočního režimu, umělou inteligencí a dalšími funkcemi. Selfie kamera nabídne snímač s 5 Mpx a taktéž podporuje řadu režimů pro vylepšení, například retuše obličeje a HDR. Výdrž telefonu má na starosti velká baterie s kapacitou 5000 mAh, která běžně zvládne i více než den provozu na jedno nabití, a podporuje 10–15W rychlonabíjení.",
     "note": "Ochranná folie na LCD",
     "images": [
@@ -37,7 +38,8 @@
     "img": "https://placehold.co/400x300?text=G54",
     "images": [
       "https://placehold.co/400x300?text=G54"
-    ]
+    ],
+    "sold": false
   },
   {
     "id": 3,
@@ -57,7 +59,8 @@
     "img": "https://placehold.co/400x300?text=G84",
     "images": [
       "https://placehold.co/400x300?text=G84"
-    ]
+    ],
+    "sold": false
   },
   {
     "id": 4,
@@ -77,7 +80,8 @@
     "img": "https://placehold.co/400x300?text=A7",
     "images": [
       "https://placehold.co/400x300?text=A7"
-    ]
+    ],
+    "sold": false
   },
   {
     "id": 5,
@@ -97,7 +101,8 @@
     "img": "https://placehold.co/400x300?text=J4+",
     "images": [
       "https://placehold.co/400x300?text=J4+"
-    ]
+    ],
+    "sold": false
   },
   {
     "id": 6,
@@ -117,7 +122,8 @@
     "img": "https://placehold.co/400x300?text=S5610",
     "images": [
       "https://placehold.co/400x300?text=S5610"
-    ]
+    ],
+    "sold": false
   },
   {
     "id": 7,
@@ -137,7 +143,8 @@
     "img": "https://placehold.co/400x300?text=S9",
     "images": [
       "https://placehold.co/400x300?text=S9"
-    ]
+    ],
+    "sold": false
   },
   {
     "id": 9,
@@ -157,7 +164,8 @@
     "img": "https://placehold.co/400x300?text=Y21s-B",
     "images": [
       "https://placehold.co/400x300?text=Y21s-B"
-    ]
+    ],
+    "sold": false
   },
   {
     "id": 10,
@@ -177,7 +185,8 @@
     "img": "https://placehold.co/400x300?text=Y21s-C",
     "images": [
       "https://placehold.co/400x300?text=Y21s-C"
-    ]
+    ],
+    "sold": false
   },
   {
     "id": 11,
@@ -197,7 +206,8 @@
     "img": "https://placehold.co/400x300?text=Y29s",
     "images": [
       "https://placehold.co/400x300?text=Y29s"
-    ]
+    ],
+    "sold": false
   },
   {
     "id": 12,
@@ -217,7 +227,8 @@
     "img": "https://placehold.co/400x300?text=Y29s-2",
     "images": [
       "https://placehold.co/400x300?text=Y29s-2"
-    ]
+    ],
+    "sold": false
   },
   {
     "id": 13,
@@ -237,7 +248,8 @@
     "img": "https://placehold.co/400x300?text=Y33s-A",
     "images": [
       "https://placehold.co/400x300?text=Y33s-A"
-    ]
+    ],
+    "sold": false
   },
   {
     "id": 14,
@@ -257,7 +269,8 @@
     "img": "https://placehold.co/400x300?text=Y33s-B",
     "images": [
       "https://placehold.co/400x300?text=Y33s-B"
-    ]
+    ],
+    "sold": false
   },
   {
     "id": 15,
@@ -277,7 +290,8 @@
     "img": "https://placehold.co/400x300?text=Redmi12",
     "images": [
       "https://placehold.co/400x300?text=Redmi12"
-    ]
+    ],
+    "sold": false
   },
   {
     "id": 16,
@@ -297,7 +311,8 @@
     "img": "https://placehold.co/400x300?text=12C",
     "images": [
       "https://placehold.co/400x300?text=12C"
-    ]
+    ],
+    "sold": false
   },
   {
     "id": 17,
@@ -317,7 +332,8 @@
     "img": "https://placehold.co/400x300?text=15C",
     "images": [
       "https://placehold.co/400x300?text=15C"
-    ]
+    ],
+    "sold": false
   },
   {
     "id": 18,
@@ -337,7 +353,8 @@
     "img": "https://placehold.co/400x300?text=15",
     "images": [
       "https://placehold.co/400x300?text=15"
-    ]
+    ],
+    "sold": false
   },
   {
     "id": 19,
@@ -357,7 +374,8 @@
     "img": "https://placehold.co/400x300?text=Note10",
     "images": [
       "https://placehold.co/400x300?text=Note10"
-    ]
+    ],
+    "sold": false
   },
   {
     "id": 20,
@@ -377,7 +395,8 @@
     "img": "https://placehold.co/400x300?text=Note10-B",
     "images": [
       "https://placehold.co/400x300?text=Note10-B"
-    ]
+    ],
+    "sold": false
   },
   {
     "id": 21,
@@ -397,7 +416,8 @@
     "img": "https://placehold.co/400x300?text=Note10Pro",
     "images": [
       "https://placehold.co/400x300?text=Note10Pro"
-    ]
+    ],
+    "sold": false
   },
   {
     "id": 22,
@@ -417,7 +437,8 @@
     "img": "https://placehold.co/400x300?text=Note11",
     "images": [
       "https://placehold.co/400x300?text=Note11"
-    ]
+    ],
+    "sold": false
   },
   {
     "id": 23,
@@ -437,6 +458,7 @@
     "img": "https://placehold.co/400x300?text=Note11Pro",
     "images": [
       "https://placehold.co/400x300?text=Note11Pro"
-    ]
+    ],
+    "sold": false
   }
 ]

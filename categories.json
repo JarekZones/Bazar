@@ -3,48 +3,62 @@
     "id": "electronics",
     "name": "Elektronika",
     "image": "",
-    "visible": true
+    "visible": true,
+    "features": [
+      { "id": "charger", "name": "Nabíječka" },
+      { "id": "cable", "name": "Datový kabel" },
+      { "id": "earphones", "name": "Sluchátka" },
+      { "id": "case", "name": "Pouzdro" },
+      { "id": "box", "name": "Krabička" }
+    ]
   },
   {
     "id": "toys",
     "name": "Hračky a dětské",
     "image": "",
-    "visible": true
+    "visible": true,
+    "features": []
   },
   {
     "id": "furniture",
     "name": "Nábytek a bydlení",
     "image": "",
-    "visible": true
+    "visible": true,
+    "features": []
   },
   {
     "id": "home-garden",
     "name": "Dům, dílna a zahrada",
     "image": "",
-    "visible": true
+    "visible": true,
+    "features": []
   },
   {
     "id": "sport",
     "name": "Sport a volný čas",
     "image": "",
-    "visible": true
+    "visible": true,
+    "features": []
   },
   {
     "id": "fashion",
     "name": "Oblečení a móda",
     "image": "",
-    "visible": true
+    "visible": true,
+    "features": []
   },
   {
     "id": "auto-moto",
     "name": "Auto-moto",
     "image": "",
-    "visible": true
+    "visible": true,
+    "features": []
   },
   {
     "id": "other",
     "name": "Ostatní",
     "image": "",
-    "visible": true
+    "visible": true,
+    "features": []
   }
 ]

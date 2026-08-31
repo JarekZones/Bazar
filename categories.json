@@ -37,7 +37,7 @@
   {
     "id": "toys",
     "name": "Hračky a dětské",
-    "image": "",
+    "image": "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788207088622-0-Hra-ky.jpg",
     "visible": true,
     "fields": {
       "brand": true,

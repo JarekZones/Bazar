@@ -9,4 +9,4 @@ GITHUB_REPO = "Bazar"
 
 [[kv_namespaces]]
 binding = "IMEI_KV"
-id = "SEM_PATŘÍ_ID_TVÉ_KV_INSTANCE"
+id = "7c9893ad46654d869454d3c09fe0b85b"

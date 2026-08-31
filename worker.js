@@ -117,6 +117,37 @@ async function handleContact(request,env,origin){
     console.error("Resend error",response.status,detail.slice(0,1000));
     return json({error:"E-mail se nepodařilo odeslat. Zkuste to prosím znovu."},502,origin);
   }
+
+  const confirmationText=[
+    `Dobrý den${name?` ${name}`:""},`,
+    "",
+    `děkuji za zprávu ohledně produktu „${title}“.`,
+    "Vaše zpráva byla úspěšně doručena.",
+    "Ozvu se vám co nejdříve.",
+    "",
+    "S pozdravem",
+    "Soukromý bazárek"
+  ].join("\n");
+
+  const confirmation=await fetch("https://api.resend.com/emails",{
+    method:"POST",
+    headers:{
+      "Authorization":`Bearer ${env.RESEND_API_KEY}`,
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+      from:"Soukromý bazárek <bazarek@mobilmax.cz>",
+      to:[email],
+      reply_to:"j.preclik@mobilmax.cz",
+      subject:`Potvrzení přijetí zprávy – ${title}`,
+      text:confirmationText
+    })
+  });
+  if(!confirmation.ok){
+    const detail=await confirmation.text();
+    console.error("Resend confirmation error",confirmation.status,detail.slice(0,1000));
+  }
+
   return json({ok:true,message:"Zpráva byla úspěšně odeslána."},200,origin);
 }
 

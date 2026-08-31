@@ -10,6 +10,7 @@ export default {
     try{
       const url=new URL(request.url);
       if(url.pathname==="/api/auth"&&request.method==="POST")return await handleAuth(request,env,origin);
+      if(url.pathname==="/api/contact"&&request.method==="POST")return await handleContact(request,env,origin);
       if(url.pathname==="/api/products"&&request.method==="GET"){
         const categories=(await getCategories(env)).map(normalizeCategory);
         const products=(await getGitHubData(env)).map(p=>normalizeProduct(p,categories));
@@ -53,6 +54,55 @@ async function requireAuth(request,env){
   const header=request.headers.get("Authorization")||"";
   const token=header.startsWith("Bearer ")?header.slice(7):"";
   if(!token||!(await verifyToken(token,env.SESSION_SECRET)))throw new HttpError("Neplatné nebo prošlé přihlášení.",401);
+}
+
+async function handleContact(request,env,origin){
+  if(!env.RESEND_API_KEY)throw new HttpError("Odesílání e-mailů není nastavené.",500);
+  const body=await request.json().catch(()=>({}));
+  const name=String(body.name||"").trim();
+  const email=String(body.email||"").trim().toLowerCase();
+  const message=String(body.message||"").trim();
+  const productId=String(body.productId??"").trim();
+  if(name.length<2||name.length>100)return json({error:"Zadejte prosím jméno."},400,origin);
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||email.length>254)return json({error:"Zadejte platnou e-mailovou adresu."},400,origin);
+  if(message.length<3||message.length>4000)return json({error:"Zpráva musí mít 3 až 4000 znaků."},400,origin);
+  if(!productId)return json({error:"Chybí vybraný produkt."},400,origin);
+
+  const products=await getGitHubData(env);
+  const product=products.find(p=>String(p.id)===productId&&!p.sold);
+  if(!product)return json({error:"Produkt už není k dispozici."},404,origin);
+  const title=String(product.title||"Produkt").trim().slice(0,160);
+  const text=[
+    `Zájem o produkt: ${title}`,
+    `ID produktu: ${productId}`,
+    "",
+    `Jméno: ${name}`,
+    `E-mail: ${email}`,
+    "",
+    "Zpráva:",
+    message
+  ].join("\n");
+
+  const response=await fetch("https://api.resend.com/emails",{
+    method:"POST",
+    headers:{
+      "Authorization":`Bearer ${env.RESEND_API_KEY}`,
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+      from:"Soukromý bazárek <bazarek@mobilmax.cz>",
+      to:["j.preclik@mobilmax.cz"],
+      reply_to:email,
+      subject:`Zájem o ${title}`,
+      text
+    })
+  });
+  if(!response.ok){
+    const detail=await response.text();
+    console.error("Resend error",response.status,detail.slice(0,1000));
+    return json({error:"E-mail se nepodařilo odeslat. Zkuste to prosím znovu."},502,origin);
+  }
+  return json({ok:true,message:"Zpráva byla úspěšně odeslána."},200,origin);
 }
 
 function normalizeFeature(f){

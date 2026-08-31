@@ -1,0 +1,42 @@
+[
+  {
+    "id": "electronics",
+    "name": "Elektronika",
+    "image": ""
+  },
+  {
+    "id": "toys",
+    "name": "Hračky a dětské",
+    "image": ""
+  },
+  {
+    "id": "furniture",
+    "name": "Nábytek a bydlení",
+    "image": ""
+  },
+  {
+    "id": "home-garden",
+    "name": "Dům, dílna a zahrada",
+    "image": ""
+  },
+  {
+    "id": "sport",
+    "name": "Sport a volný čas",
+    "image": ""
+  },
+  {
+    "id": "fashion",
+    "name": "Oblečení a móda",
+    "image": ""
+  },
+  {
+    "id": "auto-moto",
+    "name": "Auto-moto",
+    "image": ""
+  },
+  {
+    "id": "other",
+    "name": "Ostatní",
+    "image": ""
+  }
+]

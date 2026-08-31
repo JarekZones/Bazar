@@ -482,6 +482,7 @@ async function saveProducts(){
  }catch(e){
   console.error("Chyba ukládání:", e);
   alert("Nepodařilo se uložit produkty na server:\n\n" + e.message);
+  throw e;
 }
 }
 
@@ -716,28 +717,33 @@ document.getElementById("saveProductBtn").addEventListener("click",async()=>{
   if(index>=0) products[index]=data;
   else products.push(data);
 
-  saveProducts();
+try{
+  await saveProducts();
   resetEditor();
   alert("Produkt byl uložen.");
-});
+}catch(e){
+  // Chyba už byla zobrazena ve saveProducts()
+}
+  });
 
-document.getElementById("deleteProductBtn").addEventListener("click",()=>{
+document.getElementById("deleteProductBtn").addEventListener("click", async ()=>{
   const id=Number(document.getElementById("editId").value);
   if(!id)return;
+
   const p=products.find(x=>Number(x.id)===id);
   if(!p)return;
 
   if(!confirm(`Opravdu chcete smazat produkt „${p.title}“?`))return;
 
   products=products.filter(x=>Number(x.id)!==id);
-  saveProducts();
-  resetEditor();
-});
 
-document.getElementById("addNewBtn").addEventListener("click",()=>{
-  resetEditor();
-  document.getElementById("editTitle").focus();
-  document.querySelector(".panel:last-child").scrollIntoView({behavior:"smooth",block:"start"});
+  try{
+    await saveProducts();
+    resetEditor();
+    alert("Produkt byl smazán.");
+  }catch(e){
+    // Chyba už byla zobrazena ve saveProducts()
+  }
 });
 
 document.getElementById("resetFormBtn").addEventListener("click",resetEditor);

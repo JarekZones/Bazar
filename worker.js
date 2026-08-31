@@ -15,6 +15,7 @@ export default {
 
     try {
       const url = new URL(request.url); 
+      }
       
       // Přihlášení administrátora
       if (url.pathname === "/api/auth" && request.method === "POST") {

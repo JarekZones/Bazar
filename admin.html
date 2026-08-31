@@ -394,19 +394,39 @@ const defaultProducts = [
 
 function uid(){return Date.now()+Math.floor(Math.random()*1000)}
 
-function loadProducts(){
-  try{
-    const raw=localStorage.getItem(STORAGE_KEY);
-    if(raw){
-      const parsed=JSON.parse(raw);
-      if(Array.isArray(parsed) && parsed.length) return parsed;
-    }
-  }catch(e){console.warn("Chyba localStorage:",e)}
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(defaultProducts));
-  return defaultProducts.map(p=>({...p}));
-}
+const API_URL = "https://mobilmax-bazar-api.j-preclik.workers.dev";
 
-let products=loadProducts();
+let products = [];
+
+async function loadProducts(){
+  try{
+    const response = await fetch(API_URL + "/api/admin/data", {
+      method: "GET",
+      headers: {
+        "Authorization": "Bearer " + adminToken
+      }
+    });
+
+    if(response.status === 401){
+      localStorage.removeItem("adminToken");
+      window.location.href = "login.html";
+      return [];
+    }
+
+    const data = await response.json();
+
+    if(!response.ok){
+      throw new Error(data.error || "Nepodařilo se načíst produkty.");
+    }
+
+    return Array.isArray(data) ? data : [];
+
+  }catch(e){
+    console.error("Chyba načítání produktů:", e);
+    alert("Nepodařilo se načíst produkty ze serveru.");
+    return [];
+  }
+}
 
 /* Převod starého formátu img -> images a doplnění IMEI. */
 function normalizeProduct(p){
@@ -419,13 +439,48 @@ function normalizeProduct(p){
   copy.imei=copy.imei ? String(copy.imei) : "";
   return copy;
 }
-products=products.map(normalizeProduct);
+async function initAdmin(){
+  products = await loadProducts();
+  products = products.map(normalizeProduct);
 
-function saveProducts(){
-  products=products.map(normalizeProduct);
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(products));
   renderAdminTable();
   updateStats();
+}
+
+initAdmin();
+
+async function saveProducts(){
+  products = products.map(normalizeProduct);
+
+  try{
+    const response = await fetch(API_URL + "/api/save", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + adminToken
+      },
+      body: JSON.stringify(products)
+    });
+
+    const data = await response.json();
+
+    if(response.status === 401){
+      localStorage.removeItem("adminToken");
+      window.location.href = "login.html";
+      return;
+    }
+
+    if(!response.ok){
+      throw new Error(data.error || "Nepodařilo se uložit produkty.");
+    }
+
+    renderAdminTable();
+    updateStats();
+
+  }catch(e){
+    console.error("Chyba ukládání:", e);
+    alert("Nepodařilo se uložit produkty na server.");
+  }
 }
 
 function formatPrice(n){

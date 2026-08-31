@@ -3,18 +3,21 @@
     "id": 1,
     "title": "Motorola Moto G04",
     "brand": "Motorola",
-    "price": 2200,
+    "price": 2250,
     "color": "Oranžová",
     "memory": "4GB / 64GB",
     "demo": true,
     "description": "Motorola Moto G04 je cenově dostupný chytrý telefon, který vyniká svým stylovým designem a solidní výbavou pro každodenní použití. K jeho hlavním přednostem patří velký 6,56\" IPS HD+ displej s rozlišením 1612 x 720 pixelů a obnovovací frekvencí 90 Hz. Displej zajišťuje plynulý pohyb veškerého zobrazovaného obsahu i dobrou čitelnost na denním světle. Jeho kompaktní tělo je tenké, lehké a vyrobené z kvalitních materiálů, přičemž speciální matná povrchová úprava telefonu nejen dobře vypadá, ale i příjemně sedí v ruce. K výbavě patří také děrovaný design displeje pro decentně umístěnou přední kameru a podpora Dolby Atmos pro lepší zážitek ze sledování videí i poslechu hudby.\n\nVýkon telefonu zajišťuje osmijádrový procesor Unisoc T606 s taktem až 1,6 GHz ve spojení se 4 GB RAM. Díky tomu i v této cenové kategorii nabídne plynulý chod systému Android 14 i náročnějších běžných aplikací. Interní úložiště má kapacitu 64 GB a lze jej rozšířit paměťovou kartou microSD až o 1 TB, což potěší uživatele s větším množstvím fotografií, videí či aplikací. Telefon je vybaven moderními technologiemi jako je čtečka otisků prstů na boku, odemykání obličejem, USB-C konektor a stále oblíbený 3,5mm jack na sluchátka. Samozřejmostí je podpora Dual SIM, LTE a bezkontaktní komunikace Bluetooth a Wi‑Fi.\n\nFotovýbava jednoznačně předčí většinu konkurentů v této třídě – hlavní fotoaparát s rozlišením 16 Mpx je vybaven PDAF ostřením a podporou nočního režimu, umělou inteligencí a dalšími funkcemi. Selfie kamera nabídne snímač s 5 Mpx a taktéž podporuje řadu režimů pro vylepšení, například retuše obličeje a HDR. Výdrž telefonu má na starosti velká baterie s kapacitou 5000 mAh, která běžně zvládne i více než den provozu na jedno nabití, a podporuje 10–15W rychlonabíjení.",
     "note": "Ochranná folie na LCD",
+    "images": [
+      "https://www.huramobil.cz/fotocache/bigorig/IRMOTOG04ORN.jpg"
+    ],
+    "img": "https://www.huramobil.cz/fotocache/bigorig/IRMOTOG04ORN.jpg",
     "charger": true,
     "cable": true,
     "earphones": false,
     "case": true,
-    "box": false,
-    "img": "https://www.huramobil.cz/fotocache/bigorig/IRMOTOG04ORN.jpg"
+    "box": false
   },
   {
     "id": 2,
@@ -31,7 +34,10 @@
     "earphones": true,
     "case": true,
     "box": true,
-    "img": "https://placehold.co/400x300?text=G54"
+    "img": "https://placehold.co/400x300?text=G54",
+    "images": [
+      "https://placehold.co/400x300?text=G54"
+    ]
   },
   {
     "id": 3,
@@ -48,7 +54,10 @@
     "earphones": false,
     "case": true,
     "box": true,
-    "img": "https://placehold.co/400x300?text=G84"
+    "img": "https://placehold.co/400x300?text=G84",
+    "images": [
+      "https://placehold.co/400x300?text=G84"
+    ]
   },
   {
     "id": 4,
@@ -65,7 +74,10 @@
     "earphones": true,
     "case": true,
     "box": true,
-    "img": "https://placehold.co/400x300?text=A7"
+    "img": "https://placehold.co/400x300?text=A7",
+    "images": [
+      "https://placehold.co/400x300?text=A7"
+    ]
   },
   {
     "id": 5,
@@ -82,7 +94,10 @@
     "earphones": true,
     "case": true,
     "box": true,
-    "img": "https://placehold.co/400x300?text=J4+"
+    "img": "https://placehold.co/400x300?text=J4+",
+    "images": [
+      "https://placehold.co/400x300?text=J4+"
+    ]
   },
   {
     "id": 6,
@@ -99,7 +114,10 @@
     "earphones": true,
     "case": true,
     "box": true,
-    "img": "https://placehold.co/400x300?text=S5610"
+    "img": "https://placehold.co/400x300?text=S5610",
+    "images": [
+      "https://placehold.co/400x300?text=S5610"
+    ]
   },
   {
     "id": 7,
@@ -116,7 +134,10 @@
     "earphones": true,
     "case": true,
     "box": true,
-    "img": "https://placehold.co/400x300?text=S9"
+    "img": "https://placehold.co/400x300?text=S9",
+    "images": [
+      "https://placehold.co/400x300?text=S9"
+    ]
   },
   {
     "id": 9,
@@ -133,7 +154,10 @@
     "earphones": true,
     "case": true,
     "box": false,
-    "img": "https://placehold.co/400x300?text=Y21s-B"
+    "img": "https://placehold.co/400x300?text=Y21s-B",
+    "images": [
+      "https://placehold.co/400x300?text=Y21s-B"
+    ]
   },
   {
     "id": 10,
@@ -150,7 +174,10 @@
     "earphones": true,
     "case": true,
     "box": true,
-    "img": "https://placehold.co/400x300?text=Y21s-C"
+    "img": "https://placehold.co/400x300?text=Y21s-C",
+    "images": [
+      "https://placehold.co/400x300?text=Y21s-C"
+    ]
   },
   {
     "id": 11,
@@ -167,7 +194,10 @@
     "earphones": false,
     "case": true,
     "box": true,
-    "img": "https://placehold.co/400x300?text=Y29s"
+    "img": "https://placehold.co/400x300?text=Y29s",
+    "images": [
+      "https://placehold.co/400x300?text=Y29s"
+    ]
   },
   {
     "id": 12,
@@ -184,7 +214,10 @@
     "earphones": false,
     "case": true,
     "box": true,
-    "img": "https://placehold.co/400x300?text=Y29s-2"
+    "img": "https://placehold.co/400x300?text=Y29s-2",
+    "images": [
+      "https://placehold.co/400x300?text=Y29s-2"
+    ]
   },
   {
     "id": 13,
@@ -201,7 +234,10 @@
     "earphones": true,
     "case": true,
     "box": true,
-    "img": "https://placehold.co/400x300?text=Y33s-A"
+    "img": "https://placehold.co/400x300?text=Y33s-A",
+    "images": [
+      "https://placehold.co/400x300?text=Y33s-A"
+    ]
   },
   {
     "id": 14,
@@ -218,7 +254,10 @@
     "earphones": false,
     "case": true,
     "box": false,
-    "img": "https://placehold.co/400x300?text=Y33s-B"
+    "img": "https://placehold.co/400x300?text=Y33s-B",
+    "images": [
+      "https://placehold.co/400x300?text=Y33s-B"
+    ]
   },
   {
     "id": 15,
@@ -235,7 +274,10 @@
     "earphones": false,
     "case": true,
     "box": true,
-    "img": "https://placehold.co/400x300?text=Redmi12"
+    "img": "https://placehold.co/400x300?text=Redmi12",
+    "images": [
+      "https://placehold.co/400x300?text=Redmi12"
+    ]
   },
   {
     "id": 16,
@@ -252,7 +294,10 @@
     "earphones": true,
     "case": true,
     "box": true,
-    "img": "https://placehold.co/400x300?text=12C"
+    "img": "https://placehold.co/400x300?text=12C",
+    "images": [
+      "https://placehold.co/400x300?text=12C"
+    ]
   },
   {
     "id": 17,
@@ -269,7 +314,10 @@
     "earphones": false,
     "case": true,
     "box": true,
-    "img": "https://placehold.co/400x300?text=15C"
+    "img": "https://placehold.co/400x300?text=15C",
+    "images": [
+      "https://placehold.co/400x300?text=15C"
+    ]
   },
   {
     "id": 18,
@@ -286,7 +334,10 @@
     "earphones": false,
     "case": false,
     "box": false,
-    "img": "https://placehold.co/400x300?text=15"
+    "img": "https://placehold.co/400x300?text=15",
+    "images": [
+      "https://placehold.co/400x300?text=15"
+    ]
   },
   {
     "id": 19,
@@ -303,7 +354,10 @@
     "earphones": false,
     "case": false,
     "box": false,
-    "img": "https://placehold.co/400x300?text=Note10"
+    "img": "https://placehold.co/400x300?text=Note10",
+    "images": [
+      "https://placehold.co/400x300?text=Note10"
+    ]
   },
   {
     "id": 20,
@@ -320,7 +374,10 @@
     "earphones": false,
     "case": true,
     "box": false,
-    "img": "https://placehold.co/400x300?text=Note10-B"
+    "img": "https://placehold.co/400x300?text=Note10-B",
+    "images": [
+      "https://placehold.co/400x300?text=Note10-B"
+    ]
   },
   {
     "id": 21,
@@ -337,7 +394,10 @@
     "earphones": false,
     "case": false,
     "box": false,
-    "img": "https://placehold.co/400x300?text=Note10Pro"
+    "img": "https://placehold.co/400x300?text=Note10Pro",
+    "images": [
+      "https://placehold.co/400x300?text=Note10Pro"
+    ]
   },
   {
     "id": 22,
@@ -354,7 +414,10 @@
     "earphones": false,
     "case": false,
     "box": false,
-    "img": "https://placehold.co/400x300?text=Note11"
+    "img": "https://placehold.co/400x300?text=Note11",
+    "images": [
+      "https://placehold.co/400x300?text=Note11"
+    ]
   },
   {
     "id": 23,
@@ -371,6 +434,9 @@
     "earphones": false,
     "case": false,
     "box": false,
-    "img": "https://placehold.co/400x300?text=Note11Pro"
+    "img": "https://placehold.co/400x300?text=Note11Pro",
+    "images": [
+      "https://placehold.co/400x300?text=Note11Pro"
+    ]
   }
 ]

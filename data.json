@@ -526,24 +526,5 @@
     ],
     "img": "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788200827414-0-Mammut_1.jpg",
     "demo": false
-  },
-  {
-    "id": 1788210347541,
-    "title": "TEST",
-    "category": "toys",
-    "brand": "Lego",
-    "price": 2500,
-    "color": "",
-    "memory": "",
-    "condition": "regular",
-    "sold": true,
-    "description": "test",
-    "note": "rest",
-    "features": [],
-    "images": [
-      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788210372452-0-20161226204802_IMG_1365.jpg"
-    ],
-    "img": "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788210372452-0-20161226204802_IMG_1365.jpg",
-    "demo": false
   }
 ]

@@ -479,10 +479,10 @@ async function saveProducts(){
     renderAdminTable();
     updateStats();
 
-  }catch(e){
-    console.error("Chyba ukládání:", e);
-    alert("Nepodařilo se uložit produkty na server.");
-  }
+ }catch(e){
+  console.error("Chyba ukládání:", e);
+  alert("Nepodařilo se uložit produkty na server:\n\n" + e.message);
+}
 }
 
 function formatPrice(n){

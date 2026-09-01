@@ -115,9 +115,11 @@
       "box"
     ],
     "images": [
-      "https://placehold.co/400x300?text=J4+"
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788278212211-0-1000042146.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788278247183-0-1000042145.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788278253037-1-1000042144.jpg"
     ],
-    "img": "https://placehold.co/400x300?text=J4+",
+    "img": "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788278212211-0-1000042146.jpg",
     "demo": false
   },
   {

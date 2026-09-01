@@ -381,9 +381,14 @@
       "box"
     ],
     "images": [
-      "https://placehold.co/400x300?text=15C"
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788284304556-0-1000042206.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788284325660-0-1000042207.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788284328025-1-1000042208.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788284330561-2-1000042209.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788284333420-3-1000042210.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788284341899-0-1000042205.jpg"
     ],
-    "img": "https://placehold.co/400x300?text=15C",
+    "img": "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788284304556-0-1000042206.jpg",
     "demo": true
   },
   {

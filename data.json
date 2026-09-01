@@ -98,27 +98,27 @@
   {
     "id": 5,
     "title": "Samsung Galaxy J4+",
+    "category": "electronics",
     "brand": "Samsung",
     "price": 900,
     "color": "Černá",
     "memory": "2GB / 32GB",
-    "demo": false,
+    "condition": "regular",
+    "sold": false,
     "description": "Samsung Galaxy J4+ je jednoduchý a dostupný telefon, který je ideální pro nenáročné uživatele nebo jako záložní zařízení. Díky velkému 6\" displeji je vhodný pro běžné používání, komunikaci a prohlížení internetu. Konstrukce je lehká, dobře se drží a telefon působí moderně.\n\nUvnitř najdeme základní hardware, který postačí pro běžné aplikace, sociální sítě a jednoduché hry. 2GB RAM a 32GB úložiště jsou vhodné pro uživatele, kteří nepotřebují vysoký výkon. Fotoaparát dokáže zachytit slušné snímky za dobrého světla a baterie poskytuje solidní výdrž.\n\nJ4+ je vhodný jako telefon pro děti, seniory nebo jako druhé zařízení. Díky jednoduchému ovládání, dostupné ceně a spolehlivému chodu je praktickou volbou pro každodenní komunikaci.",
     "note": "Nový LCD, Podřený zadní kryt",
-    "img": "https://placehold.co/400x300?text=J4+",
-    "images": [
-      "https://placehold.co/400x300?text=J4+"
-    ],
-    "sold": false,
-    "category": "electronics",
-    "condition": "regular",
     "features": [
       "charger",
       "cable",
       "earphones",
       "case",
       "box"
-    ]
+    ],
+    "images": [
+      "https://placehold.co/400x300?text=J4+"
+    ],
+    "img": "https://placehold.co/400x300?text=J4+",
+    "demo": false
   },
   {
     "id": 6,

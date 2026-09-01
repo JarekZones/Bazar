@@ -467,21 +467,21 @@
   {
     "id": 22,
     "title": "Xiaomi Redmi Note 11S",
+    "category": "electronics",
     "brand": "Xiaomi",
     "price": 1500,
     "color": "Šedá",
     "memory": "6GB / 64GB",
-    "demo": false,
+    "condition": "regular",
+    "sold": false,
     "description": "",
     "note": "Nový LCD",
-    "img": "https://placehold.co/400x300?text=Note11",
+    "features": [],
     "images": [
       "https://placehold.co/400x300?text=Note11"
     ],
-    "sold": false,
-    "category": "electronics",
-    "condition": "regular",
-    "features": []
+    "img": "https://placehold.co/400x300?text=Note11",
+    "demo": false
   },
   {
     "id": 23,

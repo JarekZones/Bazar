@@ -448,21 +448,21 @@
   {
     "id": 21,
     "title": "Xiaomi Redmi Note 10 Pro",
+    "category": "electronics",
     "brand": "Xiaomi",
     "price": 1700,
     "color": "Černá",
     "memory": "6GB / 128GB",
-    "demo": false,
+    "condition": "regular",
+    "sold": false,
     "description": "Xiaomi Redmi Note 10 Pro je oblíbený telefon střední třídy, který nabízí špičkový 6,67\" AMOLED displej s vysokým jasem a krásnými barvami. Díky 120Hz obnovovací frekvenci je ideální pro sledování videí, hraní her i běžné používání. Konstrukce působí prémiově a telefon se příjemně drží.\n\nProcesor Snapdragon 732G poskytuje stabilní výkon pro náročnější aplikace i hry. 6GB RAM umožňuje plynulý multitasking a 128GB úložiště nabízí dostatek prostoru pro fotografie, videa a aplikace. 108Mpx fotoaparát dokáže zachytit detailní snímky a patří mezi nejlepší ve své třídě.\n\nTento kus má prasklý zadní kryt, což je pouze kosmetická vada a nemá vliv na funkčnost. Redmi Note 10 Pro je skvělou volbou pro uživatele, kteří hledají výkonný telefon s kvalitním displejem a výborným fotoaparátem.",
     "note": "Prasklý zadní kryt",
-    "img": "https://placehold.co/400x300?text=Note10Pro",
+    "features": [],
     "images": [
       "https://placehold.co/400x300?text=Note10Pro"
     ],
-    "sold": false,
-    "category": "electronics",
-    "condition": "regular",
-    "features": []
+    "img": "https://placehold.co/400x300?text=Note10Pro",
+    "demo": false
   },
   {
     "id": 22,

@@ -158,18 +158,15 @@
     "condition": "regular",
     "sold": false,
     "description": "Samsung Galaxy S9 je prémiový telefon, který i po letech nabízí vysoký výkon a kvalitní zpracování. Je vybaven 5,8\" Super AMOLED displejem s vysokým rozlišením, který poskytuje krásný obraz a skvělou čitelnost. Konstrukce z kovu a skla působí luxusně a telefon se příjemně drží.\n\nUvnitř najdeme výkonný procesor Exynos 9810, který zvládá náročné aplikace, hry i multitasking. 12Mpx fotoaparát s variabilní clonou patří mezi nejlepší ve své době a dokáže pořizovat velmi kvalitní snímky i za horšího světla. Baterie nabízí solidní výdrž a podporuje rychlé nabíjení.\n\nGalaxy S9 je vhodný pro uživatele, kteří hledají kvalitní telefon s výborným fotoaparátem, krásným displejem a stále velmi dobrým výkonem. I přes drobné kosmetické vady jde o skvělou volbu pro náročnější použití.",
-    "note": "Lehce poškrábaná záda",
-    "features": [
-      "charger",
-      "cable",
-      "earphones",
-      "case",
-      "box"
-    ],
+    "note": "Mírně vpálený LCD. Lehce poškrábaná záda",
+    "features": [],
     "images": [
-      "https://placehold.co/400x300?text=S9"
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788278914507-0-IMG_9326.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788278931137-0-IMG_9329.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788278935588-1-IMG_9328.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788278940704-2-IMG_9330.jpg"
     ],
-    "img": "https://placehold.co/400x300?text=S9",
+    "img": "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788278914507-0-IMG_9326.jpg",
     "demo": false
   },
   {

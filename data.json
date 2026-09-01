@@ -245,25 +245,25 @@
   {
     "id": 12,
     "title": "Vivo Y29s 5G",
+    "category": "electronics",
     "brand": "Vivo",
     "price": 2800,
     "color": "Černá",
     "memory": "6GB / 128GB",
-    "demo": true,
+    "condition": "demo",
+    "sold": false,
     "description": "Vivo Y29s 5G je elegantní telefon s podporou rychlých 5G sítí, který nabízí moderní funkce a stabilní výkon. Díky velkému displeji je vhodný pro sledování videí, sociální sítě i běžné používání. Konstrukce je lehká a telefon se dobře drží.\n\nProcesor Dimensity 700 poskytuje stabilní výkon a 6GB RAM umožňuje plynulý chod aplikací. 128GB úložiště je dostatečné pro běžné potřeby. 50Mpx fotoaparát dokáže zachytit kvalitní snímky a baterie s kapacitou 5000mAh nabízí dlouhou výdrž.\n\nY29s 5G je vhodný jako univerzální telefon pro uživatele, kteří hledají moderní zařízení s podporou 5G. Díky stabilnímu výkonu a dobré výdrži je praktickou volbou pro každodenní použití.",
     "note": "",
-    "img": "https://placehold.co/400x300?text=Y29s-2",
-    "images": [
-      "https://placehold.co/400x300?text=Y29s-2"
-    ],
-    "sold": false,
-    "category": "electronics",
-    "condition": "demo",
     "features": [
       "cable",
       "case",
       "box"
-    ]
+    ],
+    "images": [
+      "https://placehold.co/400x300?text=Y29s-2"
+    ],
+    "img": "https://placehold.co/400x300?text=Y29s-2",
+    "demo": true
   },
   {
     "id": 13,

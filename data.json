@@ -364,25 +364,25 @@
   {
     "id": 17,
     "title": "Xiaomi Redmi 15C",
+    "category": "electronics",
     "brand": "Xiaomi",
     "price": 2100,
     "color": "Černá",
     "memory": "4GB / 128GB",
-    "demo": true,
+    "condition": "demo",
+    "sold": false,
     "description": "Xiaomi Redmi 15C je moderní telefon určený pro běžné uživatele, kteří hledají spolehlivé zařízení s velkým displejem. Díky 6,74\" panelu je vhodný pro sledování videí, sociální sítě i každodenní práci. Konstrukce je lehká, dobře se drží a působí moderně.\n\nProcesor Helio G85 poskytuje stabilní výkon pro běžné aplikace a nenáročné hry. 4GB RAM umožňuje plynulý chod systému a 128GB úložiště nabízí dostatek prostoru pro fotografie, aplikace a soubory. 50Mpx fotoaparát dokáže zachytit kvalitní snímky za dobrého světla.\n\nTento kus je předváděcí, což znamená minimální známky použití, ale plnou funkčnost. Redmi 15C je vhodný jako univerzální telefon pro každodenní použití díky dobré výdrži baterie a stabilnímu výkonu.",
     "note": "",
-    "img": "https://placehold.co/400x300?text=15C",
-    "images": [
-      "https://placehold.co/400x300?text=15C"
-    ],
-    "sold": false,
-    "category": "electronics",
-    "condition": "demo",
     "features": [
       "cable",
       "case",
       "box"
-    ]
+    ],
+    "images": [
+      "https://placehold.co/400x300?text=15C"
+    ],
+    "img": "https://placehold.co/400x300?text=15C",
+    "demo": true
   },
   {
     "id": 18,

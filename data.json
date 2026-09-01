@@ -25,26 +25,26 @@
   {
     "id": 2,
     "title": "Motorola Moto G54",
+    "category": "electronics",
     "brand": "Motorola",
     "price": 3100,
     "color": "Zelená",
     "memory": "12GB / 256GB",
-    "demo": true,
+    "condition": "demo",
+    "sold": false,
     "description": "Motorola Moto G54 je telefon střední třídy, který nabízí výborný poměr výkonu a ceny. Díky 6,5\" displeji s 120Hz obnovovací frekvencí působí systém i aplikace velmi plynule a telefon je tak ideální pro běžné používání, sociální sítě i multimédia. Konstrukce je pevná, příjemná na držení a zelená varianta působí elegantně.\n\nO výkon se stará procesor Dimensity 7020, který ve spojení s 12GB RAM poskytuje dostatek síly i pro náročnější aplikace a multitasking. Velké 256GB úložiště nabízí dostatek prostoru pro fotografie, videa i aplikace. Hlavní 50Mpx fotoaparát s optickou stabilizací dokáže zachytit kvalitní snímky i za horšího světla a doplňuje jej 8Mpx širokoúhlý objektiv.\n\nTento kus je prodáván jako předváděcí, což znamená minimální známky použití, ale plnou funkčnost. Díky velké baterii s kapacitou 6000mAh nabízí telefon dlouhou výdrž a podporuje rychlé nabíjení. G54 je skvělou volbou pro uživatele, kteří hledají výkonný a spolehlivý telefon za dostupnou cenu.",
     "note": "Ochranná folie na LCD",
-    "img": "https://placehold.co/400x300?text=G54",
-    "images": [
-      "https://placehold.co/400x300?text=G54"
-    ],
-    "sold": false,
-    "category": "electronics",
-    "condition": "demo",
     "features": [
       "charger",
       "earphones",
       "case",
       "box"
-    ]
+    ],
+    "images": [
+      "https://placehold.co/400x300?text=G54"
+    ],
+    "img": "https://placehold.co/400x300?text=G54",
+    "demo": true
   },
   {
     "id": 3,

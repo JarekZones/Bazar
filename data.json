@@ -406,23 +406,23 @@
   {
     "id": 19,
     "title": "Xiaomi Redmi A5",
+    "category": "electronics",
     "brand": "Xiaomi",
     "price": 1500,
     "color": "Černá",
     "memory": "3GB / 64GB",
-    "demo": false,
+    "condition": "regular",
+    "sold": false,
     "description": "",
     "note": "",
-    "img": "https://placehold.co/400x300?text=Note10",
+    "features": [
+      "cable"
+    ],
     "images": [
       "https://placehold.co/400x300?text=Note10"
     ],
-    "sold": false,
-    "category": "electronics",
-    "condition": "regular",
-    "features": [
-      "cable"
-    ]
+    "img": "https://placehold.co/400x300?text=Note10",
+    "demo": false
   },
   {
     "id": 20,

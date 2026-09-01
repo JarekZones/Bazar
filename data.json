@@ -148,27 +148,27 @@
   {
     "id": 7,
     "title": "Samsung Galaxy S9",
+    "category": "electronics",
     "brand": "Samsung",
     "price": 1500,
     "color": "Černá",
     "memory": "4GB / 64GB",
-    "demo": false,
+    "condition": "regular",
+    "sold": false,
     "description": "Samsung Galaxy S9 je prémiový telefon, který i po letech nabízí vysoký výkon a kvalitní zpracování. Je vybaven 5,8\" Super AMOLED displejem s vysokým rozlišením, který poskytuje krásný obraz a skvělou čitelnost. Konstrukce z kovu a skla působí luxusně a telefon se příjemně drží.\n\nUvnitř najdeme výkonný procesor Exynos 9810, který zvládá náročné aplikace, hry i multitasking. 12Mpx fotoaparát s variabilní clonou patří mezi nejlepší ve své době a dokáže pořizovat velmi kvalitní snímky i za horšího světla. Baterie nabízí solidní výdrž a podporuje rychlé nabíjení.\n\nGalaxy S9 je vhodný pro uživatele, kteří hledají kvalitní telefon s výborným fotoaparátem, krásným displejem a stále velmi dobrým výkonem. I přes drobné kosmetické vady jde o skvělou volbu pro náročnější použití.",
     "note": "Lehce poškrábaná záda",
-    "img": "https://placehold.co/400x300?text=S9",
-    "images": [
-      "https://placehold.co/400x300?text=S9"
-    ],
-    "sold": false,
-    "category": "electronics",
-    "condition": "regular",
     "features": [
       "charger",
       "cable",
       "earphones",
       "case",
       "box"
-    ]
+    ],
+    "images": [
+      "https://placehold.co/400x300?text=S9"
+    ],
+    "img": "https://placehold.co/400x300?text=S9",
+    "demo": false
   },
   {
     "id": 9,

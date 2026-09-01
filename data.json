@@ -134,17 +134,11 @@
     "sold": false,
     "description": "Samsung GT‑S5610 je klasický tlačítkový telefon, který vyniká svou jednoduchostí a vysokou odolností. Díky kompaktnímu tělu a fyzickým klávesám je ideální pro uživatele, kteří preferují tradiční ovládání. Telefon je vhodný do náročných podmínek, kde je potřeba spolehlivost a dlouhá výdrž.\n\nModel nabízí základní funkce, jako je volání, SMS, jednoduchý fotoaparát a přehrávání hudby. Baterie poskytuje velmi dlouhou výdrž, což je hlavní předností tlačítkových telefonů. Konstrukce je pevná a odolná proti běžnému opotřebení.\n\nGT‑S5610 je ideální jako pracovní telefon, zařízení do dílny, na stavbu nebo pro uživatele, kteří chtějí jednoduchý a spolehlivý mobil bez složitostí. Díky své robustnosti a dlouhé výdrži je stále velmi praktickou volbou.",
     "note": "",
-    "features": [
-      "charger",
-      "cable",
-      "earphones",
-      "case",
-      "box"
-    ],
+    "features": [],
     "images": [
-      "https://placehold.co/400x300?text=S5610"
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788286679496-0-1000042242.jpg"
     ],
-    "img": "https://placehold.co/400x300?text=S5610",
+    "img": "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788286679496-0-1000042242.jpg",
     "demo": false
   },
   {

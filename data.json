@@ -49,26 +49,26 @@
   {
     "id": 3,
     "title": "Motorola Moto G84",
+    "category": "electronics",
     "brand": "Motorola",
     "price": 1900,
     "color": "Červená",
     "memory": "12GB / 256GB",
-    "demo": true,
+    "condition": "demo",
+    "sold": false,
     "description": "Motorola Moto G84 je elegantní telefon s kvalitním 6,5\" OLED displejem, který nabízí živé barvy a vysoký kontrast. Díky modernímu designu a příjemné konstrukci se dobře drží v ruce a je vhodný pro každodenní používání. Tento kus má drobné vypálení OLED panelu, které však neovlivňuje funkčnost telefonu.\n\nO výkon se stará procesor Snapdragon 695, který zajišťuje plynulý chod aplikací i multitasking. 12GB RAM poskytuje dostatek výkonu i pro náročnější uživatele. Hlavní 50Mpx fotoaparát s optickou stabilizací dokáže zachytit ostré snímky i za horšího světla a doplňuje jej 8Mpx širokoúhlý objektiv.\n\nMoto G84 je vhodná pro uživatele, kteří hledají telefon s kvalitním displejem, stabilním výkonem a dobrou výdrží. Díky moderním funkcím, jako je NFC, stereo reproduktory a velká 5000mAh baterie, jde o skvělou volbu pro běžné i náročnější použití.",
     "note": "OLED LCD je vypálený od demo smičky, Ochranná folie na LCD",
-    "img": "https://placehold.co/400x300?text=G84",
-    "images": [
-      "https://placehold.co/400x300?text=G84"
-    ],
-    "sold": false,
-    "category": "electronics",
-    "condition": "demo",
     "features": [
       "charger",
       "cable",
       "case",
       "box"
-    ]
+    ],
+    "images": [
+      "https://placehold.co/400x300?text=G84"
+    ],
+    "img": "https://placehold.co/400x300?text=G84",
+    "demo": true
   },
   {
     "id": 4,

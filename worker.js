@@ -148,6 +148,31 @@ async function handleContact(request,env,origin){
     console.error("Resend confirmation error",confirmation.status,detail.slice(0,1000));
   }
 
+  if(env.TELEGRAM_API_URL&&env.TELEGRAM_CHAT_ID){
+    const telegramText=[
+      "🔔 Nová poptávka z bazárku",
+      "",
+      `📦 ${title}`,
+      `👤 ${name}`,
+      `✉️ ${email}`,
+      "",
+      `💬 ${message}`
+    ].join("\n");
+    try{
+      const telegram=await fetch(env.TELEGRAM_API_URL,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({chat_id:env.TELEGRAM_CHAT_ID,text:telegramText})
+      });
+      if(!telegram.ok){
+        const detail=await telegram.text();
+        console.error("Telegram error",telegram.status,detail.slice(0,1000));
+      }
+    }catch(error){
+      console.error("Telegram notification error",error);
+    }
+  }
+
   return json({ok:true,message:"Zpráva byla úspěšně odeslána."},200,origin);
 }
 

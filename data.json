@@ -387,21 +387,21 @@
   {
     "id": 18,
     "title": "Xiaomi Redmi 9A",
+    "category": "electronics",
     "brand": "Xiaomi",
     "price": 1100,
     "color": "Černá",
     "memory": "2GB / 32GB",
-    "demo": false,
+    "condition": "regular",
+    "sold": false,
     "description": "",
     "note": "Nový LCD, Ošoupaný zadní kryt.",
-    "img": "https://placehold.co/400x300?text=15",
+    "features": [],
     "images": [
       "https://placehold.co/400x300?text=15"
     ],
-    "sold": false,
-    "category": "electronics",
-    "condition": "regular",
-    "features": []
+    "img": "https://placehold.co/400x300?text=15",
+    "demo": false
   },
   {
     "id": 19,

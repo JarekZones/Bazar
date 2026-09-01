@@ -73,27 +73,27 @@
   {
     "id": 4,
     "title": "Samsung Galaxy A7 (2018)",
+    "category": "electronics",
     "brand": "Samsung",
     "price": 1900,
     "color": "Modrá",
     "memory": "4GB / 64GB",
-    "demo": false,
+    "condition": "regular",
+    "sold": false,
     "description": "Samsung Galaxy A7 (2018) je oblíbený telefon střední třídy, který nabízí kvalitní konstrukci a příjemný 6\" Super AMOLED displej. Díky živým barvám a dobré čitelnosti je vhodný pro sledování videí, sociální sítě i běžné používání. Tento kus má nově vyměněné LCD, což zvyšuje jeho spolehlivost.\n\nUvnitř najdeme osmijádrový procesor Exynos, který poskytuje dostatek výkonu pro běžné aplikace a 4GB RAM zajišťuje stabilní chod systému. Trojitý fotoaparát umožňuje pořizovat širokoúhlé snímky i portréty a stále nabízí solidní kvalitu.\n\nGalaxy A7 (2018) je vhodný jako spolehlivý telefon pro každodenní použití. Díky dobré výdrži baterie, kvalitnímu displeji a moderním funkcím je stále atraktivní volbou pro nenáročné i běžné uživatele.",
     "note": "Nový LCD",
-    "img": "https://placehold.co/400x300?text=A7",
-    "images": [
-      "https://placehold.co/400x300?text=A7"
-    ],
-    "sold": false,
-    "category": "electronics",
-    "condition": "regular",
     "features": [
       "charger",
       "cable",
       "earphones",
       "case",
       "box"
-    ]
+    ],
+    "images": [
+      "https://placehold.co/400x300?text=A7"
+    ],
+    "img": "https://placehold.co/400x300?text=A7",
+    "demo": false
   },
   {
     "id": 5,

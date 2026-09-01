@@ -326,16 +326,22 @@
     "condition": "demo",
     "sold": false,
     "description": "Xiaomi Redmi 12 je moderní telefon střední třídy, který nabízí velký 6,79\" displej a elegantní design. Díky vysokému jasu a dobré čitelnosti je vhodný pro sledování videí, sociální sítě i běžné používání. Konstrukce je pevná a telefon se příjemně drží.\n\nProcesor Helio G88 poskytuje stabilní výkon a 4GB RAM umožňuje plynulý chod aplikací. 128GB úložiště je dostatečné pro běžné potřeby. 50Mpx fotoaparát dokáže zachytit kvalitní snímky a baterie s kapacitou 5000mAh nabízí dlouhou výdrž.\n\nTento kus je předváděcí, což znamená minimální známky použití, ale plnou funkčnost. Redmi 12 je vhodný jako univerzální telefon pro uživatele, kteří hledají stabilní výkon, moderní funkce a dobrou výdrž.",
-    "note": "",
+    "note": "V balení dvě pouzdra. ",
     "features": [
       "cable",
       "case",
       "box"
     ],
     "images": [
-      "https://placehold.co/400x300?text=Redmi12"
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788285718349-0-1000042229.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788285730071-0-1000042233.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788285732188-1-1000042232.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788285734459-2-1000042231.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788285758697-0-1000042230.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788285761535-1-1000042228.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788285764155-2-1000042227.jpg"
     ],
-    "img": "https://placehold.co/400x300?text=Redmi12",
+    "img": "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788285718349-0-1000042229.jpg",
     "demo": true
   },
   {

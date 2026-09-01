@@ -6,6 +6,7 @@ compatibility_date = "2026-08-31"
 GITHUB_BRANCH = "main"
 GITHUB_OWNER = "JarekZones"
 GITHUB_REPO = "Bazar"
+TELEGRAM_CHAT_ID = "8845070220"
 
 [[kv_namespaces]]
 binding = "IMEI_KV"

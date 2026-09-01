@@ -524,9 +524,11 @@
     "note": "Nový LCD",
     "features": [],
     "images": [
-      "https://placehold.co/400x300?text=Note11Pro"
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788287400719-0-1000042248.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788287423897-0-1000042249.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788287426074-1-1000042250.jpg"
     ],
-    "img": "https://placehold.co/400x300?text=Note11Pro",
+    "img": "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788287400719-0-1000042248.jpg",
     "demo": false
   },
   {

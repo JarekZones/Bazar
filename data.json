@@ -456,7 +456,7 @@
     "color": "Zelená",
     "memory": "3GB / 64GB",
     "condition": "regular",
-    "sold": false,
+    "sold": true,
     "description": "",
     "note": "",
     "features": [

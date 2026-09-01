@@ -268,27 +268,27 @@
   {
     "id": 13,
     "title": "Vivo Y33s",
+    "category": "electronics",
     "brand": "Vivo",
     "price": 2600,
     "color": "Modrá",
     "memory": "8GB / 128GB",
-    "demo": false,
+    "condition": "regular",
+    "sold": false,
     "description": "Vivo Y33s je telefon střední třídy, který nabízí elegantní design a praktické funkce pro každodenní používání. Díky velkému displeji je vhodný pro sledování videí, sociální sítě i běžnou práci. Telefon působí moderně a dobře se drží.\n\nProcesor Helio G80 poskytuje stabilní výkon a 8GB RAM umožňuje pohodlný multitasking. 128GB úložiště je dostatečné pro běžné potřeby a umožňuje ukládání velkého množství fotografií, aplikací a souborů. 50Mpx fotoaparát dokáže zachytit kvalitní snímky i za horšího světla.\n\nY33s je vhodný jako univerzální telefon pro uživatele, kteří hledají stabilní výkon, dobrou výdrž a moderní funkce. Díky vyvážené výbavě je praktickou volbou pro každodenní použití.",
     "note": "",
-    "img": "https://placehold.co/400x300?text=Y33s-A",
-    "images": [
-      "https://placehold.co/400x300?text=Y33s-A"
-    ],
-    "sold": false,
-    "category": "electronics",
-    "condition": "regular",
     "features": [
       "charger",
       "cable",
       "earphones",
       "case",
       "box"
-    ]
+    ],
+    "images": [
+      "https://placehold.co/400x300?text=Y33s-A"
+    ],
+    "img": "https://placehold.co/400x300?text=Y33s-A",
+    "demo": false
   },
   {
     "id": 14,

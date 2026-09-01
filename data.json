@@ -35,15 +35,15 @@
     "description": "Motorola Moto G54 je telefon střední třídy, který nabízí výborný poměr výkonu a ceny. Díky 6,5\" displeji s 120Hz obnovovací frekvencí působí systém i aplikace velmi plynule a telefon je tak ideální pro běžné používání, sociální sítě i multimédia. Konstrukce je pevná, příjemná na držení a zelená varianta působí elegantně.\n\nO výkon se stará procesor Dimensity 7020, který ve spojení s 12GB RAM poskytuje dostatek síly i pro náročnější aplikace a multitasking. Velké 256GB úložiště nabízí dostatek prostoru pro fotografie, videa i aplikace. Hlavní 50Mpx fotoaparát s optickou stabilizací dokáže zachytit kvalitní snímky i za horšího světla a doplňuje jej 8Mpx širokoúhlý objektiv.\n\nTento kus je prodáván jako předváděcí, což znamená minimální známky použití, ale plnou funkčnost. Díky velké baterii s kapacitou 6000mAh nabízí telefon dlouhou výdrž a podporuje rychlé nabíjení. G54 je skvělou volbou pro uživatele, kteří hledají výkonný a spolehlivý telefon za dostupnou cenu.",
     "note": "Ochranná folie na LCD",
     "features": [
-      "charger",
-      "earphones",
+      "cable",
       "case",
       "box"
     ],
     "images": [
-      "https://placehold.co/400x300?text=G54"
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788290287553-0-1000042269.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788290295175-0-1000042272.jpg"
     ],
-    "img": "https://placehold.co/400x300?text=G54",
+    "img": "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788290287553-0-1000042269.jpg",
     "demo": true
   },
   {

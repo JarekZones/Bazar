@@ -316,25 +316,25 @@
   {
     "id": 15,
     "title": "Xiaomi Redmi 12",
+    "category": "electronics",
     "brand": "Xiaomi",
     "price": 1600,
     "color": "Černá",
     "memory": "4GB / 128GB",
-    "demo": true,
+    "condition": "demo",
+    "sold": false,
     "description": "Xiaomi Redmi 12 je moderní telefon střední třídy, který nabízí velký 6,79\" displej a elegantní design. Díky vysokému jasu a dobré čitelnosti je vhodný pro sledování videí, sociální sítě i běžné používání. Konstrukce je pevná a telefon se příjemně drží.\n\nProcesor Helio G88 poskytuje stabilní výkon a 4GB RAM umožňuje plynulý chod aplikací. 128GB úložiště je dostatečné pro běžné potřeby. 50Mpx fotoaparát dokáže zachytit kvalitní snímky a baterie s kapacitou 5000mAh nabízí dlouhou výdrž.\n\nTento kus je předváděcí, což znamená minimální známky použití, ale plnou funkčnost. Redmi 12 je vhodný jako univerzální telefon pro uživatele, kteří hledají stabilní výkon, moderní funkce a dobrou výdrž.",
     "note": "",
-    "img": "https://placehold.co/400x300?text=Redmi12",
-    "images": [
-      "https://placehold.co/400x300?text=Redmi12"
-    ],
-    "sold": false,
-    "category": "electronics",
-    "condition": "demo",
     "features": [
       "cable",
       "case",
       "box"
-    ]
+    ],
+    "images": [
+      "https://placehold.co/400x300?text=Redmi12"
+    ],
+    "img": "https://placehold.co/400x300?text=Redmi12",
+    "demo": true
   },
   {
     "id": 16,

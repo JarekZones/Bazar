@@ -173,25 +173,27 @@
   {
     "id": 9,
     "title": "Vivo Y21s",
+    "category": "electronics",
     "brand": "Vivo",
     "price": 1900,
     "color": "Modrá",
     "memory": "4GB / 128GB",
-    "demo": false,
+    "condition": "regular",
+    "sold": false,
     "description": "Vivo Y21s nabízí vyvážený výkon a praktické funkce v kompaktním těle. Je vybaven 6,5\" displejem, který je ideální pro běžné používání, komunikaci a prohlížení internetu. Telefon působí moderně a je vhodný pro uživatele, kteří hledají spolehlivé zařízení.\n\nProcesor Helio G80 zajišťuje stabilní chod aplikací, zatímco 4GB RAM umožňuje pohodlný multitasking. 128GB úložiště poskytuje dostatek prostoru pro fotografie, aplikace a soubory. 50Mpx fotoaparát dokáže zachytit kvalitní snímky za dobrého světla.\n\nTento kus je vhodný jako každodenní telefon pro nenáročné i běžné uživatele. Díky dobré výdrži baterie a stabilnímu výkonu je praktickou volbou pro široké použití.",
     "note": "",
-    "img": "https://placehold.co/400x300?text=Y21s-B",
+    "features": [
+      "charger",
+      "cable",
+      "earphones",
+      "case",
+      "box"
+    ],
     "images": [
       "https://placehold.co/400x300?text=Y21s-B"
     ],
-    "sold": false,
-    "category": "electronics",
-    "condition": "regular",
-    "features": [
-      "cable",
-      "earphones",
-      "case"
-    ]
+    "img": "https://placehold.co/400x300?text=Y21s-B",
+    "demo": false
   },
   {
     "id": 10,

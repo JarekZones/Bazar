@@ -422,12 +422,18 @@
     "description": "",
     "note": "",
     "features": [
-      "cable"
+      "cable",
+      "box"
     ],
     "images": [
-      "https://placehold.co/400x300?text=Note10"
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788283451711-0-1000042191.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788283467322-0-1000042192.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788283470225-1-1000042193.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788283472439-2-1000042194.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788283475179-3-1000042195.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788283477724-4-1000042196.jpg"
     ],
-    "img": "https://placehold.co/400x300?text=Note10",
+    "img": "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788283451711-0-1000042191.jpg",
     "demo": false
   },
   {

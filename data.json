@@ -556,7 +556,7 @@
     "color": "Modrá",
     "memory": "",
     "condition": "regular",
-    "sold": false,
+    "sold": true,
     "description": "Sestava dětského nábytku IKEA MAMMUT. \nSestava obsahuje:\n1x velkou šatní skříň\n1x malou šatní skříň\n2x komoda se třemi šuplíky\n2x policová skříň ",
     "note": "velkou šatní skříň, malou šatní skříň, 2x komoda se třemi šuplíky, 2x policová skříň.",
     "features": [],

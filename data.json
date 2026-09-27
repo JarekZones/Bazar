@@ -437,7 +437,7 @@
     "price": 1500,
     "color": "Černá",
     "memory": "3GB / 64GB",
-    "condition": "regular",
+    "condition": "demo",
     "sold": false,
     "description": "",
     "note": "",
@@ -454,7 +454,7 @@
       "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788283477724-4-1000042196.jpg"
     ],
     "img": "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1788283451711-0-1000042191.jpg",
-    "demo": false
+    "demo": true
   },
   {
     "id": 20,

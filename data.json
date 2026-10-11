@@ -415,7 +415,7 @@
     "color": "Černá",
     "memory": "2GB / 32GB",
     "condition": "regular",
-    "sold": false,
+    "sold": true,
     "description": "",
     "note": "Nový LCD, Ošoupaný zadní kryt.",
     "features": [],

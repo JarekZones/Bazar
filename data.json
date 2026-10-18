@@ -438,9 +438,9 @@
     "color": "Černá",
     "memory": "3GB / 64GB",
     "condition": "demo",
-    "sold": false,
+    "sold": true,
     "description": "",
-    "note": "",
+    "note": "1200,-",
     "features": [
       "cable",
       "box"

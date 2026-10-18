@@ -215,9 +215,9 @@
     "color": "Modrá",
     "memory": "4GB / 128GB",
     "condition": "regular",
-    "sold": false,
+    "sold": true,
     "description": "Vivo Y21s je telefon střední třídy, který nabízí dobrý poměr cena/výkon. Díky velkému displeji je vhodný pro sledování videí, sociální sítě i běžné používání. Konstrukce je lehká a telefon se pohodlně drží.\n\nProcesor Helio G80 poskytuje stabilní výkon a 4GB RAM umožňuje plynulý chod aplikací. 128GB úložiště je dostatečné pro běžné potřeby. 50Mpx fotoaparát dokáže zachytit kvalitní snímky a baterie s kapacitou 5000mAh nabízí dlouhou výdrž.\n\nY21s je vhodný jako univerzální telefon pro každodenní použití. Díky stabilnímu výkonu, dobré výdrži a moderním funkcím je praktickou volbou pro širokou škálu uživatelů.",
-    "note": "",
+    "note": "1400",
     "features": [
       "charger",
       "cable",

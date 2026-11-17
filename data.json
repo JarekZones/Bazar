@@ -186,7 +186,7 @@
     "title": "Vivo Y21s",
     "category": "electronics",
     "brand": "Vivo",
-    "price": 1900,
+    "price": 1800,
     "color": "Modrá",
     "memory": "4GB / 128GB",
     "condition": "regular",
@@ -201,9 +201,15 @@
       "box"
     ],
     "images": [
-      "https://placehold.co/400x300?text=Y21s-B"
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1794934591021-0-IMG_20261117_163259.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1794934623685-0-IMG_20261117_163311.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1794934629941-1-IMG_20261117_163509.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1794934636769-2-IMG_20261117_163346.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1794934643112-3-IMG_20261117_163400.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1794934648801-4-IMG_20261117_163433.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1794934655310-5-IMG_20261117_163417.jpg"
     ],
-    "img": "https://placehold.co/400x300?text=Y21s-B",
+    "img": "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1794934591021-0-IMG_20261117_163259.jpg",
     "demo": false
   },
   {

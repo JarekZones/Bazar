@@ -330,25 +330,29 @@
   {
     "id": 14,
     "title": "Vivo Y33s",
+    "category": "electronics",
     "brand": "Vivo",
     "price": 2200,
     "color": "Modrá",
     "memory": "8GB / 128GB",
-    "demo": false,
+    "condition": "regular",
     "sold": false,
     "description": "Vivo Y33s je elegantní telefon střední třídy, který nabízí moderní design a praktické funkce. Díky velkému displeji je vhodný pro sledování videí, sociální sítě i běžné používání. Černá varianta působí decentně a profesionálně.\n\nProcesor Helio G80 poskytuje stabilní výkon a 8GB RAM umožňuje plynulý chod aplikací. 128GB úložiště je dostatečné pro běžné potřeby. 50Mpx fotoaparát dokáže zachytit kvalitní snímky a baterie s kapacitou 5000mAh nabízí dlouhou výdrž.\n\nY33s je vhodný jako univerzální telefon pro uživatele, kteří hledají stabilní výkon, dobrou výdrž a moderní funkce. Díky vyvážené výbavě je praktickou volbou pro každodenní použití.",
     "note": "",
-    "images": [
-      "https://placehold.co/400x300?text=Y33s-B"
-    ],
-    "img": "https://placehold.co/400x300?text=Y33s-B",
-    "category": "electronics",
-    "condition": "regular",
     "features": [
       "charger",
       "cable",
       "case"
-    ]
+    ],
+    "images": [
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1795029269999-0-IMG_20261117_162210.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1795029277203-1-IMG_20261117_162334.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1795029255057-1-IMG_20261117_162348.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1795029247470-0-IMG_20261117_162435.jpg",
+      "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1795029227845-0-IMG_20261117_162547.jpg"
+    ],
+    "img": "https://raw.githubusercontent.com/JarekZones/Bazar/main/images/1795029269999-0-IMG_20261117_162210.jpg",
+    "demo": false
   },
   {
     "id": 15,
